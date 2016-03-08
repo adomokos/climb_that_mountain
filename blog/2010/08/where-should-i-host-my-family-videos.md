@@ -41,3 +41,6 @@ Here is the short HTML code I used to link in the flv movies through the [OS Flv
 </pre>
 
 And here is a quick movie clip I made in July, 76 MB compressed to around 1 MB. Enjoy!
+
+
+POSTED BY ATTILA DOMOKOS AT 10:22 AM
