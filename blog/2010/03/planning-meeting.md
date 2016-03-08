@@ -8,13 +8,13 @@ It'll be a web app, most likely developed in Rails using mySQL back-end. But it 
 We got together Saturday around 10 AM. After establishing the agenda we started to work on the details.
 Here is what our agenda was:
 
-1) Check competitors
-2) Look at HTML Templates
-3) Define system user types
-4) Work out the workflows for our different user types
-5) Create wire frames
-6) Create mock-ups
-7) Enter story cards in Pivotal tracker
+1) Check competitors<br/>
+2) Look at HTML Templates<br/>
+3) Define system user types<br/>
+4) Work out the workflows for our different user types<br/>
+5) Create wire frames<br/>
+6) Create mock-ups<br/>
+7) Enter story cards in Pivotal tracker<br/>
 
 ![agenda](/resources/2010/03/agenda.jpg)
 
@@ -24,7 +24,7 @@ Once we had a general idea of the different workflows that different user types 
 
 We estimated around 12 – 15 pages we need to get the application off the ground. Our mock up task focused on what elements or fields we'd have on those pages. What describes a user? Name, email, company name, etc. Do we need categories to help searches? Sure! So we added that making it easy for the different user types to connect.
 
-<div style="clear: both; text-align: center;">![mockup](/resources/2010/03/mockup.jpg)</div>
+![mockup](/resources/2010/03/mockup.jpg)
 
 One of us was working on the white board, while the other entered stories into the excellent [Pivotal Tracker](http://www.pivotaltracker.com/).
 We finished around 3:30 PM. I was tired, but we did accomplish what we wanted. Create stories and start to move forward with the project.
