@@ -150,11 +150,11 @@ And I have 3 child elements under the first category</span>
 
 I use [scenario outline](http://wiki.github.com/aslakhellesoy/cucumber/scenario-outlines) in my third scenario. I set the "Value1" cell for the "Child1" row to 211\. Take a look at the result in Excel:
 
-![](resources/2010/03/excel_spreadsheet_add_100.jpg)
+![excel_spreadsheet_add_100](/resources/2010/03/excel_spreadsheet_add_100.jpg)
 
 I also try to set the same cell to 51, I got these numbers then:
 
-![](resources/2010/03/excel_spreadsheet_subtract_160.jpg)
+![excel_spreadsheet_subtract_160.jpg](/resources/2010/03/excel_spreadsheet_subtract_160.jpg)
 
 I am verifying numbers in red in the last scenario:
 
