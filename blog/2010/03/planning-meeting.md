@@ -15,7 +15,8 @@ Here is what our agenda was:
 5) Create wire frames
 6) Create mock-ups
 7) Enter story cards in Pivotal tracker
-[![agenda](/resources/2010/03/agenda.jpg)]
+
+![agenda](/resources/2010/03/agenda.jpg)
 
 The real work started with item 3 on our list. It is like the 10,000 feet view of the app. No specifics, discussing what happens when. Our technique was similar to a UML activity diagram, focusing on what triggers the application to move from one state to the other.
 
@@ -23,7 +24,7 @@ Once we had a general idea of the different workflows that different user types 
 
 We estimated around 12 – 15 pages we need to get the application off the ground. Our mock up task focused on what elements or fields we'd have on those pages. What describes a user? Name, email, company name, etc. Do we need categories to help searches? Sure! So we added that making it easy for the different user types to connect.
 
-<div style="clear: both; text-align: center;">[![mockup](/resources/2010/03/mockup.jpg)]</div>
+<div style="clear: both; text-align: center;">![mockup](/resources/2010/03/mockup.jpg)</div>
 
 One of us was working on the white board, while the other entered stories into the excellent [Pivotal Tracker](http://www.pivotaltracker.com/).
 We finished around 3:30 PM. I was tired, but we did accomplish what we wanted. Create stories and start to move forward with the project.
