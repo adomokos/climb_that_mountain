@@ -7,7 +7,7 @@ After playing with [MSpec](http://github.com/machine/machine.specifications) on 
 Getting MSpec is pretty easy. Pull the source code from the github repo and build it. Once you have everything built you should just reference the dll in your C# project: Machine.Specifications.
 I wanted to keep my solution as simple as possible so I kept both the TicketCalculator and its specs in the same .cs file.
 
-![TryMSpecSolution.png](resources/2010/09/TryMSpecSolution.png)
+![TryMSpecSolution.png](/resources/2010/09/TryMSpecSolution.png)
 
 The kata specifies the method names that you start with so I went ahead and created the class:
 
@@ -38,11 +38,12 @@ public class Purchasing_general_ticket_as_an_adult_non_student{
 
 It compiled fine, however, when I executed the spec this is the error I got:
 
-<div style="color: #CC0000"><trymspec>(1 test), 1 test failed
-TryMSpec (1 test), 1 test failed
-Basic admission rates, Purchasing general ticket as an adult non student (1 test), 1 test failed
-verify, Failed: Machine.Specifications.SpecificationException: Should equal [11] but is [0]
+<div style="color: #CC0000"><trymspec>(1 test), 1 test failed<br/>
+TryMSpec (1 test), 1 test failed<br/>
+Basic admission rates, Purchasing general ticket as an adult non student (1 test), 1 test failed<br/>
+verify, Failed: Machine.Specifications.SpecificationException: Should equal [11] but is [0]<br/>
 </trymspec></div>
+
 
 Since refactoring in the "red" is forbidden, I did the simplest thing that would make my test to pass: I returned 11 from the "FinishPurchase()" method.
 
@@ -117,13 +118,14 @@ public class Purchasing_general_ticket_as_an_adult_student{
 
 When I executed the spec with MSpec I received the following error:
 
-<div style="color: #CC0000"><trymspec>(2 tests), 1 test failed
-TryMSpec (2 tests), 1 test failed
-Basic admission rates, Purchasing general ticket as an adult non student (1 test), Success
-i pay 11 bucks, Success
-Basic admission rates, Purchasing general ticket as an adult student (1 test), 1 test failed
-i pay 8 bucks, Failed: Machine.Specifications.SpecificationException: Should equal [8] but is [11]
+<div style="color: #CC0000"><trymspec>(2 tests), 1 test failed<br/>
+TryMSpec (2 tests), 1 test failed<br/>
+Basic admission rates, Purchasing general ticket as an adult non student (1 test), Success<br/>
+i pay 11 bucks, Success<br/>
+Basic admission rates, Purchasing general ticket as an adult student (1 test), 1 test failed<br/>
+i pay 8 bucks, Failed: Machine.Specifications.SpecificationException: Should equal [8] but is [11]<br/>
 </trymspec></div>
+
 
 Again, I did the simplest thing that could possibly work:
 
@@ -192,3 +194,6 @@ I'd like to list a couple of things that you should see - and maybe follow - bas
 *   there is no code duplication,
 *   there is only one assertion in each one of them,
 *   the spec tells you a story.
+
+
+POSTED BY ATTILA DOMOKOS AT 9:33 PM
