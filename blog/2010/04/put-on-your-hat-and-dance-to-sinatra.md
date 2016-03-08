@@ -54,9 +54,10 @@ Digging into the [Sinatra documentation](http://www.sinatrarb.com/intro) I found
 
 <div style="margin-bottom: 0px; margin-top: 0px;">-|-myapp.rb</div>
 
+
 layout.erb is my template:
 
-<pre class="brush: xml" name="code"><html>
+`<pre class="brush: xml" name="code"><html>
 <head>
 <title>Something Test</title>
 </head>
@@ -69,15 +70,15 @@ layout.erb is my template:
 </div>
 </body>
 </html>
-</pre>
+</pre>`
 
 
 And index.erb provides the page content:
 
-<pre class="brush: xml" name="code"><div>
+`<pre class="brush: xml" name="code"><div>
 This is the content: <%= @data %>
 </div>
-</pre>
+</pre>`
 
 Please note that I set the @data variable in the "get '/test'" block.
 
