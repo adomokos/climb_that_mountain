@@ -6,7 +6,8 @@ Our #Hackibou today was a real blast. We focused on JavaScript development using
 
 We started out with a couple of very simple specs:
 
-<pre class="brush: js">describe("Calculator", function() {
+```javascript
+describe("Calculator", function() {
   var calculator;
   beforeEach(function() {
    calculator = new Calculator();
@@ -30,11 +31,12 @@ We started out with a couple of very simple specs:
    });
   });
 });
-</pre>
+```
 
 And our - not too elegant - solution was this:
 
-<pre class="brush: js">function Calculator() {
+```javascript
+function Calculator() {
   this.add = function(input) {
     var result = 0;
     for(i = 0; i<input.length; ++i) {
@@ -51,11 +53,12 @@ And our - not too elegant - solution was this:
     return result;
   }
 }
-</pre>
+```
 
 Look at the code above. 90% of the code is duplicated there. One of us suggested assigning the first element of the array to the result right on the declaration. With this change the only difference between the two functions is the operation. One uses addition and the other multiplication. I played with JS closures a little bit before, so I proposed this:
 
-<pre class="brush: js">function Calculator() {
+```javascript
+function Calculator() {
  var operator = function(result, input) { return result + input; };
  this.add = function(input){
   return operation(input, operator);
@@ -73,29 +76,31 @@ Look at the code above. 90% of the code is duplicated there. One of us suggested
   return result;
  }
 }
-</pre>
+```
 
 Check out the operation() function. It uses two parameters, the first one is the array of integers and the other is a function object that holds the calculation logic. It's invoked on line 14\. The variable result is both passed in as the first input and is assigned as the result of the function call. One of us suggested using the [shift() function](http://www.w3schools.com/jsref/jsref_shift.asp) on the input array, this way we did not have to start our for loop with the second element of the array. Our operation() function now looked like this:
 
-<pre class="brush: js">function operation(input, operator) {
+```javascript
+function operation(input, operator) {
  var result = input.shift();
  for(i = 0; i < input.length; i++){
   result = operator(result, input[i]);
  }
  return result;
 }
-</pre>
+```
 
 Adding subtraction and division was very simple:
 
-<pre class="brush: js">this.subtract = function(input){
+```javascript
+this.subtract = function(input){
   return operation(input, function(result, input){return result-input;});
  }
 
  this.divide = function(input){
   return operation(input, function(result, input){return result/input;});
  }
-</pre>
+```
 
 Please note that there is no [if statement](http://www.antiifcampaign.com/) in the Calculator object.
 
