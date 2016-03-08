@@ -18,4 +18,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted at blogger, but m
     * [Dynamic Properties In Ruby](blog/2010/05/dynamic-properties-in-ruby.md)<br/>
   08/<br/>
     * [Where Should I Host My Family Videos?](blog/2010/08/where-should-i-host-my-family-videos.md)<br/>
-
+  09/<br/>
+    * [Making Your Tests More Readable with MSpec](blog/2010/09/making-your-tests-more-readable-with.md)<br/>
+  11/<br/>
+    * [JavaScript Closures for DRY-ing Up The Logic](blog/2010/11/javascript-closures-for-dry-ing-up.md)<br/>
