@@ -9,7 +9,7 @@ to learn more about it.
 
 Here is the task I need to write tests for: we have a basic Excel spreadsheet with a handful of cells in it.
 
-![](resources/2010/03/excel_spreadsheet.jpg)
+![excel_spreadsheet](/resources/2010/03/excel_spreadsheet.jpg)
 
 The row cells with yellow background are the column headers. Column cells starting from A2 are captions. "Category1" has three child elements and "Category2" has only two. The category rows are calculated by the sum of their children. Value Total is the sum of Value1 and Value2 for each row. The totals in the bottom are calculated by adding up Category1 and Category2 values.
 
