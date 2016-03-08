@@ -43,6 +43,8 @@ Then in the first test, I verify caption cells. Nothing magical here, I just mak
 
 To be continued...
 
+POSTED BY ATTILA DOMOKOS AT 6:39 PM
+
 #### 1 comment:
 
 [Ryan K](https://www.blogger.com/profile/13399971190233079313) said...

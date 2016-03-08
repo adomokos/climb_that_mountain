@@ -35,4 +35,4 @@ Development will start when we are OK with our HTML pages.
 Do you follow the same process with your customers?
 
 
-Posted by Attila Domokos at 8:01 AM
+POSTED BY ATTILA DOMOKOS AT 8:01 AM

@@ -232,6 +232,8 @@ I developed the code on Windows 7 using ruby version 1.9.1\. You also need cucum
 
 Happy coding!
 
+POSTED BY ATTILA DOMOKOS AT 9:07 PM
+
 #### 10 comments:
 
 [Matt.Snyder](https://www.blogger.com/profile/15724459143365994221) said...
