@@ -16,5 +16,6 @@ My [blog](http://www.adomokos.com)'s articles currently hosted at blogger, but m
     * [Hackibou](blog/2010/04/hackibou.md)<br/>
   05/<br/>
     * [Dynamic Properties In Ruby](blog/2010/05/dynamic-properties-in-ruby.md)<br/>
+  08/<br/>
     * [Where Should I Host My Family Videos?](blog/2010/08/where-should-i-host-my-family-videos.md)<br/>
 
