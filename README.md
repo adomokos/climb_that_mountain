@@ -8,5 +8,4 @@ My [blog](http://www.adomokos.com)'s articles currently hosted at blogger, but m
 
 2010/<br/>
   03/<br/>
-
     * [Automated Testing of an OBA App with Ruby](blog/2010/03/automated-testing-of-oba-app-with-ruby.md)<br/>
