@@ -23,3 +23,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted at blogger, but m
   11/<br/>
     * [JavaScript Closures for DRY-ing Up The Logic](blog/2010/11/javascript-closures-for-dry-ing-up.md)<br/>
     * [Running Jamine BDD Specs in the Terminal](blog/2010/11/running-jasmine-bdd-specs-in-terminal.md)<br/>
+  12/<br/>
+    * [Ruby Mocks vs Stubs - CleRB Presentation](blog/2010/12/ruby-mocks-vs-stubs-clerb-presentation.md)<br/>
+
+2011/<br/>
