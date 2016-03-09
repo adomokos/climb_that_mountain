@@ -17,21 +17,21 @@ First I'd like to verify that the column headers and captions are in place. I st
 
 ```cucumber
 Feature: Modify values in the Excel sheet
-<span style="color: blue;">In order to show my power</span>
-<span style="color: blue;">  As a user</span>
-<span style="color: blue;">  I want to interact with Excel</span>
+In order to show my power
+  As a user
+  I want to interact with Excel
 
-<span style="color: blue;">Scenario: Display column headers and captions</span>
-<span style="color: blue;">  Given I have 2 categories</span>
-<span style="color: blue;">    And I have 3 child elements under the first category</span>
-<span style="color: blue;">  When I open the Excel workbook</span>
-<span style="color: blue;">  Then I should see "Category" in the "A1" cell</span>
-<span style="color: blue;">    And I should see "Value Total" in the "B1" cell</span>
-<span style="color: blue;">    And I should see "Value1" in the "C1" cell</span>
-<span style="color: blue;">    And I should see "Value2" in the "D1" cell</span>
-<span style="color: blue;">    And I should see "Category1" in the "A2" cell</span>
-<span style="color: blue;">    And I should see "Child1" in the "A3" cell</span>
-<span style="color: blue;">    And I should see "Child2" in the "A4" cell</span>
+Scenario: Display column headers and captions
+  Given I have 2 categories
+    And I have 3 child elements under the first category
+   When I open the Excel workbook
+   Then I should see "Category" in the "A1" cell
+    And I should see "Value Total" in the "B1" cell
+    And I should see "Value1" in the "C1" cell
+    And I should see "Value2" in the "D1" cell
+    And I should see "Category1" in the "A2" cell
+    And I should see "Child1" in the "A3" cell
+    And I should see "Child2" in the "A4" cell
 ```
 
 I created the following folder structure:
@@ -52,7 +52,8 @@ I am not particularly concerned with the "Given" part of the scenario. The data 
 
 My [previous blog post](http://adomokos.blogspot.com/2010/03/automated-testing-of-oba-app-with-ruby.html) described how I can interact with Excel through the great [WIN32OLE](http://ruby-doc.org/stdlib/libdoc/win32ole/rdoc/classes/WIN32OLE.html) object. I created the ExcelHandler class which does that:
 
-<pre class="brush: ruby">class ExcelHandler
+```ruby
+class ExcelHandler
   include Singleton
 
   # set this to your Excel file path
@@ -68,7 +69,7 @@ My [previous blog post](http://adomokos.blogspot.com/2010/03/automated-testing-o
     end
   end
 end
-</pre>
+```
 
 I might not have the most elegant code in the open_excel method, but this allows me to attach to a running instance of the Excel workbook which is a big thing for me. In case the workbook has not been launched yet, I take care of it here. Launching and closing Excel takes time and resources, I'd like to reuse running instances of Excel whenever I can.
 
@@ -76,14 +77,16 @@ I take advantage of the singleton pattern in this class. Starting up Excel is an
 
 The env.rb file has the require statements:
 
-<pre class="brush: ruby">require 'spec/expectations'
+```ruby
+require 'spec/expectations'
 require 'win32ole'
 require 'singleton'
-</pre>
+```
 
 All the magic happens in the excel_steps.rb file:
 
-<pre class="brush: ruby">When /^I open the Excel workbook$/ do
+```ruby
+When /^I open the Excel workbook$/ do
   ExcelHandler.instance.open_excel
   @worksheet = ExcelHandler.instance.worksheet
   @worksheet.extend CellValueGetter
@@ -108,7 +111,7 @@ module CellValueGetter
     cells(cell_values[1].to_i, cell_values[0])
   end
 end
-</pre>
+```
 
 Look at how I add methods to the @worksheet object. You gotta love Ruby for that!
 The methods in this module are responsible for getting and setting a value based on the provided cell.
@@ -122,7 +125,8 @@ When I execute "cucumber features" in the command prompt I get this:
 Hey, the first scenario is passing!!
 
 All right, let's verify in the second scenario that the data was loaded correctly:
-<span class="Apple-style-span" style="color: blue;">
+
+```cucumber
 Scenario: Display loaded values
   Given I have 2 categories
     And I have 3 child elements under the first category
@@ -131,13 +135,15 @@ Scenario: Display loaded values
     And I should see 353 in the "C2" cell
     And I should see 458 in the "B3" cell
     And I should see 1523 in the "B2" cell</span>
+```
 
 I had to add one step definition to the excel_step.rb file:
 
-<pre class="brush: ruby">Then /^I should see (\d+) in the "([^\"]*)" cell$/ do |value, cell|
+```ruby
+Then /^I should see (\d+) in the "([^\"]*)" cell$/ do |value, cell|
   @worksheet.get_cell_value(cell).should == value.to_i
 end
-</pre>
+```
 
 When I execute "cucumber features" in the command prompt I see this:
 
@@ -148,9 +154,11 @@ When I execute "cucumber features" in the command prompt I see this:
 
 I know I am not using the "Given" part of the scenarios, however, I do repeat code there. I used the [background feature](http://wiki.github.com/aslakhellesoy/cucumber/background) of Cucumber and DRY-ed up my scenarios a little bit.
 
-<span class="Apple-style-span" style="color: blue;">Background:
+```cucumber
+Background:
 Given I have 2 categories
-And I have 3 child elements under the first category</span>
+And I have 3 child elements under the first category
+```
 
 I use [scenario outline](http://wiki.github.com/aslakhellesoy/cucumber/scenario-outlines) in my third scenario. I set the "Value1" cell for the "Child1" row to 211\. Take a look at the result in Excel:
 
@@ -162,7 +170,8 @@ I also try to set the same cell to 51, I got these numbers then:
 
 I am verifying numbers in red in the last scenario:
 
-<span class="Apple-style-span" style="color: blue;">Scenario Outline: Change values
+```cucumber
+Scenario Outline: Change values
   Given the default values were loaded
   When I open the Excel workbook
     And I put <child1_value> in the "C3" cell
@@ -174,14 +183,16 @@ I am verifying numbers in red in the last scenario:
 Examples:
 | child1_value | category_value1 | child1_sum | category_total | value1_total |
 | 211 | 453 | 558 | 1623 | 1281 |
-| 51 | 293 | 398 | 1463 | 1121 |</span>
+| 51 | 293 | 398 | 1463 | 1121 |
+```
 
 I added the following step to the excel_steps.rb file:
 
-<pre class="brush: ruby">When /^I put (\d+) in the "([^\"]*)" cell$/ do |value, cell|
+```ruby
+When /^I put (\d+) in the "([^\"]*)" cell$/ do |value, cell|
   @worksheet.set_cell_value(cell, value)
 end
-</pre>
+```
 
 Let's see what we get now:
 
@@ -221,9 +232,11 @@ One more thing I need to do: when the feature is complete, I'd like to close Exc
 
 I use the cucumber's at_exit hook to accomplish that:
 
-<pre class="brush: ruby">at_exit do
+```ruby
+at_exit do
   ExcelHandler.instance.close_excel
-end</pre>
+end
+```
 
 When I execute the cucumber feature I see Excel popping up and closing down.
 What if I wanted to run the feature in headless mode? It's simple, I just have to change the @excel.visible = true value to false in the excel_handler.rb file.
