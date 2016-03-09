@@ -27,3 +27,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Ruby Mocks vs Stubs - CleRB Presentation](blog/2010/12/ruby-mocks-vs-stubs-clerb-presentation.md)<br/>
 
 2011/<br/>
+  02/<br/>
+    * [First Month Without Windows](blog/2011/02/first-month-without-windows.md)<br/>
