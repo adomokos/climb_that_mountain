@@ -11,12 +11,13 @@ I wanted to keep my solution as simple as possible so I kept both the TicketCalc
 
 The kata specifies the method names that you start with so I went ahead and created the class:
 
-<pre class="brush: csharp">public class TicketCalculator {
+```c#
+public class TicketCalculator {
   public void StartPurchase(int runtime, DayOfWeek day, bool isParquet, bool is3D) {}
   public void AddTicket(int age, bool isStudent) {}
   public decimal FinishPurchase() {return 0m;}
 }
-</pre>
+```
 
 I put my first spec right below the TicketCalculator class:
 
