@@ -16,7 +16,7 @@ I wanted to execute the exact same specs but instead of running it in the browse
 
 I easily found JazzMoney's installation instructions on their github page.
 
-[jazzmoney_install](/resources/2010/11/jazzmoney_install.jpg)
+![jazzmoney_install](/resources/2010/11/jazzmoney_install.jpg)
 
 It has prerequisites: I had to install [harmony](https://github.com/mynyml/harmony) first.
 
