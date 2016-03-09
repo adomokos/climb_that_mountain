@@ -21,7 +21,8 @@ public class TicketCalculator {
 
 I put my first spec right below the TicketCalculator class:
 
-<pre class="brush: csharp">[Subject("Basic admission rates")]
+```c#
+[Subject("Basic admission rates")]
 public class Purchasing_general_ticket_as_an_adult_non_student{
   private static TicketCalculator _calculator;
 
@@ -35,7 +36,7 @@ public class Purchasing_general_ticket_as_an_adult_non_student{
   It verify = () =>
     _calculator.FinishPurchase().ShouldEqual(11m);
 }
-</pre>
+```
 
 It compiled fine, however, when I executed the spec this is the error I got:
 
@@ -52,7 +53,8 @@ I am looking at both the MSpec code and the output and they are ugly: it's reall
 
 My spec passed so I started cleaning up my code. The first thing I did was introducing new aliases for the delegate names. Establish, Because and It felt awkward. I always think about Given-When-Then state transitions in my tests and this change just felt more natural to me.
 
-<pre class="brush: csharp">using Given = Machine.Specifications.Establish;
+```c#
+using Given = Machine.Specifications.Establish;
 using When = Machine.Specifications.Because;
 using Then = Machine.Specifications.It;
 
@@ -70,11 +72,12 @@ using Then = Machine.Specifications.It;
     Then verify = () =>
       _calculator.FinishPurchase().ShouldEqual(11m);
   }
-</pre>
+```
 
 This was a good start, but the code is far from readable. I tweaked the delegate names a little bit and I ended up with this:
 
-<pre class="brush: csharp">[Subject("Basic admission rates")]
+```c#
+[Subject("Basic admission rates")]
   public class Purchasing_general_ticket_as_an_adult_non_student{
     private static TicketCalculator _calculator;
 
@@ -88,7 +91,7 @@ This was a good start, but the code is far from readable. I tweaked the delegate
     Then i_pay_11_bucks = () =>
       _calculator.FinishPurchase().ShouldEqual(11m);
   }
-</pre>
+```
 
 Try to read this code! There is some noise around it, but you should be able to read it out:
 
@@ -101,7 +104,8 @@ I don't have much space on this page, but if you indent the lambda a little more
 Let's look at the second scenario: a standard movie ticket for a student is $8.
 Here is my spec for that:
 
-<pre class="brush: csharp">[Subject("Basic admission rates")]
+```c#
+[Subject("Basic admission rates")]
 public class Purchasing_general_ticket_as_an_adult_student{
   private static TicketCalculator _calculator;
 
@@ -115,7 +119,7 @@ public class Purchasing_general_ticket_as_an_adult_student{
   Then i_pay_8_bucks = () =>
     _calculator.FinishPurchase().ShouldEqual(8m);
 }
-</pre>
+```
 
 When I executed the spec with MSpec I received the following error:
 
@@ -130,7 +134,8 @@ i pay 8 bucks, Failed: Machine.Specifications.SpecificationException: Should equ
 
 Again, I did the simplest thing that could possibly work:
 
-<pre class="brush: csharp">public class TicketCalculator{
+```c#
+public class TicketCalculator{
   private decimal _ticket_price = 11m;
   public void StartPurchase(int runtime, DayOfWeek day, bool isParquet, bool is3D) {}
 
@@ -141,7 +146,7 @@ Again, I did the simplest thing that could possibly work:
 
   public decimal FinishPurchase(){ return _ticket_price; }
 }
-</pre>
+```
 
 Everything passed:
 
@@ -155,7 +160,8 @@ i pay 8 bucks, Success
 
 Notice we have duplication in our specs: the "Given" delegate is duplicated the exact same way in both of them. Time to [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself) up the code a little bit. I created a base class called SpecBase and moved the field "_calculator" and the "Given" delegate into it.
 
-<pre class="brush: csharp">public class SpecBase{
+```c#
+public class SpecBase{
   protected static TicketCalculator _calculator;
 
   Given i_buy_a_standard_movie_ticket = () => {
@@ -163,11 +169,12 @@ Notice we have duplication in our specs: the "Given" delegate is duplicated the 
     _calculator.StartPurchase(115, DayOfWeek.Monday, true, false);
   };
 }
-</pre>
+```
 
 Both of the specs are now inheriting from this base class. The second one looks like this:
 
-<pre class="brush: csharp">[Subject("Basic admission rates")]
+```c#
+[Subject("Basic admission rates")]
 public class Purchasing_general_ticket_as_an_adult_student : SpecBase{
   When i_purchase_it_for_an_adult_student = () =>
     _calculator.AddTicket(33, true);
@@ -175,17 +182,18 @@ public class Purchasing_general_ticket_as_an_adult_student : SpecBase{
   Then i_pay_8_bucks = () =>
     _calculator.FinishPurchase().ShouldEqual(8m);
 }
-</pre>
+```
 
 This way the spec is short and there is no duplication, however, I don't see the "Given" part in it. I took care of it by renaming the "SpecBase" class to "Given_i_buy_a_standard_ticket" and with the right indentation I should have a readable spec that tells a story.
 
-<pre class="brush: csharp">[Subject("Basic admission rates")]
+```c#
+[Subject("Basic admission rates")]
 public class Purchasing_general_ticket_as_an_adult_student : 
   Given_i_buy_a_standard_ticket{
   When i_purchase_it_for_an_adult_student = () => _calculator.AddTicket(33, true);
   Then i_pay_8_bucks = () => _calculator.FinishPurchase().ShouldEqual(8m);
 }
-</pre>
+```
 
 You can find the final C# file in this gist: [http://gist.github.com/576433](http://gist.github.com/576433).
 
