@@ -15,7 +15,8 @@ The row cells with yellow background are the column headers. Column cells starti
 
 First I'd like to verify that the column headers and captions are in place. I started writing my feature this way:
 
-<span style="color: blue;">Feature: Modify values in the Excel sheet</span>
+```cucumber
+Feature: Modify values in the Excel sheet
 <span style="color: blue;">In order to show my power</span>
 <span style="color: blue;">  As a user</span>
 <span style="color: blue;">  I want to interact with Excel</span>
@@ -31,8 +32,10 @@ First I'd like to verify that the column headers and captions are in place. I st
 <span style="color: blue;">    And I should see "Category1" in the "A2" cell</span>
 <span style="color: blue;">    And I should see "Child1" in the "A3" cell</span>
 <span style="color: blue;">    And I should see "Child2" in the "A4" cell</span>
+```
 
 I created the following folder structure:
+```
 /features
   |
   |-- step_definitions
@@ -41,6 +44,7 @@ I created the following folder structure:
   |-- support
   |      |-- env.rb
   | - excel.feature
+```
 
 The feature from above was saved in the excel.feature file.
 
