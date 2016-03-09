@@ -15,7 +15,8 @@ I admire the testing enthusiasm I see in the Ruby community. The way they practi
 I work on an OBA ([Office Business Application](http://msdn.microsoft.com/en-us/office/aa905528.aspx)) project at work. We have decent unit test coverage, however, not having automated functional testing is a risk. Sure we have QA staff, they can just go through the test scripts manually over and over. I think what could automated should be automated.
 I bumped into the win 32 OLE automation object in ruby ([http://ruby-doc.org/core/classes/WIN32OLE.html](http://ruby-doc.org/core/classes/WIN32OLE.html)) a couple of months ago but I never had the time to fully investigate it. I was able to open Excel, read and write a value in the cell, save the worksheet and close it. This was all cool, but not enough.
 
-<pre class="brush: ruby" name="code">require 'win32ole'
+```ruby
+require 'win32ole'
 require 'test/unit'
 ExcelTest < Test::Unit::TestCase
 
@@ -35,7 +36,7 @@ ExcelTest < Test::Unit::TestCase
   assert_equal('Child 4', @sheet1.cells(6, "A").value)
  end
 end
-</pre>
+```
 
 I am trying to use Ruby unit testing. It's easy and simple for now. In the setup method I create an Excel object with the tested workbook loaded into it. I create two instance variables for the worksheets to keep my code simple.
 
