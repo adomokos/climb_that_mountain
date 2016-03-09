@@ -18,7 +18,8 @@ I saw the tweet, I did not really pay attention to it then. But after I created 
 
 Here is the only Ruby file I had in my sample app:
 
-<pre class="brush: ruby"># myapp.rb
+```ruby
+# myapp.rb
 require 'rubygems'
 require 'sinatra'
 
@@ -36,7 +37,7 @@ get '/test' do
   @data = 'Hello from test!'
   erb :index
 end
-</pre>
+```
 
 The first block is executed when you make a request - assuming you run the app locally - to http://localhost:4567\. There is no template rendering, you'll only see the string "Hello, World!" in the browser.
 
@@ -44,20 +45,18 @@ Ok, this works, but how could I use this for my templates?
 
 Digging into the [Sinatra documentation](http://www.sinatrarb.com/intro) I found the solution. I had to create the following directory structure:
 
-<div style="margin-bottom: 0px; margin-top: 0px;">-|</div>
-
-<div style="margin-bottom: 0px; margin-top: 0px;">-|-views</div>
-
-<div style="margin-bottom: 0px; margin-top: 0px;">        |- index.erb</div>
-
-<div style="margin-bottom: 0px; margin-top: 0px;">        |- layout.erb</div>
-
-<div style="margin-bottom: 0px; margin-top: 0px;">-|-myapp.rb</div>
-
+```
+-|
+-|-views
+     |- index.erb
+     |- layout.erb
+-|-myapp.rb
+```
 
 layout.erb is my template:
 
-```<pre class="brush: ruby" name="code"><html>
+```html
+<html>
 <head>
 <title>Something Test</title>
 </head>
@@ -70,16 +69,16 @@ layout.erb is my template:
 </div>
 </body>
 </html>
-</pre>```
-
+```
 
 And index.erb provides the page content:
 
 
-```<pre class="brush: ruby" name="code"><div>
+```html
+<pre class="brush: ruby" name="code"><div>
 This is the content: <%= @data %>
 </div>
-</pre>```
+```
 
 Please note that I set the @data variable in the "get '/test'" block.
 
