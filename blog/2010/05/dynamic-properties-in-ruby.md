@@ -6,27 +6,29 @@ I've been working on this Rails 3 app where users can define what fields they wa
 
 I have this class:
 
-<pre class="brush: ruby">class Track
+```ruby
+class Track
   attr_accessor :value
 
   def initialize(value)
     @value = value
   end
 end
-</pre>
+```
 
 The value field is populated by the application, it'll always be valid JSON data.
 
 After the track object is initialized, I'd like to be able to call "distance" and "running" properties on my track object. The following RSpec code describes what I need:
 
-<pre class="brush: ruby">describe Track do
+```
+describe Track do
   it "should add distance and running as read-only properties" do
     track = Track.new('{"distance":2,"what":"running in the park"}')
     track.distance.should == 2
     track.what.should == 'running in the park'
   end
 end
-</pre>
+```
 
 The question is: how can I do that?
 
@@ -36,18 +38,20 @@ After googling the topic I found the solution: [define_method](http://ruby-doc.o
 
 I had to parse the JSON data which was easy with the [json gem](http://flori.github.com/json/).
 
-<pre class="brush: ruby">require 'rubygems'
+```ruby
+require 'rubygems'
 require 'json'
 
 data = '{"distance":2,"what":"running"}'
 parsed_data = JSON.parse(data)
 puts parsed_data["distance"] # => 2
-</pre>
+```ruby
 
 Once I knew how I'll parse the JSON string, adding the define_method calls to the initialize method was easy.
 You can find the final solution here:
 
-<pre class="brush: ruby">require 'rubygems'
+```ruby
+require 'rubygems'
 require 'json'
 require 'spec'
 
@@ -77,7 +81,7 @@ describe Track do
     track.what.should == 'running in the park'
   end
 end
-</pre>
+```
 
 There are a couple of things worth mentioning here.
 See how elegantly the symbol array is populated from the hash keys on line 12 with the array's "inject" method.
