@@ -22,3 +22,4 @@ My [blog](http://www.adomokos.com)'s articles currently hosted at blogger, but m
     * [Making Your Tests More Readable with MSpec](blog/2010/09/making-your-tests-more-readable-with.md)<br/>
   11/<br/>
     * [JavaScript Closures for DRY-ing Up The Logic](blog/2010/11/javascript-closures-for-dry-ing-up.md)<br/>
+    * [Running Jamine BDD Specs in the Terminal](blog/2010/11/running-jasmine-bdd-specs-in-terminal.md)<br/>
