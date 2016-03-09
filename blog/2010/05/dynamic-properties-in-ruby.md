@@ -20,7 +20,7 @@ The value field is populated by the application, it'll always be valid JSON data
 
 After the track object is initialized, I'd like to be able to call "distance" and "running" properties on my track object. The following RSpec code describes what I need:
 
-```
+```ruby
 describe Track do
   it "should add distance and running as read-only properties" do
     track = Track.new('{"distance":2,"what":"running in the park"}')
@@ -45,7 +45,7 @@ require 'json'
 data = '{"distance":2,"what":"running"}'
 parsed_data = JSON.parse(data)
 puts parsed_data["distance"] # => 2
-```ruby
+```
 
 Once I knew how I'll parse the JSON string, adding the define_method calls to the initialize method was easy.
 You can find the final solution here:
@@ -68,7 +68,7 @@ class Track
 
     fields.each do |field|
       self.class.send(:define_method, field) do
-        parsed_values[field.to_s]    
+        parsed_values[field.to_s]
       end
     end
   end
