@@ -14,7 +14,8 @@ Let me sum it up:
 * 180 seconds to compile the app
 *   50 seconds to fire up all WPF services
 *   20 seconds to start the WPF UI App
-<span style="text-decoration: underline;">*   60 seconds to log in and go to the page I had to modify</span>
+*   60 seconds to log in and go to the page I had to modify
+
 <span style="font-weight: bold;">TOTAL:</span> 310 seconds
 
 My task was adding a new TextBox to this page. Simple. I opened up the [XAML](http://en.wikipedia.org/wiki/Xaml) file which was an ugly xml file with weird namespaces and special attributes all over. I grabbed a TextBox XAML code from somewhere, pasted it in, made sure all the namespaces were fine and I was ready to run it.
@@ -24,7 +25,8 @@ I had to shut down the UI app, compile the UI project, start it up again, log in
 Here is how long this took:
 * 30 seconds to compile the UI app
 * 20 seconds to start the WPF UI App
-<span style="text-decoration: underline;">* 60 seconds to log in and go to the page I had to modify</span>
+* 60 seconds to log in and go to the page I had to modify
+
 <span style="font-weight: bold;">TOTAL:</span> 110 seconds
 
 And it turned out that I did not set up the Grid for this TextBox properly, so I had to do some minor tweaks to the XAML page. I did that, killed the UI app, complied the code, ran the WPF UI app, logged in, went to the page and 110 - or one hundred and ten - seconds later I verified that all look good.
@@ -37,7 +39,8 @@ Here is the break down:
 * 30 seconds to regenerate the NHibernate mapping xml
 * 50 seconds to fire up all WCF services
 * 20 seconds to start the WPF UI App
-<span style="text-decoration: underline;">* 60 seconds to log in and make sure that all looks good</span>
+* 60 seconds to log in and make sure that all looks good
+
 <span style="font-weight: bold;">TOTAL:</span> 190 seconds
 
 Wait! 3 minutes just to see if everything is working properly?
