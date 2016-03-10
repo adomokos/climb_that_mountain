@@ -16,7 +16,7 @@ Let me sum it up:
 *   20 seconds to start the WPF UI App
 *   60 seconds to log in and go to the page I had to modify
 
-*TOTAL:* 310 seconds
+**TOTAL:** 310 seconds
 
 My task was adding a new TextBox to this page. Simple. I opened up the [XAML](http://en.wikipedia.org/wiki/Xaml) file which was an ugly xml file with weird namespaces and special attributes all over. I grabbed a TextBox XAML code from somewhere, pasted it in, made sure all the namespaces were fine and I was ready to run it.
 
@@ -27,7 +27,7 @@ Here is how long this took:
 * 20 seconds to start the WPF UI App
 * 60 seconds to log in and go to the page I had to modify
 
-*TOTAL:* 110 seconds
+**TOTAL:** 110 seconds
 
 And it turned out that I did not set up the Grid for this TextBox properly, so I had to do some minor tweaks to the XAML page. I did that, killed the UI app, complied the code, ran the WPF UI app, logged in, went to the page and 110 - or one hundred and ten - seconds later I verified that all look good.
 
@@ -41,7 +41,7 @@ Here is the break down:
 * 20 seconds to start the WPF UI App
 * 60 seconds to log in and make sure that all looks good
 
-*TOTAL:* 190 seconds
+**TOTAL:** 190 seconds
 
 Wait! 3 minutes just to see if everything is working properly?
 
