@@ -29,3 +29,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
 2011/<br/>
   02/<br/>
     * [First Month Without Windows](blog/2011/02/first-month-without-windows.md)<br/>
+  04/<br/>
+    * [Rapid Feedback](blog/2011/04/rapid-feedback.md)<br/>
