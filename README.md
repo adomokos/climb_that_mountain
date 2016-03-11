@@ -32,3 +32,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
   04/<br/>
     * [Rapid Feedback](blog/2011/04/rapid-feedback.md)<br/>
     * [Running Rails RSpec Tests Without Rails](blog/2011/04/running-rails-rspec-tests-without-rails.md)<br/>
+  06/<br/>
+    * [Spec it or not?](blog/2011/06/spec-it-or-not.md)<br/>
