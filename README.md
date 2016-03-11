@@ -38,3 +38,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Get out of my Controller! And from Active Record, too!](blog/2011/09/get-out-of-my-controller-and-from.md)<br/>
   10/<br/>
     * [Running Fast RSpec Tests With and Without Rails](blog/2011/10/running-fast-rspec-tests-with-and.md)<br/>
+  12/<br/>
+    * [(More) Specific Stubbing with RSpec](blog/2011/12/more-specific-stubbing-with-rspec.md)<br/>
