@@ -31,3 +31,4 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [First Month Without Windows](blog/2011/02/first-month-without-windows.md)<br/>
   04/<br/>
     * [Rapid Feedback](blog/2011/04/rapid-feedback.md)<br/>
+    * [Running Rails RSpec Tests Without Rails](blog/2011/04/running-rails-rspec-tests-without-rails.md)<br/>
