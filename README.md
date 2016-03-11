@@ -34,3 +34,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Running Rails RSpec Tests Without Rails](blog/2011/04/running-rails-rspec-tests-without-rails.md)<br/>
   06/<br/>
     * [Spec it or not?](blog/2011/06/spec-it-or-not.md)<br/>
+  09/<br/>
+    * [Get out of my Controller! And from Active Record, too!](blog/2011/09/get-out-of-my-controller-and-from.md)
