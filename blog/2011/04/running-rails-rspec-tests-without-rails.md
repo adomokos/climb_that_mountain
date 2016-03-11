@@ -91,7 +91,7 @@ This was the point where I had to require Rails.
 Instead of doing that, I just defined the class myself so the controller was aware of it. I also needed to declare the class method "protect_from_forgery", but I left the implementation blank. Please note that the class declaration is above the require statements.
 Here is the entire spec after my changes:
 
-```
+```ruby
 APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "..", "..", ".."))
 $: << File.join(APP_ROOT, "app/controllers")
 
