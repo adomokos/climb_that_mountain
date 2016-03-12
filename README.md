@@ -53,3 +53,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Running Mocha Specs in the Browser](blog/2012/05/running-mocha-specs-in-browser.md)<br/>
   06/<br/>
     * [Frequent Job Change](blog/2012/06/frequent-job-change.md)<br/>
+  07/<br/>
+    * [Just make it small, please!](blog/2012/07/just-make-it-small-please.md)<br/>
