@@ -57,3 +57,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Just make it small, please!](blog/2012/07/just-make-it-small-please.md)<br/>
   09/<br/>
     * [My List](blog/2012/09/my-list.md)<br/>
+  10/<br/>
+    * [The Organizations - Users - Roles Kata](blog/2012/10/the-organizations-users-roles-kata.md)<br/>
