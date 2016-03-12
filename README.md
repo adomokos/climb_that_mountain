@@ -44,3 +44,4 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
 2012/<br/>
   01/<br/>
     * [Tic-Tac-Toe Game](blog/2012/01/tic-tac-toe-game.md)<br/>
+    * [JavaScript Testing With Mocha](blog/2012/01/javascript-testing-with-mocha.md)<br/>
