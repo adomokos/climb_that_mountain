@@ -62,3 +62,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
   11/<br/>
     * [A (Mini) Programming Tour](blog/2012/11/a-mini-programming-tour.md)<br/>
     * [Preparing For My Visit in Chicago](blog/2012/11/preparing-for-my-visit-in-chicago.md)<br/>
+  12/<br/>
+    * [npm and bundler - the Good Parts](blog/2012/12/npm-and-bundler-good-parts.md)<br/>
