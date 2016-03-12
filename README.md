@@ -47,3 +47,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [JavaScript Testing With Mocha](blog/2012/01/javascript-testing-with-mocha.md)<br/>
   03/<br/>
     * [Job Change](blog/2012/03/job-change.md)<br/>
+  04/<br/>
+    * [Refactoring Workflows to Chain of Actions](blog/2012/04/refactoring-workflows-to-chain-of.md)<br/>
