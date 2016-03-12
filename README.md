@@ -40,3 +40,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Running Fast RSpec Tests With and Without Rails](blog/2011/10/running-fast-rspec-tests-with-and.md)<br/>
   12/<br/>
     * [(More) Specific Stubbing with RSpec](blog/2011/12/more-specific-stubbing-with-rspec.md)<br/>
+
+2012/<br/>
+  01/<br/>
+    * [Tic-Tac-Toe Game](blog/2012/01/tic-tac-toe-game.md)<br/>
