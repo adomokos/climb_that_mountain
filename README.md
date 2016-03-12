@@ -49,3 +49,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Job Change](blog/2012/03/job-change.md)<br/>
   04/<br/>
     * [Refactoring Workflows to Chain of Actions](blog/2012/04/refactoring-workflows-to-chain-of.md)<br/>
+  05/<br/>
+    * [Running Mocha Specs in the Browser](blog/2012/05/running-mocha-specs-in-browser.md)<br/>
