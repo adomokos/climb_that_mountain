@@ -55,3 +55,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Frequent Job Change](blog/2012/06/frequent-job-change.md)<br/>
   07/<br/>
     * [Just make it small, please!](blog/2012/07/just-make-it-small-please.md)<br/>
+  09/<br/>
+    * [My List](blog/2012/09/my-list.md)<br/>
