@@ -59,3 +59,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [My List](blog/2012/09/my-list.md)<br/>
   10/<br/>
     * [The Organizations - Users - Roles Kata](blog/2012/10/the-organizations-users-roles-kata.md)<br/>
+  11/<br/>
+    * [A (Mini) Programming Tour](blog/2012/11/a-mini-programming-tour.md)<br/>
