@@ -79,3 +79,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Trust and Discipline are the Core Ingredients of Remote Work](blog/2013/07/trust-and-discipline-are-core.md)<br/>
   08/<br/>
     * [Me and My (2013 or v2) Nexus 7](blog/2013/08/me-and-my-2013-or-v2-nexus-7.md)<br/>
+  09/<br/>
+    * [The Broken Light Switch](blog/2013/09/the-broken-light-switch.md)<br/>
