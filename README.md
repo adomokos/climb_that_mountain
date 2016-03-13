@@ -75,3 +75,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [The Tale of Two Rails Rewrites](blog/2013/04/the-tale-of-two-rails-rewrites.md)<br/>
   06/<br/>
     * [Simple and Elegant Rails Code with Functional Style](blog/2013/06/simple-and-elegant-rails-code-with.md)<br/>
+  07/<br/>
+    * [Trust and Discipline are the Core Ingredients of Remote Work](blog/2013/07/trust-and-discipline-are-core.md)<br/>
