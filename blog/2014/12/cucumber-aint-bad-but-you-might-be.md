@@ -14,7 +14,9 @@ This presentation will show you what tools and techniques you should use to writ
 
 You can review the code examples in this [repo](https://github.com/adomokos/cfp-app/blob/cucumber-aint-bad/features/step_definitions/profile_steps.rb).
 
-And view the slides [here](https://speakerdeck.com/adomokos/cucumber-aint-bad-you-are-just-doing-it-wrong).
+And view the slides by clicking on the image below:
+
+[![here](/resources/2014/12/cucumber-aint-bad.png)](https://speakerdeck.com/adomokos/cucumber-aint-bad-you-are-just-doing-it-wrong).
 
 
 POSTED BY ATTILA DOMOKOS AT 10:07 AM
