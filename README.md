@@ -108,3 +108,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [The Case For and Against Cucumber](blog/2015/01/the-case-for-and-against-cucumber.md)<br/>
   03/<br/>
     * [Education](blog/2015/03/education.md)<br/>
+  04/<br/>
+    * [The Long and Winding Road to US Citizenship](blog/2015/04/the-long-and-winding-road-to-us.md)<br/>
