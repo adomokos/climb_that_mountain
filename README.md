@@ -116,3 +116,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Engineering Core Values](blog/2015/06/engineering-core-values.md)<br/>
   08/<br/>
     * [Pay It Forward](blog/2015/08/pay-it-forward.md)<br/>
+  10/<br/>
+    * [The $18 Web Design](blog/2015/10/the-18-web-design.md)<br/>
