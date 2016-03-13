@@ -99,3 +99,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Use GitHub as Your Professional Portfolio](blog/2014/07/use-github-as-your-professional.md)<br/>
   08/<br/>
     * [Unobtrusive Logging with a Decorator](blog/2014/08/unobtrusive-logging-with-decorator.md)<br/>
+  12/<br/>
+    * [Cucumber Ain't Bad, But You Might Be Doing It Wrong](blog/2014/12/cucumber-aint-bad-but-you-might-be.md)<br/>
