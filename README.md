@@ -85,3 +85,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Reporting in Rails - with Rails Admin and ...](blog/2013/11/reporting-in-rails-with-rails-admin-and.md)<br/>
   12/<br/>
     * [Test Driving the FizzBuzz Kata In Clojure](blog/2013/12/test-driving-fizzbuzz-kata-in-clojure.md)<br/>
+
+2014/<br/>
+  02/<br/>
+    * [Learning Clojure One Failing Test at a Time](blog/2014/02/learning-clojure-one-failing-test-at.md)<br/>
