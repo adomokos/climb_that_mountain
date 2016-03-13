@@ -73,3 +73,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Crossroads](blog/2013/02/crossroads.md)<br/>
   04/<br/>
     * [The Tale of Two Rails Rewrites](blog/2013/04/the-tale-of-two-rails-rewrites.md)<br/>
+  06/<br/>
+    * [Simple and Elegant Rails Code with Functional Style](blog/2013/06/simple-and-elegant-rails-code-with.md)<br/>
