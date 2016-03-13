@@ -71,3 +71,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
   02/<br/>
     * [User Devised - Disconnecting Your User Entity From Devise](blog/2013/02/user-devised-disconnecting-your-user.md)<br/>
     * [Crossroads](blog/2013/02/crossroads.md)<br/>
+  04/<br/>
+    * [The Tale of Two Rails Rewrites](blog/2013/04/the-tale-of-two-rails-rewrites.md)<br/>
