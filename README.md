@@ -68,3 +68,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
 2013/<br/>
   01/<br/>
     * [Simple & Beautiful Rails Code with Functional Style](blog/2013/01/simple-beautiful-rails-code-with.md)<br/>
+  02/<br/>
+    * [User Devised - Disconnecting Your User Entity From Devise](blog/2013/02/user-devised-disconnecting-your-user.md)<br/>
