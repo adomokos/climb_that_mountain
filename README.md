@@ -114,3 +114,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [(Software Engineering) Meeting Best Practices](blog/2015/05/software-engineering-meeting-best.md)<br/>
   06/<br/>
     * [Engineering Core Values](blog/2015/06/engineering-core-values.md)<br/>
+  08/<br/>
+    * [Pay It Forward](blog/2015/08/pay-it-forward.md)<br/>
