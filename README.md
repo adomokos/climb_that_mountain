@@ -64,3 +64,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Preparing For My Visit in Chicago](blog/2012/11/preparing-for-my-visit-in-chicago.md)<br/>
   12/<br/>
     * [npm and bundler - the Good Parts](blog/2012/12/npm-and-bundler-good-parts.md)<br/>
+
+2013/<br/>
+  01/<br/>
+    * [Simple & Beautiful Rails Code with Functional Style](blog/2013/01/simple-beautiful-rails-code-with.md)<br/>
