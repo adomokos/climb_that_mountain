@@ -110,3 +110,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Education](blog/2015/03/education.md)<br/>
   04/<br/>
     * [The Long and Winding Road to US Citizenship](blog/2015/04/the-long-and-winding-road-to-us.md)<br/>
+  05/<br/>
+    * [(Software Engineering) Meeting Best Practices](blog/2015/05/software-engineering-meeting-best.md)<br/>
