@@ -10,7 +10,7 @@ I'll show you how you can craft simple and beautiful Rails application by adopti
 
 My talk got accepted and I gave it in early January, 2013. In case you could not attend it, or if you want to review the slides again, here is an abridged version of it.
 
-<iframe src="http://adomokos.github.com/simple_and_beautiful_rails_preso/" width="560" height="540" frameborder="0" scrolling="no"></iframe>
+[Watch the presentation's slides here](http://adomokos.github.io/simple_and_beautiful_rails_preso/).
 
 
 POSTED BY ATTILA DOMOKOS AT 11:16 PM
