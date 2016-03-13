@@ -83,3 +83,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [The Broken Light Switch](blog/2013/09/the-broken-light-switch.md)<br/>
   11/<br/>
     * [Reporting in Rails - with Rails Admin and ...](blog/2013/11/reporting-in-rails-with-rails-admin-and.md)<br/>
+  12/<br/>
+    * [Test Driving the FizzBuzz Kata In Clojure](blog/2013/12/test-driving-fizzbuzz-kata-in-clojure.md)<br/>
