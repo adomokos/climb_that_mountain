@@ -81,3 +81,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Me and My (2013 or v2) Nexus 7](blog/2013/08/me-and-my-2013-or-v2-nexus-7.md)<br/>
   09/<br/>
     * [The Broken Light Switch](blog/2013/09/the-broken-light-switch.md)<br/>
+  11/<br/>
+    * [Reporting in Rails - with Rails Admin and ...](blog/2013/11/reporting-in-rails-with-rails-admin-and.md)<br/>
