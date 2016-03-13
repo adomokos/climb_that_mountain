@@ -97,3 +97,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Expects and Promises in LightService](blog/2014/05/expects-and-promises-in-lightservice.md)<br/>
   07/<br/>
     * [Use GitHub as Your Professional Portfolio](blog/2014/07/use-github-as-your-professional.md)<br/>
+  08/<br/>
+    * [Unobtrusive Logging with a Decorator](blog/2014/08/unobtrusive-logging-with-decorator.md)<br/>
