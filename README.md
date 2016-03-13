@@ -89,3 +89,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
 2014/<br/>
   02/<br/>
     * [Learning Clojure One Failing Test at a Time](blog/2014/02/learning-clojure-one-failing-test-at.md)<br/>
+  03/<br/>
+    * [Group By In Plain Ruby](blog/2014/03/group-by-in-plain-ruby.md)<br/>
+  04/<br/>
+    * [Tracking Progress of a Rails Rewrite](blog/2014/04/tracking-progress-of-rails-rewrite.md)<br/>
