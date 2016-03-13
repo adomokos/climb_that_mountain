@@ -88,7 +88,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
 
 2014/<br/>
   02/<br/>
-    * [Learning Clojure One Failing Test at a Time](blog/2014/02/learning-clojure-one-failing-test-at.md)<br/>
+    * [Learning Clojure One Failing Test At A Time](blog/2014/02/learning-clojure-one-failing-test-at.md)<br/>
   03/<br/>
     * [Group By In Plain Ruby](blog/2014/03/group-by-in-plain-ruby.md)<br/>
   04/<br/>
@@ -101,3 +101,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Unobtrusive Logging with a Decorator](blog/2014/08/unobtrusive-logging-with-decorator.md)<br/>
   12/<br/>
     * [Cucumber Ain't Bad, But You Might Be Doing It Wrong](blog/2014/12/cucumber-aint-bad-but-you-might-be.md)<br/>
+
+2015/<br/>
+  01/<br/>
+    * [Fast TDD in Clojure with Fireplace.vim](blog/2015/01/fast-tdd-in-clojure-with-fireplacevim.md)<br/>
