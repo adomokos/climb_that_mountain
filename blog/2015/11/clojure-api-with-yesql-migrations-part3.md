@@ -2,7 +2,7 @@
 
 ### [Clojure API with Yesql, Migrations and More (Part 3.)](http://www.adomokos.com/2015/11/clojure-api-with-yesql-migrations-part3.html)
 
-We created a database with scripts, [added migrations](http://www.adomokos.com/2015/10/clojure-api-with-yesql-migrations-and.html) and [communicated with the database](http://www.adomokos.com/2015/10/clojure-api-with-yesql-migrations-part2.html) with the help of yesql in the previous posts. Please look at those first to get up to speed with this part.
+We created a database with scripts, [added migrations](/blog/2015/10/clojure-api-with-yesql-migrations-and.md) and [communicated with the database](/blog/2015/10/clojure-api-with-yesql-migrations-part2.md) with the help of yesql in the previous posts. Please look at those first to get up to speed with this part.
 
 In the final part of the series, we will serialize the data we pull from the database to JSON, and we will expose that data through an HTTP endpoint. We will also add logging to monitor the JDBC communication with the database.
 
