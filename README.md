@@ -120,4 +120,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [The $18 Web Design](blog/2015/10/the-18-web-design.md)<br/>
     * [Clojure API with Yesql, Migrations and More (Part 1.)](blog/2015/10/clojure-api-with-yesql-migrations-and.md)<br/>
     * [Clojure API with Yesql, Migrations and More (Part 2.)](blog/2015/10/clojure-api-with-yesql-migrations-part2.md)<br/>
-    * [Clojure API with Yesql, Migrations and More (Part 3.)](blog/2015/10/clojure-api-with-yesql-migrations-part3.md)<br/>
+  11/<br/>
+    * [Clojure API with Yesql, Migrations and More (Part 3.)](blog/2015/11/clojure-api-with-yesql-migrations-part3.md)<br/>

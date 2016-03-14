@@ -307,7 +307,7 @@ I rebuilt the db, ran the tests and everything passed.
 
 You could say this is only the "happy path", what if the band name is incorrect and no band will be found. This will blow up somewhere. Absolutely! You need to do exception handling and error checking. I wanted to keep my examples simple, so others coming to Clojure can benefit from the simplified code.
 
-This last refactoring concludes the second part of the series. In the [final session](/blog/2015/11/clojure-api-with-yesql-migrations-part3.html) we will add logging to jdbc to monitor how yesql communicates with the database. We will also expose the data as JSON through an HTTP endpoint.
+This last refactoring concludes the second part of the series. In the [final session](/blog/2015/11/clojure-api-with-yesql-migrations-part3.md) we will add logging to jdbc to monitor how yesql communicates with the database. We will also expose the data as JSON through an HTTP endpoint.
 
 
 POSTED BY ATTILA DOMOKOS AT 10:38 AM
