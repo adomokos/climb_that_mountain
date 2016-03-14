@@ -130,7 +130,7 @@ Test your SQL by running `lein clj-sql-up migrate` in the terminal. I would reco
 
 The table "clj_sql_migrations" is used to track the actual version of your database, it's the metadata for clj-sql-up to run the migrations. Let's add the "bands" and "bands_members" tables as well, create a new migration file with the clj-sql-up generator: `lein clj-sql-up create create-bands`. Open up the migrations/*-create-bands.clj file and add this SQL:
 
-```
+```clojure
 (defn up []
     ["CREATE TABLE bands(id SERIAL PRIMARY KEY,
                          name varchar(50) NOT NULL,
