@@ -122,3 +122,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Clojure API with Yesql, Migrations and More (Part 2.)](blog/2015/10/clojure-api-with-yesql-migrations-part2.md)<br/>
   11/<br/>
     * [Clojure API with Yesql, Migrations and More (Part 3.)](blog/2015/11/clojure-api-with-yesql-migrations-part3.md)<br/>
+
+2016/<br/>
+  01/<br/>
+    * [Vitamin, Medicine, Drug](blog/2016/01/vitamin-medicine-drug.md)<br/>
