@@ -2,7 +2,7 @@
 
 ### [Clojure API with Yesql, Migrations and More (Part 2.)](http://www.adomokos.com/2015/10/clojure-api-with-yesql-migrations-part2.html)
 
-In the [previous article](http://www.adomokos.com/2015/10/clojure-api-with-yesql-migrations-and.html), we started working on [kashmir](https://github.com/adomokos/kashmir), a Clojure project that interacts with a database, and exposes the data through a JSON HTTP endpoint.
+In the [previous article](/blog/2015/10/clojure-api-with-yesql-migrations-and.md), we started working on [kashmir](https://github.com/adomokos/kashmir), a Clojure project that interacts with a database, and exposes the data through a JSON HTTP endpoint.
 In this post we'll seed the database with some test data, add [yesql](https://github.com/krisajenkins/yesql) as our DB communication tool, at the end we will cover testing.
 
 #### Adding Seed Data
