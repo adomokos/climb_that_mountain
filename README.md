@@ -118,3 +118,4 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Pay It Forward](blog/2015/08/pay-it-forward.md)<br/>
   10/<br/>
     * [The $18 Web Design](blog/2015/10/the-18-web-design.md)<br/>
+    * [Clojure API with Yesql, Migrations and More (Part 1.)](blog/2015/10/clojure-api-with-yesql-migrations-and.md)<br/>
