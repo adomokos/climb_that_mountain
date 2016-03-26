@@ -1,6 +1,6 @@
 ## Saturday, March 28, 2016
 
-### [Why Make In Any Project?](http://www.adomokos.com/)
+### [Why Make?](http://www.adomokos.com/)
 
 A new member joined our team a couple of weeks ago, and as we took him out for a cup of coffee on his first week, he asked me a question: "I've never seen this before and I wanted to ask you. Why are you using Make in your Ruby project?"
 
@@ -30,4 +30,11 @@ I was amazed a few weeks ago, when I found a [blog post](http://marmelab.com/blo
 
 ![make-output](/resources/2016/03/make_output.jpg)
 
-As I have not found a good make target generator, I created this [gist](https://www.github.com/adomokos/gists) to get me rolling. Documentation and a sample target template is what I need to get me rolling.
+As I have not found a good make target generator, I created a [gist](https://gist.github.com/adomokos/2fd95840d59b19bbb3f4) to get me rolling. Documentation and a sample target is a good way to get started. I even added a shell function to grab it for me:
+
+```shell
+make-init() {
+  curl https://gist.githubusercontent.com/adomokos/2fd95840d59b19bbb3f4/raw/7b548cd3fda0dab958ecb0e0955fbadc1af6ef6e/Makefile > Makefile
+}
+```
+Now, I only need to type `make-init` in the terminal and I have a Makefile to work with.
