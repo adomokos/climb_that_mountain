@@ -26,7 +26,7 @@ This practice came with me as I went back to Ruby as well. As I started working 
 
 Of course, some of the religious Rails disciples dismissed this, but productivity over religion has a higher precedence for me.
 
-I was amazed a few weeks ago when I found a [blog post](http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html) on how to add task descripition to Make targets. I updated my Makefiles, and now, when I run `make` in the terminal, this is what I see:
+A few weeks ago I found a [blog post](http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html) on how to add task description to Make targets. I updated my Makefiles, and now, when I run `make` in the terminal, this is what I see:
 
 ![make-output](/resources/2016/03/make_output.jpg)
 
