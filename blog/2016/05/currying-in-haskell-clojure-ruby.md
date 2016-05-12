@@ -2,7 +2,7 @@
 
 I worked with a developer about a year ago, who had more experience with functional programming than I had. We worked on a Clojure project, and his deep Haskell background made him an expert on our team. This was especially revealing when we discussed partial function applications and currying. I was vaguely familiar with the concept, but I've never used them in any of the apps I've worked on.
 
-Fast forward 1 year, after I have a few months of learning and playing with Haskell under my belt, I understand why: in Haskell, everything is curried. I repeat: everything. Even the function invocation is curried. No wonder, this was so obvious for that developer.
+Fast forward 1 year, after learning and playing with Haskell for a few months, I understand why: in Haskell, everything is curried. I repeat: everything. Even the function invocation is curried. In fact, you have to work hard if you want it differently. No wonder, this was so obvious for that developer.
 
 Let's look at a simple example:
 
@@ -16,7 +16,7 @@ double 3
 triple 4
 ```
 
-Let me explain what we did here. We describe a multiply function that takes two arguments and multiplies them. In Haskell everything is curried, it's perfectly fine to invoke this function with only a single argument. What will I get back? Another function and not an exception. And this was the breakthrough for me: partially applying a function yields another function. Then we define two other functions, one that passes in 2 to double, the other 3 to triple whatever argument we pass to it.
+Let me explain what I did here. I created a multiply function that takes two arguments and multiplies them. In Haskell everything is curried, it's perfectly fine to invoke this function with only a single argument. What will I get back? Another function and not an exception. This was the breakthrough for me: partially applying a function yields another function. Then I defined two other functions, one that passes in 2 to double, the other 3 to triple whatever argument we pass to it.
 
 What I was amazed by this was the easiness and the natural nature of Haskell's currying through partial application.
 
@@ -54,7 +54,7 @@ double = multiply(2)
 triple = multiply(3)
 ```
 
-I am sure the Ruby language authors had the reason to use `curry` for partial applications.
+I am sure the Ruby language authors had a reason to use `curry` for partial applications, but it just did not feel natural. I have to learn and remember how to use it properly.
 
 There are currying related npm packages in Node, but I have not found anything that's built into the language. Here is how the poor man's currying is done in JavaScript:
 
@@ -71,5 +71,5 @@ var triple = function(3);
 double(3); // will yield 6
 triple(4); // will produce 12
 ```
-
+I like JavaScript's "functions are first class citizens" nature, I am sure once ES6 or 7 gets widely adopted, it will be a language I'll enjoy using in the future.
 
