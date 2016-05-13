@@ -2,7 +2,7 @@
 
 I worked with a developer about a year ago, who had more experience with functional programming than I had. We worked on a Clojure project, and his deep Haskell background made him an expert on our team. This was especially revealing when we discussed partial function applications and currying. I was vaguely familiar with the concept, but I've never used them in any of the apps I've worked on.
 
-Fast forward 1 year, after learning and playing with Haskell for a few months, I understand why: in Haskell, everything is curried. I repeat: everything. Even the function invocation is curried. In fact, you have to work hard if you want it differently. No wonder, this was so obvious for that developer.
+Fast forward a year, after learning and playing with Haskell for a few months, I understand why: in Haskell, everything is curried. I repeat: everything. Even the function invocation is curried. In fact, you have to work hard if you want it differently. No wonder, this was so obvious for that developer.
 
 Let's look at a simple example:
 
@@ -31,7 +31,7 @@ Let's see how this simple example would look in Clojure.
 (triple 4) ;; will produce 12
 ```
 
-This works, but yuck, I had to use a special language contsract `partial` to signal, that I'll be partially applying the `multiply` function. Based on the Haskell example, my intuition was to use `defn` for the double and triple functions, but that tripped me over, it did not work. I had to "StackOverflow" it to realize, that the `def` binding is needed instead of `defn` to produce the partially applied function. In Haskell, everything felt natural.
+This works, but yuck, I had to use a special language construct `partial` to signal, that I'll be partially applying the `multiply` function. Based on the Haskell example, my intuition was to use `defn` for the double and triple functions, but that tripped me over, it did not work. I had to "StackOverflow" it to realize, that the `def` binding is needed instead of `defn` to produce the partially applied function. In Haskell, everything felt natural.
 
 Although Ruby is a dynamically typed object-oriented language, it has many functional constructs that I enjoy using. I was curious, if Ruby supports currying. To my surprise, it does. Look at the same example with partial functions and currying in Ruby.
 
