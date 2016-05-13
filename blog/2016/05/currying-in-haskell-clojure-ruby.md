@@ -65,8 +65,8 @@ var multiply = function(x) {
   }
 }
 
-var double = function(2);
-var triple = function(3);
+var double = multiply(2);
+var triple = multiply(3);
 
 double(3); // will yield 6
 triple(4); // will produce 12
