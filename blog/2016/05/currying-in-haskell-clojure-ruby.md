@@ -1,4 +1,4 @@
-### Currying
+### Currying in Haskell, Clojure, Ruby and JavaScript
 
 I worked with a developer about a year ago, who had more experience with functional programming than I had. We worked on a Clojure project, and his deep Haskell background made him an expert on our team. This was especially revealing when we discussed partial function applications and currying. I was vaguely familiar with the concept, but I've never used them in any of the apps I've worked on.
 
