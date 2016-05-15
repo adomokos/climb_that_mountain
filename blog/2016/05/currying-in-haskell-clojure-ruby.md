@@ -9,7 +9,7 @@ Fast forward a year, after learning and playing with Haskell for a few months, I
 Let's look at a simple example in Haskell:
 
 ```haskell
--- You can type this in GHCi or in TryHaslell.com
+-- You can type this in your own GHCi or try it in https://ghc.io/
 let multiply x y = x * y
 let double = multiply 2
 let triple = multiply 3
