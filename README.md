@@ -130,3 +130,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Teaching Clojure to a 7-Year-Old](blog/2016/02/teaching-clojure-to-7-year-old.md)<br/>
   03/<br/>
     * [Why Make?](blog/2016/03/why-make.md)<br/>
+  05/<br/>
+    * [Currying in Haskell, Clojure, Ruby and JavaScript](blog/2016/05/currying-in-haskell-clojure-ruby.md)<br/>
