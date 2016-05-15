@@ -75,5 +75,5 @@ triple(4); // will produce 12
 ```
 I like JavaScript's "functions are first class citizens" nature, I am sure once ES6 or 7 gets widely adopted, it will be a language I'll enjoy using in the future.
 
-Learning about currying in one language and using those concepts in another is clear benefit of [learning a programming language in every year](https://pragprog.com/book/tpp/the-pragmatic-programmer).
+Learning about currying in one language and using those concepts in another is an obvious benefit of [learning a programming language in every year](https://pragprog.com/book/tpp/the-pragmatic-programmer).
 
