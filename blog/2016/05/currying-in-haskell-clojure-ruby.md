@@ -4,9 +4,7 @@ I worked with a developer about a year ago, who had more experience with functio
 
 Fast forward a year, after learning and playing with Haskell for a few months, I understand why: in Haskell, everything is curried. I repeat: everything. Even the function invocation is curried. In fact, you have to work hard if you want it differently. No wonder, currying was so obvious for that developer.
 
-<div style="text-align: center;">
-![haskell-logo](/resources/2016/05/haskell.png)
-</div>
+->![haskell-logo](/resources/2016/05/haskell.png)<-
 
 Let's look at a simple example in Haskell:
 
