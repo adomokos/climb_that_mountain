@@ -8,6 +8,64 @@ AWS Lambda, as of this writing, supports 3 main platforms: Java, Node.JS and Pyt
 
 Amazon claimed you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would show me how. Once you can package up your app to run as an executable, you can run it. I bumped into this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code base can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this, and found the great [Travelling Ruby](http://phusion.github.io/traveling-ruby/) app. You can package your code and run it as an executable on the user's computer, no local Ruby installation is necessary. I first wanted to try it locally, thinking if it works there (on OSX), it should work on AWS Lambda as well.
 
-I created a project skeleton like this:
+First things first: you need to have the same version of Ruby as the one Travelling Ruby offers. The latest there is Ruby 2.2.2, I'd recommend installing that through Rbenv or RVM, and use that throughout the project.
+
+1. Setting up the project
+
+I gave named the project `hello_app` and created a directory structure like this:
+
+```shell
+- hello_app
+    |- hello_ruby
+       |- lib
+          |- hello.rb
+```
+
+I put this code in the `hello.rb` file:
+```ruby
+puts 'Hello from Ruby!'
+```
+
+I made sure that my Ruby version in the project is 2.2.2 by setting it with Rbenv. I ran the app and made sure everything is wired up OK thus far:
+```shell
+$: cd hello_ruby && ruby lib/hello.rb
+$: Hello from Ruby!
+```
+[Commit point](https://www.github.com)
+
+2. Execute the Ruby code with Travelling Ruby
+
+I use the Rbenv provided Ruby runtime in the example above. I will set up Travelling Ruby to execute the Ruby code in this section.
+
+Create a directory under the project root directory with the name `resources`. Your directory structure should look like this:
+
+```shell
+- hello_app
+    |- hello_ruby
+    |- resources
+```
+Download the Ruby runtimes from [Travelling Ruby](http://travelling.phusion.org)'s website into the `resources` directory. I only needed the OSX version for local development, and the linux-x86_64 version for AWS. My directory had these two files in it:
+
+```shell
+- hello_app
+    |- hello_ruby
+    |- resources
+         |- traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz
+         |- traveling-ruby-20150715-2.2.2-osx.tar.gz
+```
+[Commit point](https://www.github.com)
+
+Create two new directories for assembling the project under OSX and Linux X86_64 like these:
+
+```shell
+- hello_app
+    |- hello-2.0.0-linux-x86_64
+    |- hello-1.0.0-osx
+    |- hello_ruby
+    |- resources
+```
+(Highlight new lines)
+
+Add a [Makefile](http://www.adomokos.com/why-make) to the project under the root directory, we want to automate all the different steps as early as possible.
 
 
