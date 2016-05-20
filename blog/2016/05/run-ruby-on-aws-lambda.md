@@ -14,10 +14,10 @@ This post assumes you are familiar with AWS, you have access to the AWS web cons
 
 1. Setting up the project
 
-I named the project `hello_app` and created a directory structure like this:
+I named the project `aws-lambda-ruby` and created a directory structure like this:
 
 ```shell
-- hello_app
+- aws-lambda-ruby
     |- hello_ruby
        |- lib
           |- hello.rb
@@ -40,14 +40,14 @@ $: Hello from Ruby!
 Create a directory under the project root directory with the name `resources`. Your directory structure should look like this:
 
 ```shell
-- hello_app
+- aws-lambda-ruby
     |- hello_ruby
     |- resources
 ```
 Download the Ruby runtimes from [Travelling Ruby](http://phusion.github.io/traveling-ruby/)'s [S3 bucket](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) into the `resources` directory. I only needed the [OSX version](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-osx.tar.gz) for local development, and the [linux-x86_64](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz) version for AWS. My directory had these two files in it:
 
 ```shell
-- hello_app
+- aws-lambda-ruby
     |- hello_ruby
     |- resources
          |- traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz
@@ -58,7 +58,7 @@ Download the Ruby runtimes from [Travelling Ruby](http://phusion.github.io/trave
 Create two new directories for assembling the project under OSX and Linux X86_64 like these:
 
 ```shell
-- hello_app
+- aws-lambda-ruby
     |- hello-2.0.0-linux-x86_64
     |- hello-1.0.0-osx
     |- hello_ruby
