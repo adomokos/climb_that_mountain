@@ -33,7 +33,7 @@ I made sure that my Ruby version in the project is 2.2.2 by setting it with Rben
 $: cd hello_ruby && ruby lib/hello.rb
 $: Hello from Ruby!
 ```
-[Commit point](https://www.github.com)
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/c1d1970023ccf376c718aa1516b356df0a6c0d16)
 
 2. Execute the Ruby code with Travelling Ruby
 
@@ -44,7 +44,7 @@ Create a directory under the project root directory with the name `resources`. Y
     |- hello_ruby
     |- resources
 ```
-Download the Ruby runtimes from [Travelling Ruby](http://travelling.phusion.org)'s website into the `resources` directory. I only needed the [OSX version](http://travelling.phusion.com/download/osx) for local development, and the [linux-x86_64](http://travelling.phusion.org/linux) version for AWS. My directory had these two files in it:
+Download the Ruby runtimes from [Travelling Ruby](http://phusion.github.io/traveling-ruby/)'s [S3 bucket](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) into the `resources` directory. I only needed the [OSX version](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-osx.tar.gz) for local development, and the [linux-x86_64](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz) version for AWS. My directory had these two files in it:
 
 ```shell
 - hello_app
@@ -53,7 +53,7 @@ Download the Ruby runtimes from [Travelling Ruby](http://travelling.phusion.org)
          |- traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz
          |- traveling-ruby-20150715-2.2.2-osx.tar.gz
 ```
-[Commit point](https://www.github.com)
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/e4c12cb357f276f51ef771686a9fb4cad6df2162)
 
 Create two new directories for assembling the project under OSX and Linux X86_64 like these:
 
@@ -64,8 +64,6 @@ Create two new directories for assembling the project under OSX and Linux X86_64
     |- hello_ruby
     |- resources
 ```
-(Highlight new lines)
-
-Add a [Makefile](http://www.adomokos.com/why-make) to the project under the root directory, we want to automate all the different steps as early as possible. Create a Make target to package the code for OSX.
+Add a [Makefile](http://www.adomokos.com/2016/03/why-make.html) to the project under the root directory, we want to automate all the different steps as early as possible. Create a Make target to package the code for OSX.
 
 
