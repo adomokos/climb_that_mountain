@@ -12,7 +12,7 @@ First things first: you need to have the same version of Ruby as the one Travell
 
 This post assumes you are familiar with AWS, you have access to the AWS web console and you have the AWS command line tool configured to interact with your services through the terminal.
 
-1. Setting up the project
+(1) Setting up the project
 
 I named the project `aws-lambda-ruby` and created a directory structure like this:
 
@@ -35,7 +35,7 @@ $: Hello from Ruby!
 ```
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/c1d1970023ccf376c718aa1516b356df0a6c0d16)
 
-2. Execute the Ruby code with Travelling Ruby
+(2) Execute the Ruby code with Travelling Ruby
 
 Create a directory under the project root directory with the name `resources`. Your directory structure should look like this:
 
