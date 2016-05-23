@@ -6,9 +6,9 @@ Bulk of my work at my current gig is about transforming data: we get some kind o
 
 AWS Lambda, as of this writing, supports three main platforms: Java, Node.JS and Python. I played around running Clojure on AWS Lambda, which worked as the code is compiled into a jar file, but our current code - due to its monolithic nature - can't support any other language for a service just yet.
 
-Amazon claimed you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would show me how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code base can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this, and found the great [Travelling Ruby](http://phusion.github.io/traveling-ruby/) app. You can package your code and run it as an executable on the user's computer, no local Ruby installation is necessary. I first wanted to try it locally, thinking if it works there (on OSX), it should work on AWS Lambda as well.
+Amazon claimed you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would show me how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code base can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this, and found the great [Traveling Ruby](http://phusion.github.io/traveling-ruby/) app. You can package your code and run it as an executable on the user's computer, no local Ruby installation is necessary. I first wanted to try it locally, thinking if it works there (on OSX), it should work on AWS Lambda as well.
 
-First things first: you need to have the same version of Ruby as the one Travelling Ruby offers. The latest there is Ruby 2.2.2, I'd recommend installing that through Rbenv or RVM, and use that throughout the project.
+First things first: you need to have the same version of Ruby as the one Traveling Ruby offers. The latest there is Ruby 2.2.2, I'd recommend installing that through Rbenv or RVM, and use that throughout the project.
 
 This post assumes you are familiar with AWS, you have access to the AWS web console and you have the AWS command line tool configured to interact with your services through the terminal.
 
@@ -35,7 +35,7 @@ $: Hello from Ruby!
 ```
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/c1d1970023ccf376c718aa1516b356df0a6c0d16)
 
-(2) Execute the Ruby code with Travelling Ruby
+(2) Execute the Ruby code with Traveling Ruby
 
 Create a directory under the project root directory with the name `resources`. Your directory structure should look like this:
 
@@ -44,7 +44,7 @@ Create a directory under the project root directory with the name `resources`. Y
     |- hello_ruby
     |- resources
 ```
-Download the Ruby runtimes from [Travelling Ruby](http://phusion.github.io/traveling-ruby/)'s [S3 bucket](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) into the `resources` directory. I only needed the [OSX version](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-osx.tar.gz) for local development, and the [linux-x86_64](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz) version for AWS. My directory had these two files in it:
+Download the Ruby runtimes from [Traveling Ruby](http://phusion.github.io/traveling-ruby/)'s [S3 bucket](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) into the `resources` directory. I only needed the [OSX version](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-osx.tar.gz) for local development, and the [linux-x86_64](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz) version for AWS. My directory had these two files in it:
 
 ```shell
 - aws-lambda-ruby
@@ -64,6 +64,44 @@ Create two new directories for assembling the project under OSX and Linux X86_64
     |- hello_ruby
     |- resources
 ```
-Add a [Makefile](http://www.adomokos.com/2016/03/why-make.html) to the project under the root directory, we want to automate all the different steps as early as possible. Create a Make target to package the code for OSX.
+Add a [Makefile](http://www.adomokos.com/2016/03/why-make.html) to the project under the root directory, we want to automate all the different steps as early as possible. Create a Make target to package and run the code on OSX like this:
 
+```shell
+run: ## Runs the code locally
+	@echo 'Run the app locally'
+	@echo '-------------------'
+	@rm -fr $(OSXDIR)
+	@mkdir -p $(OSXDIR)/lib/ruby
+	@tar -xzf resources/traveling-ruby-20150715-2.2.2-osx.tar.gz -C $(OSXDIR)/lib/ruby
+	@mkdir $(OSXDIR)/lib/app
+	@cp hello_ruby/lib/hello.rb $(OSXDIR)/lib/app/hello.rb
+	@cp resources/wrapper.sh $(OSXDIR)/hello
+	@chmod +x $(OSXDIR)/hello
+	@cd $(OSXDIR) && ./hello
+```
 
+Traveling Ruby suggests running the app through an executable shell script, that's what the `resources/wrapper.sh` file is:
+
+```shell
+#!/bin/bash
+set -e
+
+# Figure out where this script is located.
+SELFDIR="`dirname \"$0\"`"
+SELFDIR="`cd \"$SELFDIR\" && pwd`"
+
+# Run the actual app using the bundled Ruby interpreter.
+exec "$SELFDIR/lib/ruby/bin/ruby" "$SELFDIR/lib/app/hello.rb"
+```
+
+If you have all the right files in the correct directories and your Makefile has the `run` target with the code above, when you execute `make run`, this is what you should see in your terminal:
+
+```shell
+$: make run
+Run the app locally
+-------------------
+Hello from Ruby!
+```
+We now executed the Ruby code with the Traveling Ruby packaged Ruby runtime, not with the system Ruby, that I set up with Rbenv.
+
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/1ff6a6bf0ea51f0e856f352f3509490d98841f28)
