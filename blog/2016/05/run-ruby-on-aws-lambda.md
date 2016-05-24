@@ -251,6 +251,7 @@ If everything configured properly, you should be able to create your AWS Lambda 
 We can invoke the lambda from the command line as well, this make target will do just that:
 
 ```shell
+...
 
 invoke: ## Invoke the AWS Lambda in the command line
 	rm -fr tmp && mkdir tmp
