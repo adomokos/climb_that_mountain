@@ -253,7 +253,7 @@ We can invoke the lambda from the command line as well, this make target will do
 ```shell
 
 invoke: ## Invoke the AWS Lambda in the command line
-	
+	rm -fr tmp && mkdir tmp
 	aws lambda invoke \
 	--invocation-type RequestResponse \
 	--function-name HelloFromRuby \
