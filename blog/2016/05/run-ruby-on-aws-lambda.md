@@ -203,3 +203,5 @@ Fill out the form as you see it in this screenshot:
 Test the function by clicking on the blue "Test" button. You can accept the `HelloWorld` test template, those arguments are going to be ignored for now. You should see the following output:
 
 ![log_output](/resources/2016/05/log_output.jpg)
+
+The string "Hello from Ruby!" is coming from the Ruby code executed by Traveling Ruby, just like we did locally. Woohoo! Congrats, you've just created an AWS Lambda function with MRI Ruby.
