@@ -102,6 +102,29 @@ Run the app locally
 -------------------
 Hello from Ruby!
 ```
-We now executed the Ruby code with the Traveling Ruby packaged Ruby runtime, not with the system Ruby, that I set up with Rbenv.
+We ran the Ruby code with the Traveling Ruby packaged Ruby runtime, not with the system Ruby, that I set up with Rbenv.
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/1ff6a6bf0ea51f0e856f352f3509490d98841f28)
+
+(3) Package the Code for AWS Lambda
+
+We need to package the code for AWS Lambda after running the app locally on OSX. You can easily check the Lambda runtime by running an AWS Lambda function with Python. Create a new AWS Lambda with the "hello-world-python" template with this Python code in it:
+
+```python
+from __future__ import print_function
+
+import json
+import commands
+
+print('Loading function')
+
+def lambda_handler(event, context):
+    print(commands.getstatusoutput('cat /etc/issue'))
+    print(commands.getstatusoutput('uname -a'))
+    print(commands.getstatusoutput('pwd'))
+```
+There are plenty of tutorials out there to guide you through creating an AWS Lambda, please Google the solution if you don't know what to do. When you run it, this is the information you should get:
+
+![python-system-info](/resources/2016/05/python_system_info_log_output.jpg)
+
+
