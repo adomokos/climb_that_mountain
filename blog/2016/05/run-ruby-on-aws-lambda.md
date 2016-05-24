@@ -194,3 +194,12 @@ We created a `hello_ruby.zip` file in the previous section, let's deploy this zi
 
 ![node-exec](/resources/2016/05/node_exec_template.jpg)
 
+Fill out the form as you see it in this screenshot:
+
+![create_function](/resources/2016/05/create_function.jpg)
+
+1 - name it "HelloFromRuby", 2 - chose the option of "Upload a .ZIP file", 3 - use the `lambda_basic_execution` role, if you don't have it, create it. Confirm it and create the Lambda function.
+
+Test the function by clicking on the blue "Test" button. You can accept the `HelloWorld` test template, those arguments are going to be ignored for now. You should see the following output:
+
+![log_output](/resources/2016/05/log_output.jpg)
