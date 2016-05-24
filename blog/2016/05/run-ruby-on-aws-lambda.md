@@ -2,6 +2,8 @@
 
 It was May 2015 at the AWS Summit in Chicago, where I first heard about AWS Lambdas. The company I worked with was running its servers on Linode, I had no chance of using it, but I still found the concept fascinating: "just deploy code and we will execute it for you" was the promsie.
 
+![aws-lambda](/resources/2016/05/aws_lambda.png)
+
 Bulk of my work at my current gig is about transforming data: we get some kind of data, we need to transform and load it into our own data storage. Sure the worker boxes can do the job, but maintaining a series of these instances takes effort. AWS Lambdas would be the perfect solution for us, but Amazon does not support Ruby natively, which is most of our business logic is written in.
 
 AWS Lambda, as of this writing, supports three main platforms: Java, Node.JS and Python. I played around running Clojure on AWS Lambda, which worked as the code is compiled into a jar file, but our current code - due to its monolithic nature - can't support any other language for a service just yet.
