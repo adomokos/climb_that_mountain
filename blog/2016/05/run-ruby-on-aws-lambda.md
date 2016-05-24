@@ -267,7 +267,7 @@ invoke: ## Invoke the AWS Lambda in the command line
 ...
 ```
 
-Please note, that I am using a lightweight JSON parser, (jq)[https://stedolan.github.io/jq/] to extract information from the response.
+Please note, that I am using a lightweight JSON parser, [jq](https://stedolan.github.io/jq/) to extract information from the response.
 You should see the following response from AWS Lambda:
 
 ```shell
