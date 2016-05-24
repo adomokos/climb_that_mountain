@@ -242,10 +242,42 @@ create: ## Creates an AWS lambda function
 ...
 ```
 
-I masked the `role` entry, you need to find the correct "Role ARN" value under Security -> IAM -> Roles. You should look for it here:
+I masked the `role` entry, you need to find your correct "Role ARN" value under Security -> IAM -> Roles. You should look for it here:
 
 ![role-arn](/resources/2016/05/role_arn.jpg)
 
 If everything configured properly, you should be able to create your AWS Lambda function by running `make create` in the terminal.
 
+We can invoke the lambda from the command line as well, this make target will do just that:
 
+```shell
+
+invoke: ## Invoke the AWS Lambda in the command line
+	
+	aws lambda invoke \
+	--invocation-type RequestResponse \
+	--function-name HelloFromRuby \
+	--log-type Tail \
+	--region us-east-1 \
+	--payload '{"name":"John Adam Smith"}' \
+	tmp/outfile.txt \
+	| jq -r '.LogResult' | base64 -D
+
+...
+```
+
+You should see the following response from AWS Lambda:
+
+```shell
+START RequestId: e8c24c91-2165-11e6-a0b6-35430628271f Version: $LATEST
+2016-05-24T04:13:46.403Z        e8c24c91-2165-11e6-a0b6-35430628271f    Hello from Ruby!
+
+END RequestId: e8c24c91-2165-11e6-a0b6-35430628271f
+REPORT RequestId: e8c24c91-2165-11e6-a0b6-35430628271f
+       Duration: 214.12 ms
+       Billed Duration: 300 ms
+       Memory Size: 512 MB
+       Max Memory Used: 20 MB
+```
+
+(Commit point)[https://github.com/adomokos/aws-lambda-ruby/commit/7bf6c4e5d6f745d636dbdc6737db7f23a4371085]
