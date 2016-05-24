@@ -1,6 +1,6 @@
 ### Using Ruby in AWS Lambda
 
-It was May 2015 at the AWS Summit in Chicago, where I first heard about AWS Lambdas. The company I worked with was running its servers on Linode, I had no chance of using it, but I still found the concept fascinating: "just deploy code and we will execute it for you" was the promsie.
+It was May 2015 at the AWS Summit in Chicago, where I first heard about AWS Lambdas. The company I worked with was running its servers on Linode, I had no chance of using it, but I still found the serverless concept fascinating.
 
 ![aws-lambda](/resources/2016/05/aws_lambda.png)
 
