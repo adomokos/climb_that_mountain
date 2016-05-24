@@ -192,5 +192,5 @@ and a `hello_ruby.zip` file should be created in your `deploy` directory.
 
 We created a `hello_ruby.zip` file in the previous section, let's deploy this zip file to AWS Lambda. Open the [AWS Management Console](https://aws.amazon.com/console/) and select "Lambda" from the options. Your created Lambdas (if you had any) are listed here. Let's start creating a new one by clicking on the "Create a Lambda function" button. Select the "node-exec" template:
 
-![node-exec](resources/2016/05/node_exec_template.png)
+![node-exec](resources/2016/05/node_exec_template.jpg)
 
