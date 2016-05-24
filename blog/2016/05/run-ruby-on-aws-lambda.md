@@ -127,4 +127,61 @@ There are plenty of tutorials out there to guide you through creating an AWS Lam
 
 ![python-system-info](/resources/2016/05/python_system_info_log_output.jpg)
 
+We will use Node.js to execute the code, place this JavaScript file in your resources directory with the name `index.js`:
 
+```javascript
+process.env['PATH'] = process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT']
+
+var exec = require('child_process').exec;
+exports.handler = function(event, context) {
+  var command = `./hello`;
+  child = exec(command, {env: {'LD_LIBRARY_PATH': __dirname + '/lib'}}, function(error) {
+    // Resolve with result of process
+    context.done(error, 'Process complete!');
+  });
+  // Log process stdout and stderr
+  child.stdout.on('data', console.log);
+  child.stderr.on('data', console.error);
+};
+```
+
+The index.handler will be invoked by Lambda, which will spawn a new child process by executing the `hello` shell script, which will run the Ruby code with Traveling Ruby.
+
+The `package` make target will assemble the directory for AWS Lambda and compress it into a zip file. This is how that code looks:
+
+```shell
+LAMBDADIR=hello-1.0.0-linux-x86_64
+
+...
+
+package: ## Package the code for AWS Lambda
+	@echo 'Package the app for deploy'
+	@echo '--------------------------'
+	@rm -fr $(LAMBDADIR)
+	@rm -fr deploy
+	@mkdir -p $(LAMBDADIR)/lib/ruby
+	@tar -xzf resources/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz -C $(LAMBDADIR)/lib/ruby
+	@mkdir $(LAMBDADIR)/lib/app
+	@cp hello_ruby/lib/hello.rb $(LAMBDADIR)/lib/app/hello.rb
+	@cp resources/wrapper.sh $(LAMBDADIR)/hello
+	@chmod +x $(LAMBDADIR)/hello
+	@cp resources/index.js $(LAMBDADIR)/
+	cd $(LAMBDADIR) && zip -r hello_ruby.zip hello index.js lib/
+	mkdir deploy
+	cd $(LAMBDADIR) && mv hello_ruby.zip ../deploy/
+	@echo '... Done.'
+
+...
+```
+
+I only list the content that I added, the `run` target is still in the Makefile but I omitted it here for brevity. When you execute `make package`, you should see the following output:
+
+```shell
+$: make package
+Package the app for deploy
+--------------------------
+... Done.
+```
+and a `hello_ruby.zip` file should be created in your `deploy` directory.
+
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/6721e9e8f7d15649385bdb9adf6593214ad6e250)
