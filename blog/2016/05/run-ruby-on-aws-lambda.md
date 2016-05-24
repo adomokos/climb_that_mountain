@@ -187,3 +187,10 @@ Package the app for deploy
 and a `hello_ruby.zip` file should be created in your `deploy` directory.
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/6721e9e8f7d15649385bdb9adf6593214ad6e250)
+
+(4) Deploy the Package Ruby Code to AWS Lambda
+
+We created a `hello_ruby.zip` file in the previous section, let's deploy this zip file to AWS Lambda. Open the [AWS Management Console](https://aws.amazon.com/console/) and select "Lambda" from the options. Your created Lambdas (if you had any) are listed here. Let's start creating a new one by clicking on the "Create a Lambda function" button. Select the "node-exec" template:
+
+![node-exec](resources/2016/05/node_exec_template.png)
+
