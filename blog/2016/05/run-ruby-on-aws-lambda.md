@@ -207,3 +207,45 @@ Test the function by clicking on the blue "Test" button. You can accept the `Hel
 The string "Hello from Ruby!" is coming from the Ruby code executed by Traveling Ruby, just like we did locally.
 
 Woohoo! Congrats, you've just created an AWS Lambda function with MRI Ruby.
+
+(5) Use the AWS Command Line Interface to Publish an AWS Lambda Function
+
+Although creating a Lambda through the GUI works, it's not something I'd do in the long run. The steps of dropping and creating Lambdas can be automated through the AWS Command Line Interface, those scripts can be easily executed from a Make target. Let's add a new target to drop the already existing Lambda function:
+
+(This blog post assumes you already know how to use the AWS Command Line Interface, you have it configured properly. There is good documentation around this, please look them up and set it up for yourself.)
+
+```shell
+...
+
+delete: ## Removes the Lambda
+	aws lambda delete-function --function-name HelloFromRuby
+```
+
+Your 'HelloFromRuby' Lambda function will be deleted when you run `make delete` in your terminal. Go back to the AWS Management Console to veriy that your Lambda function was delete.
+
+Add your lambda with the following script in your Make file:
+
+```shell
+...
+
+create: ## Creates an AWS lambda function
+	aws lambda create-function \
+		--function-name HelloFromRuby \
+		--handler index.handler \
+		--runtime nodejs4.3 \
+		--memory 512 \
+		--timeout 10 \
+		--description "Saying hello from MRI Ruby" \
+		--role arn:aws:iam::___xyz___:role/lambda_basic_execution \
+		--zip-file fileb://./deploy/hello_ruby.zip
+
+...
+```
+
+I masked the `role` entry, you need to find the correct "Role ARN" value under Security -> IAM -> Roles. You should look for it here:
+
+![role-arn](/resources/2016/05/role_arn.jpg)
+
+If everything configured properly, you should be able to create your AWS Lambda function by running `make create` in the terminal.
+
+
