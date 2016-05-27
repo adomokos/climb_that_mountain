@@ -150,6 +150,6 @@ REPORT RequestId: 3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b
 ```
 The `Hello - 'xyz' from Ruby!` string contains the Faker gem generated name. You can also invoke the Lambda function through the AWS Management Console, you should see something similar to this in the `Log output` section:
 
-![faker-with-aws-lambda](resources/2016/06/faker_with_aws_lambda.jpg)
+![faker-with-aws-lambda](/resources/2016/06/faker_with_aws_lambda.jpg)
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/8fa581ded4007f3ae2b5a1ace2da79991f07b75e)
