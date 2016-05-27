@@ -2,9 +2,11 @@
 
 I showed in the previous blog post how to run MRI Ruby on AWS Lambda. In this writing I'll guide you through adding gems to the project: first faker, and then the mysql2 gem with active_record, and finally we will have the Ruby code talk to an RDS instance.
 
+I recorded all my changes in [this project](https://github.com/adomokos/aws-lambda-ruby), feel free to jump in where you want, I recorded commit points after each section.
+
 (1) Add faker to the project
 
-Let's jump in by editing our Ruby app, let's add a Gemfile to it in the `hello_ruby` directory:
+You can pick up the changes from [here](https://github.com/adomokos/aws-lambda-ruby/commit/7bf6c4e5d6f745d636dbdc6737db7f23a4371085). Let's jump in by editing our Ruby app, let's add a Gemfile to it in the `hello_ruby` directory:
 
 ```ruby
 source 'https://rubygems.org'
@@ -12,7 +14,7 @@ source 'https://rubygems.org'
 gem 'faker'
 ```
 
-Run `bundle install` in that directory, but provide the following arguments to the command: `--path vendor`. This is very important, as we have to package all the files in the `vendor` directory.
+Run `BUNDLE_IGNORE_CONFIG=1 bundle install --path vendor` in that directory. The `--path vendor` argument is important, as we have to package all the files in the `vendor` directory. Make sure the `BUNDLED WITH` part of your Gemfile.lock is not there as that can cause you some pain when you deploy your code to AWS Lambda.
 
 Edit the `lib/hello.rb` file:
 
@@ -24,7 +26,7 @@ require 'faker'
 puts "Hello - '#{Faker::Name.name}' from Ruby!"
 ```
 
-We required the faker gem and used it to generate a fake name. Run the app in the terminal with `BUNDLE_IGNORE_CONFIG=1 bundle install --path vendor` command. Make sure the `BUNDLED WITH` part of your Gemfile.lock is not there as that can cause you some pain when you deploy your code to AWS Lambda.
+We required the faker gem and used it to generate a fake name. Run the app in the terminal with `bundle exec ruby lib/hello.rb` command.
 
 ```shell
 Hello - 'Jamar Gutmann II' from Ruby!
