@@ -24,7 +24,7 @@ require 'faker'
 puts "Hello - '#{Faker::Name.name}' from Ruby!"
 ```
 
-We required the faker gem and used it to generate a fake name. When I run the app in the terminal with `bundle exec ruby lib/hello.rb`, I see the following output:
+We required the faker gem and used it to generate a fake name. Run the app in the terminal with `BUNDLE_IGNORE_CONFIG=1 bundle install --path vendor` command. Make sure the `BUNDLED WITH` part of your Gemfile.lock is not there as that can cause you some pain when you deploy your code to AWS Lambda.
 
 ```shell
 Hello - 'Jamar Gutmann II' from Ruby!
@@ -32,7 +32,7 @@ Hello - 'Jamar Gutmann II' from Ruby!
 
 You will get a different name between the single quotes, but that's the point, faker generates random name for us.
 
-[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/df038e90b3dc56fe380b7e4b6afa97721000f3ff)
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/a0ca3becd83e3a2c6c87f627114f20dfdcbffd5f)
 
 (2) Use faker with Traveling Ruby
 
@@ -99,5 +99,57 @@ Run the app locally
 Hello - 'Kelly Huel' from Ruby!
 ```
 
-[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/2e1d816c206f7cf22ab080939d0b8ef2949db97b)
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/3a3cfe89c5a65527be141256c5ab85700d1114ae)
 
+(3) Deploy the app with faker to AWS Lambda
+
+In order to run your app on AWS Lambda, you only need to change the `package` target in your Makefile, everything else, the delete, create, invoke targets should remain the same. Change the target like this:
+
+```shell
+...
+
+package: ## Package the code for AWS Lambda
+	@echo 'Package the app for deploy'
+	@echo '--------------------------'
+	@rm -fr $(LAMBDADIR)
+	@rm -fr deploy
+	@mkdir -p $(LAMBDADIR)/lib/ruby
+	@tar -xzf resources/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz -C $(LAMBDADIR)/lib/ruby
+	@mkdir $(LAMBDADIR)/lib/app
+	@cp hello_ruby/lib/hello.rb $(LAMBDADIR)/lib/app/hello.rb
+	@cp -pR hello_ruby/vendor $(LAMBDADIR)/lib/
+	@rm -f $(LAMBDADIR)/lib/vendor/*/*/cache/*
+	@mkdir -p $(LAMBDADIR)/lib/vendor/.bundle
+	@cp resources/bundler-config $(LAMBDADIR)/lib/vendor/.bundle/config
+	@cp hello_ruby/Gemfile $(LAMBDADIR)/lib/vendor/
+	@cp hello_ruby/Gemfile.lock $(LAMBDADIR)/lib/vendor/
+	@cp resources/wrapper.sh $(LAMBDADIR)/hello
+	@chmod +x $(LAMBDADIR)/hello
+	@cp resources/index.js $(LAMBDADIR)/
+	@cd $(LAMBDADIR) && zip -r hello_ruby.zip hello index.js lib/
+	@mkdir deploy
+	cd $(LAMBDADIR) && mv hello_ruby.zip ../deploy/
+	@echo '... Done.'
+
+...
+```
+The added rows are very similar to the ones we had to add to run the app locally with Travelling Ruby. Delete the lambda functions and recreate it by using the Makefile. When you invoke it, your should see something like this:
+
+```shell
+START RequestId: 3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b Version: $LATEST
+2016-05-27T04:12:41.473Z
+  3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b
+    Hello - 'Mrs. Lelah Bradtke' from Ruby!
+
+END RequestId: 3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b
+REPORT RequestId: 3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b
+       Duration: 3425.01 ms
+       Billed Duration: 3500 ms
+       Memory Size: 512 MB
+       Max Memory Used: 65 MB
+```
+The `Hello - 'xyz' from Ruby!` string contains the Faker gem generated name. You can also invoke the Lambda function through the AWS Management Console, you should see something similar to this in the `Log output` section:
+
+![faker-with-aws-lambda](resources/2016/06/faker_with_aws_lambda.jpg)
+
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/8fa581ded4007f3ae2b5a1ace2da79991f07b75e)
