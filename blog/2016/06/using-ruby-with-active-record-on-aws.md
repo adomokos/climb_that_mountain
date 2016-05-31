@@ -1,6 +1,6 @@
 ### Using Ruby with ActiveRecord in AWS Lambda
 
-I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this writing I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [active_record](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance.
+I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this writing I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [active_record](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
 
 I recorded all my changes in [this project](https://github.com/adomokos/aws-lambda-ruby), feel free to jump in where you want, I recorded commit points after each section.
 
@@ -32,7 +32,7 @@ We required the faker gem and used it to generate a fake name. Run the app in th
 Hello - 'Jamar Gutmann II' from Ruby!
 ```
 
-You will get a different name between the single quotes, but that's the point, faker generates random name for us.
+You will get a different name between the single quotes, but that's the point, faker generates a random name for us.
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/a0ca3becd83e3a2c6c87f627114f20dfdcbffd5f)
 
@@ -100,6 +100,7 @@ Run the app locally
 -------------------
 Hello - 'Kelly Huel' from Ruby!
 ```
+We've just ran the app with Traveling Ruby's Ruby interpreter, and we used the `faker` gem's functionality as well!
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/3a3cfe89c5a65527be141256c5ab85700d1114ae)
 
@@ -158,7 +159,7 @@ The `Hello - 'xyz' from Ruby!` string contains the Faker gem generated name. You
 
 (4) Publish a newer version to AWS Lambda
 
-Dropping and recreating the function works, but not the most effective solution. AWS allows you to update your function which we'll do with this new target in the Makefile:
+Dropping and recreating the Lambda function works, but it's not the most effective solution. AWS allows you to update your function which we'll do with this new target in the Makefile:
 
 ```shell
 ...
@@ -181,6 +182,8 @@ Add this script to your Makefile, it will create a minimal RDS instance for you,
 ```shell
 DBPASSWD=Kew2401Sd
 DBNAME=awslambdaruby
+
+...
 
 create-rds-instance: ## Creates an RDS MySQL DB instance
 	aws rds create-db-instance \
@@ -210,11 +213,11 @@ create-db: ## Creates a DB with a table and records
 
 ...
 ```
-Create the RDS instance first, then allow connecting to it from your own IP through adjusting the "Inbound" traffic through your own IP under your Security Group:
+Create the RDS instance first, AWS will need some time to initialize it. Allow incoming connections to it by adjusting the "Inbound" traffic through your own IP under your Security Group:
 
 ![adjust-security-group](/resources/2016/06/adjust_security_group.jpg)
 
-There are plenty of documents out there to show you how you can do it, please search for it if you get stuck. You can connect to the RDS instance through the `mysql` console using the `db-connect` target. You'll need to adjust the hostname to yours. Once that works out, use the `create-db` target to create a DB with a table and add two records to it. If all goes well, this is what you should see when you query the `users` table in the MySQL console:
+You can connect to the RDS instance through the `mysql` console using the `db-connect` target. You'll need to adjust the hostname to yours. Once that works out, use the `create-db` target to create a DB with a table and add two records to it. If all goes well, this is what you should see when you query the `users` table in the MySQL console:
 
 ```shell
 mysql> SELECT * FROM users;
@@ -238,7 +241,7 @@ gem 'activerecord'
 gem 'mysql2', '0.3.18'
 ```
 
-We need to use the 0.3.18 version of the mysql2 gem, as that [comes packaged](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) in Traveling Ruby. Run `bundle install` to get the new gems via Bundler.
+We need to use the 0.3.18 version of the mysql2 gem, as that [comes packaged](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) with Traveling Ruby. Run `bundle install` to get the new gems via Bundler.
 
 Modify the `lib/hello.rb` file to have this:
 
@@ -264,7 +267,7 @@ puts "First user: #{User.first.firstname} #{User.first.lastname}"
 puts "Hello - '#{Faker::Name.name}' from Ruby!"
 ```
 
-You need to use your RDS instance host name as mine won't work with yours. You'll know that everything is set up properly when you get this:
+You need to adjust the `:host` value to your RDS instance host name as mine won't work for you. You'll know that everything is set up properly when you see this in the terminal:
 
 ```shell
 $: bundle exec ruby lib/hello.rb
@@ -278,7 +281,7 @@ Hello - 'Miss Darrick Powlowski' from Ruby!
 
 You need to download the Traveling Ruby packaged [mysql2 gem](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-gems-20150715-2.2.2-linux-x86_64/mysql2-0.3.18.tar.gz) from their S3 bucket. Let's put it into our `resources` directory.
 
-Let's modify the `package` target like this:
+Modify the `package` target like this:
 
 ```shell
 ...
@@ -310,15 +313,15 @@ package: ## Packages the code for AWS Lambda
 
 ...
 ```
-We need to replace the content of the `2.0.0/extensions` directory, as the one copied their the OSX specific. We need to use the Linux version of the mysql gem as AWS Lambda is using Linux.
+We need to replace the content of the `2.0.0/extensions` directory with the Traveling Ruby's linux version, as the one copied their is OSX specific.
 
-AWS Lambda has an IP address other than the one you've been using so far. In order to make it easy for you now, I'd suggest making your AWS Instance available without IP restriction. Do this only temporarily, to test things out, remove this Inbound rule once you've seen your Lamba working. You can specify VPC your Lambda has access to, but the topic security would need another blog post just in itself.
+AWS Lambda has an IP address other than your IP. In order to make it easy for you now, (and don't do this anywhere else), I'd suggest making your AWS Instance available without IP restriction. Do this only temporarily, to test things out, remove this Inbound rule once you've seen your Lamba working. You can specify VPC your Lambda has access to, but the topic of AWS Lambda security would need another blog post just in itself.
 
 This is how I opened up my RDS instance for any IP out there:
 
 ![connect-anywhere](/resources/2016/06/connect_anywhere.jpg)
 
-When everything is set up properly, you should see something like this in your terminal when you call the Lambda function with the `make invoke` command:
+If everything is configured properly, you should see something like this in your terminal when you call the Lambda function with the `make invoke` command:
 
 ```shell
 % make invoke
