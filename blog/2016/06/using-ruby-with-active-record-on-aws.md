@@ -155,3 +155,65 @@ The `Hello - 'xyz' from Ruby!` string contains the Faker gem generated name. You
 ![faker-with-aws-lambda](/resources/2016/06/faker_with_aws_lambda.jpg)
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/8fa581ded4007f3ae2b5a1ace2da79991f07b75e)
+
+(4) Publish a newer version to AWS Lambda
+
+Dropping and recreating the function works, but not the most effective solution. AWS allows you to update your function which we'll do with this new target in the Makefile:
+
+```shell
+...
+
+publish: package ## Deploys the latest version to AWS
+        aws lambda update-function-code \
+                --function-name HelloFromRuby \
+                --zip-file fileb://./deploy/hello_ruby.zip
+
+...
+```
+This target will let you update the function code. It also calls the `package` target to make sure your latest changes will be deployed to AWS.
+
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/1edeaca0ad85806a20947ff1df688e660f7f447e)
+
+(5) Create a new RDS database with one table
+
+Add this script to your Makefile, it will create a minimal RDS instance for you, you can drop that instance, connect to the DB and drop and create the database with some seed data in it.
+
+```shell
+DBPASSWD=Kew2401Sd
+DBNAME=awslambdaruby
+
+create-rds-instance: ## Creates an RDS MySQL DB instance
+	aws rds create-db-instance \
+		--db-instance-identifier MyInstance01 \
+		--db-instance-class db.t1.micro \
+		--engine mysql \
+		--allocated-storage 10 \
+		--master-username master \
+		--master-user-password $(DBPASSWD)
+
+delete-rds-instance: ## Deletes an RDS MySQL DB instance
+	aws rds delete-db-instance \
+		--db-instance-identifier MyInstance01 \
+		--skip-final-snapshot
+
+db-connect: ## Connects to the RDS instance
+	mysql --user=master --password=$(DBPASSWD) --host myinstance01.cgic5q3lz0bb.us-east-1.rds.amazonaws.com
+
+create-db: ## Creates a DB with a table and records
+	@echo "Dropping  and creating database"
+	@echo "-------------------------------"
+	@mysql -u master --password='$(DBPASSWD)' --host myinstance01.cgic5q3lz0bb.us-east-1.rds.amazonaws.com -e "DROP DATABASE IF EXISTS $(DBNAME)" > /dev/null 2>&1
+	@mysql -u master --password='$(DBPASSWD)' --host myinstance01.cgic5q3lz0bb.us-east-1.rds.amazonaws.com -e "CREATE DATABASE $(DBNAME)" > /dev/null 2>&1
+	@mysql -u master --password='$(DBPASSWD)' --host myinstance01.cgic5q3lz0bb.us-east-1.rds.amazonaws.com $(DBNAME) < resources/schema.sql > /dev/null 2>&1
+	@mysql -u master --password='$(DBPASSWD)' --host myinstance01.cgic5q3lz0bb.us-east-1.rds.amazonaws.com $(DBNAME) < resources/seed.sql > /dev/null 2>&1
+	@echo "... Done"
+
+...
+```
+Create the RDS instance first, then allow connecting to it from your own IP through adjusting the "Inbound" traffic through your own IP under your Security Group:
+
+![adjust-security-group](/resources/2016/06/adjust_security_group.jpg)
+
+There are plenty of documents out there to show you how you can do it, please search for it if you get stuck.
+
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/435c76738689b24034446578d2707d5304544a89)
