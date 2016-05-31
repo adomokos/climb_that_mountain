@@ -129,7 +129,7 @@ There are plenty of tutorials out there to guide you through creating an AWS Lam
 
 ![python-system-info](/resources/2016/05/python_system_info_log_output.jpg)
 
-We will use Node.js to execute the code, place this JavaScript file in your resources directory with the name `index.js`:
+We will use Node.js to execute the code, place this JavaScript file in your `resources` directory with the name `index.js`:
 
 ```javascript
 process.env['PATH'] = process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT']
