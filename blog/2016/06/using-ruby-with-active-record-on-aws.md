@@ -228,3 +228,123 @@ mysql> SELECT * FROM users;
 ```
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/435c76738689b24034446578d2707d5304544a89)
+
+(6) Connect to MySQL with Rails' ActiveRecord
+
+Add the `mysql2` and `active_record` to the Ruby app's Gemfile:
+
+```ruby
+gem 'activerecord'
+gem 'mysql2', '0.3.18'
+```
+
+We need to use the 0.3.18 version of the mysql2 gem, as that [comes packaged](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) in Traveling Ruby. Run `bundle install` to get the new gems via Bundler.
+
+Modify the `lib/hello.rb` file to have this:
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'faker'
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  :adapter  => "mysql2",
+  :host     => "myinstance01.cgic5q3lz0bb.us-east-1.rds.amazonaws.com", # use your instance name
+  :username => "master",
+  :password => "Kew2401Sd",
+  :database => "awslambdaruby"
+)
+
+class User < ActiveRecord::Base
+end
+
+puts "Number of users: #{User.count}"
+puts "First user: #{User.first.firstname} #{User.first.lastname}"
+puts "Hello - '#{Faker::Name.name}' from Ruby!"
+```
+
+You need to use your RDS instance host name as mine won't work with yours. You'll know that everything is set up properly when you get this:
+
+```shell
+$: bundle exec ruby lib/hello.rb
+Number of users: 2
+First user: John Smith
+Hello - 'Miss Darrick Powlowski' from Ruby!
+```
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/6c74f4313f9c8a34e83dfc64c572ddc694f62789)
+
+(7) Use Traveling Ruby's packaged mysql gem
+
+You need to download the Traveling Ruby packaged [mysql2 gem](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-gems-20150715-2.2.2-linux-x86_64/mysql2-0.3.18.tar.gz) from their S3 bucket. Let's put it into our `resources` directory.
+
+Let's modify the `package` target like this:
+
+```shell
+...
+
+package: ## Packages the code for AWS Lambda
+	@echo 'Package the app for deploy'
+	@echo '--------------------------'
+	@rm -fr $(LAMBDADIR)
+	@rm -fr deploy
+	@mkdir -p $(LAMBDADIR)/lib/ruby
+	@tar -xzf resources/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz -C $(LAMBDADIR)/lib/ruby
+	@mkdir $(LAMBDADIR)/lib/app
+	@cp hello_ruby/lib/hello.rb $(LAMBDADIR)/lib/app/hello.rb
+	@cp -pR hello_ruby/vendor $(LAMBDADIR)/lib/
+	@rm -fr $(LAMBDADIR)/lib/vendor/ruby/2.2.0/extensions
+	@tar -xzf resources/mysql2-0.3.18-linux.tar.gz -C $(LAMBDADIR)/lib/vendor/ruby/
+	@rm -f $(LAMBDADIR)/lib/vendor/*/*/cache/*
+	@mkdir -p $(LAMBDADIR)/lib/vendor/.bundle
+	@cp resources/bundler-config $(LAMBDADIR)/lib/vendor/.bundle/config
+	@cp hello_ruby/Gemfile $(LAMBDADIR)/lib/vendor/
+	@cp hello_ruby/Gemfile.lock $(LAMBDADIR)/lib/vendor/
+	@cp resources/wrapper.sh $(LAMBDADIR)/hello
+	@chmod +x $(LAMBDADIR)/hello
+	@cp resources/index.js $(LAMBDADIR)/
+	@cd $(LAMBDADIR) && zip -r hello_ruby.zip hello index.js lib/ > /dev/null
+	@mkdir deploy
+	@cd $(LAMBDADIR) && mv hello_ruby.zip ../deploy/
+	@echo '... Done.'
+
+...
+```
+We need to replace the content of the `2.0.0/extensions` directory, as the one copied their the OSX specific. We need to use the Linux version of the mysql gem as AWS Lambda is using Linux.
+
+AWS Lambda has an IP address other than the one you've been using so far. In order to make it easy for you now, I'd suggest making your AWS Instance available without IP restriction. Do this only temporarily, to test things out, remove this Inbound rule once you've seen your Lamba working. You can specify VPC your Lambda has access to, but the topic security would need another blog post just in itself.
+
+This is how I opened up my RDS instance for any IP out there:
+
+![connect-anywhere](/resources/2016/06/connect_anywhere.jpg)
+
+When everything is set up properly, you should see something like this in your terminal when you call the Lambda function with the `make invoke` command:
+
+```shell
+% make invoke
+rm -fr tmp && mkdir tmp
+aws lambda invoke \
+        --invocation-type RequestResponse \
+        --function-name HelloFromRuby \
+        --log-type Tail \
+        --region us-east-1 \
+        --payload '{"name":"John Adam Smith"}' \
+        tmp/outfile.txt \
+        | jq -r '.LogResult' | base64 -D
+START RequestId: 8444ede9-26d8-11e6-954c-fbf57aab89fb Version: $LATEST
+2016-05-31T02:36:50.587Z        8444ede9-26d8-11e6-954c-fbf57aab89fb
+Number of users: 2
+First user: John Smith
+Hello - 'Jeanne Hansen' from Ruby!
+
+END RequestId: 8444ede9-26d8-11e6-954c-fbf57aab89fb
+REPORT RequestId: 8444ede9-26d8-11e6-954c-fbf57aab89fb
+Duration: 5072.62 ms
+Billed Duration: 5100 ms
+Memory Size: 512 MB
+Max Memory Used: 53 MB
+```
+
+Sweet! The Ruby code in this AWS Lambda function reports back 2 users and correctly displays the first record.
+
+[Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/2f307f68c3d06a23ff9024c303656ec6d6144a0f)
