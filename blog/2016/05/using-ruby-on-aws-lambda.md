@@ -4,15 +4,15 @@ It was May 2015 at the AWS Summit in Chicago, where I first heard about AWS Lamb
 
 ![aws-lambda](/resources/2016/05/aws_lambda.png)
 
-Bulk of my work at my current gig is about transforming data: we get some kind of data, we need to transform and load it into our own data storage. Sure the worker boxes can do the job, but maintaining a series of these instances takes effort. AWS Lambdas would be the perfect solution for us, but Amazon does not support Ruby natively, which is most of our business logic is written in.
+Bulk of my work at my current gig is about transforming data: we pull it from an API, we need to transform and load it into our own data store. Sure the worker boxes can do the job, but maintaining a series of these instances takes effort. AWS Lambdas would be the perfect solution for us, but Amazon does not support Ruby natively, which is most of our business logic is written in.
 
-AWS, as of this writing, supports Lambda for three main platforms: Java, Node.JS and Python. I played around running Clojure on AWS Lambda, which worked as the code is compiled into a jar file, but our current code - due to its monolithic nature - can't support any other language just yet.
+AWS, as of this writing, supports Lambda for three main platforms: Java, Node.JS and Python. I played around running Clojure on AWS Lambda, which worked as the code is compiled into a jar file, but our current app - due to its monolithic nature - can't support any other language just yet.
 
-Amazon claimed you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would show me how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code base can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this, and found the great [Traveling Ruby](http://phusion.github.io/traveling-ruby/) app. You can package your code and run it as an executable on the user's computer, no local Ruby installation is needed. I wanted to try it locally first, thinking if it works there (on OSX), it should work on AWS Lambda as well.
+Amazon claimed you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would describe how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this, and found the great [Traveling Ruby](http://phusion.github.io/traveling-ruby/). You can package your code and run it as an executable on the user's computer, no local Ruby installation is needed. I wanted to try it locally first, thinking if it works there (on OSX), it should work on AWS Lambda as well.
 
-You need to have the same version of Ruby as the one Traveling Ruby offers. The latest there is Ruby 2.2.2, I'd recommend installing that through Rbenv or RVM, and use that throughout the project.
+You need to have the same version of Ruby as the one Traveling Ruby offers. The latest there is Ruby 2.2.2, I'd recommend installing that through Rbenv or RVM, and use it throughout the project.
 
-This post assumes you are familiar with AWS, you have access to the AWS Management Console and you have the AWS command line tool configured to interact with your services through the terminal.
+This tutorial assumes you are familiar with AWS, you have access to the AWS Management Console and you have the AWS command line tool configured to interact with your services via the terminal.
 
 (1) Setting up the project
 
@@ -212,7 +212,7 @@ Woohoo! Congrats, you've just created an AWS Lambda function with MRI Ruby.
 
 Although creating a Lambda through the GUI works, it's not something I'd do in the long run. The steps of dropping and creating Lambdas can be automated through the AWS Command Line Interface, those scripts can be easily executed from a Make target. Let's add a new target to drop the already existing Lambda function:
 
-(This blog post assumes you already know how to use the AWS Command Line Interface, you have it configured properly. There is good documentation around this, please look them up and set it up for yourself.)
+(This blog post assumes you already know how to use the AWS Command Line Interface, you have it configured properly. There is good documentation around this, please look it up and set it up for yourself.)
 
 ```shell
 ...
