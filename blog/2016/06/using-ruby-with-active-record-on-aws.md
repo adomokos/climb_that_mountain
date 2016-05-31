@@ -214,6 +214,17 @@ Create the RDS instance first, then allow connecting to it from your own IP thro
 
 ![adjust-security-group](/resources/2016/06/adjust_security_group.jpg)
 
-There are plenty of documents out there to show you how you can do it, please search for it if you get stuck.
+There are plenty of documents out there to show you how you can do it, please search for it if you get stuck. You can connect to the RDS instance through the `mysql` console using the `db-connect` target. You'll need to adjust the hostname to yours. Once that works out, use the `create-db` target to create a DB with a table and add two records to it. If all goes well, this is what you should see when you query the `users` table in the MySQL console:
+
+```shell
+mysql> SELECT * FROM users;
++----+--------+------------------+-----------+----------+
+| id | login  | email            | firstname | lastname |
++----+--------+------------------+-----------+----------+
+|  1 | jsmith | jsmith@gmail.com | John      | Smith    |
+|  2 | bjones | bjones@gmail.com | Bob       | Jones    |
++----+--------+------------------+-----------+----------+
+2 rows in set (0.04 sec)
+```
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/435c76738689b24034446578d2707d5304544a89)
