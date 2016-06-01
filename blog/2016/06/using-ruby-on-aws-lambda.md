@@ -2,7 +2,7 @@
 
 It was May 2015 at the AWS Summit in Chicago, where I first heard about AWS Lambda. The company I worked for used Linode at that time, I had no chance of using it, but I still found the serverless concept fascinating.
 
-![aws-lambda](/resources/2016/05/aws_lambda.png)
+![aws-lambda](/resources/2016/06/aws_lambda.png)
 
 Bulk of my work at my current gig is about transforming data: we pull it from an API, we need to transform and load it into our own data store. Sure the worker boxes can do the job, but maintaining a series of these instances takes effort. AWS Lambdas would be the perfect solution for us, but Amazon does not support Ruby natively, which is most of our business logic is written in.
 
@@ -127,7 +127,7 @@ def lambda_handler(event, context):
 ```
 There are plenty of tutorials out there to guide you through creating an AWS Lambda, please Google the solution if you don't know what to do. When you run it, this is the information you should get:
 
-![python-system-info](/resources/2016/05/python_system_info_log_output.jpg)
+![python-system-info](/resources/2016/06/python_system_info_log_output.jpg)
 
 We will use Node.js to execute the code, place this JavaScript file in your `resources` directory with the name `index.js`:
 
@@ -192,17 +192,17 @@ and a `hello_ruby.zip` file should be created in your `deploy` directory.
 
 We created a `hello_ruby.zip` file in the previous section, let's deploy this zip file to AWS Lambda. Open the [AWS Management Console](https://aws.amazon.com/console/) and select "Lambda" from the options. Your created Lambdas (if you had any) are listed here. Let's start creating a new one by clicking on the "Create a Lambda function" button. Select the "node-exec" template:
 
-![node-exec](/resources/2016/05/node_exec_template.jpg)
+![node-exec](/resources/2016/06/node_exec_template.jpg)
 
 Fill out the form as you see it in this screenshot:
 
-![create_function](/resources/2016/05/create_function.jpg)
+![create_function](/resources/2016/06/create_function.jpg)
 
 1 - name it "HelloFromRuby", 2 - chose the option of "Upload a .ZIP file", 3 - use the `lambda_basic_execution` role, if you don't have it, create it. Confirm it and create the Lambda function.
 
 Test the function by clicking on the blue "Test" button. You can accept the `HelloWorld` test template, those arguments are going to be ignored for now. You should see the following output:
 
-![log_output](/resources/2016/05/log_output.jpg)
+![log_output](/resources/2016/06/log_output.jpg)
 
 The string "Hello from Ruby!" is coming from the Ruby code executed by Traveling Ruby, just like we did locally.
 
@@ -244,7 +244,7 @@ create: ## Creates an AWS lambda function
 
 I masked the `role` argument, you need to find your correct "Role ARN" value under Security -> IAM -> Roles. You should look for it here:
 
-![role-arn](/resources/2016/05/role_arn.jpg)
+![role-arn](/resources/2016/06/role_arn.jpg)
 
 If everything is configured properly, you should be able to create your AWS Lambda function by running `make create` in the terminal.
 
