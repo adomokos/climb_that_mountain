@@ -4,11 +4,11 @@ It was May 2015 at the AWS Summit in Chicago, where I first heard about AWS Lamb
 
 ![aws-lambda](/resources/2016/06/aws_lambda.png)
 
-Bulk of my work at my current gig is about transforming data: we pull it from an API, we need to transform and load it into our own data store. Sure the worker boxes can do the job, but maintaining a series of these instances takes effort. AWS Lambdas would be the perfect solution for us, but Amazon does not support Ruby natively, which is most of our business logic is written in.
+The bulk of my work at my current gig is about transforming data: we pull it from an API, we need to transform and load it into our own data store. Sure the worker boxes can do the job, but maintaining a series of these instances takes effort. AWS Lambdas would be the perfect solution for us, but Amazon does not support Ruby natively, which is most of our business logic is written in.
 
-AWS, as of this writing, supports Lambda for three main platforms: Java, Node.JS and Python. I played around running Clojure on AWS Lambda, which worked as the code is compiled into a jar file, but our current app - due to its monolithic nature - can't support any other language just yet.
+AWS, as of this writing, supports Lambda for three main platforms: Java, Node.JS, and Python. I played around running Clojure on AWS Lambda, which worked as the code is compiled into a jar file, but our current app - due to its monolithic nature - can't support any other language just yet.
 
-Amazon claims you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would describe how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this, and found the great [Traveling Ruby](http://phusion.github.io/traveling-ruby/). You can package your code and run it as an executable on the user's computer, no local Ruby installation is needed. I wanted to try it locally first, thinking if it works there (on OSX), it should work on AWS Lambda as well.
+Amazon claims you can run any language on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would describe how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this and found the great [Traveling Ruby](http://phusion.github.io/traveling-ruby/). You can package your code and run it as an executable on the user's computer, no local Ruby installation is needed. I wanted to try it locally first, thinking if it works there (on OSX), it should work on AWS Lambda as well.
 
 You need to have the same version of Ruby as the one Traveling Ruby offers. The latest there is Ruby 2.2.2, I'd recommend installing that through Rbenv or RVM, and use it throughout the project.
 
@@ -46,7 +46,7 @@ Create a directory under the project root directory with the name `resources`. Y
     |- hello_ruby
     |- resources
 ```
-Download the Ruby runtimes from [Traveling Ruby](http://phusion.github.io/traveling-ruby/)'s [S3 bucket](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) into the `resources` directory. I only needed the [OSX version](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-osx.tar.gz) for local development, and the [linux-x86_64](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz) version for AWS. My directory had these two files in it:
+Download the Ruby runtimes from [Traveling Ruby](http://phusion.github.io/traveling-ruby/)'s [S3 bucket](https://traveling-ruby.s3-us-west-2.amazonaws.com/list.html) into the `resources` directory. I only needed the [OSX version](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-osx.tar.gz) for local development and the [linux-x86_64](http://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-20150715-2.2.2-linux-x86_64.tar.gz) version for AWS. My directory had these two files in it:
 
 ```shell
 - aws-lambda-ruby
@@ -149,7 +149,7 @@ exports.handler = function(event, context) {
 
 The index.handler will be invoked by Lambda, which will spawn a new child process by executing the `hello` shell script, which will run the Ruby code with Traveling Ruby.
 
-The `package` make target will assemble the directory for AWS Lambda and compress it into a zip file. This is how that code looks:
+The `package` Make target will assemble the directory for AWS Lambda and compress it into a zip file. This is how that code looks:
 
 ```shell
 LAMBDADIR=hello-1.0.0-linux-x86_64
@@ -248,7 +248,7 @@ I masked the `role` argument, you need to find your correct "Role ARN" value und
 
 If everything is configured properly, you should be able to create your AWS Lambda function by running `make create` in the terminal.
 
-We can invoke the lambda from the command line as well, this make target will do just that:
+We can invoke the lambda from the command line as well, this Make target will do just that:
 
 ```shell
 ...
@@ -284,4 +284,4 @@ REPORT RequestId: e8c24c91-2165-11e6-a0b6-35430628271f
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/7bf6c4e5d6f745d636dbdc6737db7f23a4371085)
 
-This blog post guided you through the steps of running MRI Ruby on AWS lambda. In the upcoming post I'll show you how you can add gems and talk with an RDS instance from your Ruby code on AWS Lambda.
+This blog post guided you through the steps of running MRI Ruby on AWS lambda. In the upcoming post, I'll show you how you can add gems and talk with an RDS instance from your Ruby code on AWS Lambda.
