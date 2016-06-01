@@ -352,4 +352,4 @@ Sweet! The Ruby code in this AWS Lambda function reports back 2 users and correc
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/2f307f68c3d06a23ff9024c303656ec6d6144a0f)
 
-Being able to use MRI Ruby with gems opens up a ton possibilities for us (and I hope for you as well.) AWS Lambdas are neat little workers that can scale up and down very well. It's much easier to launch a 1000 AWS Lambdas at the same time then running Ruby processes with resque or sidekiq on worker boxes.
+Being able to use MRI Ruby with gems opens up a ton possibilities for us (and I hope for you as well.) AWS Lambdas are neat little workers that can scale up and down very well. It's much easier to launch a 1000 AWS Lambdas at the same time than running Ruby processes with resque or sidekiq on worker boxes.
