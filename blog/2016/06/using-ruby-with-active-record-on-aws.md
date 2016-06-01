@@ -100,7 +100,7 @@ Run the app locally
 -------------------
 Hello - 'Kelly Huel' from Ruby!
 ```
-We've just ran the app with Traveling Ruby's Ruby interpreter, and we used the `faker` gem's functionality as well!
+We've just run the app with Traveling Ruby's Ruby interpreter, and we used the `faker` gem's functionality as well!
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/3a3cfe89c5a65527be141256c5ab85700d1114ae)
 
@@ -313,7 +313,7 @@ package: ## Packages the code for AWS Lambda
 
 ...
 ```
-We need to replace the content of the `2.0.0/extensions` directory with the Traveling Ruby's linux version, as the one copied their is OSX specific.
+We need to replace the content of the `2.0.0/extensions` directory with the Traveling Ruby's Linux version, as the one copied there is OSX specific.
 
 AWS Lambda has an IP address other than your IP. In order to make it easy for you now, (and don't do this anywhere else), I'd suggest making your AWS Instance available without IP restriction. Do this only temporarily, to test things out, remove this Inbound rule once you've seen your Lamba working. You can specify VPC your Lambda has access to, but the topic of AWS Lambda security would need another blog post just in itself.
 
