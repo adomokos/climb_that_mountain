@@ -221,7 +221,7 @@ delete: ## Removes the Lambda
 	aws lambda delete-function --function-name HelloFromRuby
 ```
 
-Your 'HelloFromRuby' Lambda function will be deleted when you run `make delete` in your terminal. Go back to the AWS Management Console to veriy that your Lambda function got deleted.
+Your 'HelloFromRuby' Lambda function will be deleted when you run `make delete` in your terminal. Go back to the AWS Management Console to verify that your Lambda function got deleted.
 
 Add your lambda with the following script in your Make file:
 
