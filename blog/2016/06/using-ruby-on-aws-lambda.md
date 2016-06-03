@@ -8,7 +8,7 @@ The bulk of my work at my [current gig](https://www.kennasecurity.com/) is about
 
 AWS, as of this writing, offers Lambda for three main platforms: Java, Node.JS, and Python. I played around running Clojure on it, which worked as the code is compiled into a jar file, but our current app - due to its monolithic nature - can't support any other languages just yet.
 
-Amazon claims you can run your language of choice on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would describe how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how a Swift code can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this and found [Traveling Ruby](http://phusion.github.io/traveling-ruby/). You can package your code and run it as an executable on the user's computer, no local Ruby installation is needed. I wanted to try it locally first, thinking if it works there (on OSX), it should work on AWS Lambda as well.
+Amazon claims you can run your language of choice on AWS Lambda, Ruby included, but I have not found a comprehensive guide that would describe how. Once you can package up your app to run as an executable, you can run it. I found this [blog post](https://medium.com/@gigq/using-swift-in-aws-lambda-6e2a67a27e03#.gtg1u3lve) that describes how Swift code can be bundled, deployed and invoked on AWS Lambda. It was clear to me that this solution would work, I only had to package Ruby with its own interpreter to accomplish the same. I looked for tools that can do this and found [Traveling Ruby](http://phusion.github.io/traveling-ruby/). You can package your code and run it as an executable on the user's computer, no local Ruby installation is needed. I wanted to try it locally first, thinking if it works there (on OSX), it should work on AWS Lambda as well.
 
 This blog post is a step-by-step tutorial to run MRI Ruby on AWS Lambda. You can follow along with the [accompanying project](https://github.com/adomokos/aws-lambda-ruby/), I listed commit points at the end of each section.
 
@@ -169,9 +169,9 @@ package: ## Package the code for AWS Lambda
 	@cp resources/wrapper.sh $(LAMBDADIR)/hello
 	@chmod +x $(LAMBDADIR)/hello
 	@cp resources/index.js $(LAMBDADIR)/
-	cd $(LAMBDADIR) && zip -r hello_ruby.zip hello index.js lib/
-	mkdir deploy
-	cd $(LAMBDADIR) && mv hello_ruby.zip ../deploy/
+	@cd $(LAMBDADIR) && zip -r hello_ruby.zip hello index.js lib/
+	@mkdir deploy
+	@cd $(LAMBDADIR) && mv hello_ruby.zip ../deploy/
 	@echo '... Done.'
 
 ...
@@ -201,7 +201,9 @@ Fill out the form as you see it in this screenshot:
 
 1. Name it "HelloFromRuby"
 2. Chose the option of "Upload a .ZIP file"
-3. Use the `lambda_basic_execution` role, if you don't have it, create it. Confirm it and create the Lambda function.
+3. Use the `lambda_basic_execution` role, if you don't have it, create it
+
+Confirm it and create the Lambda function.
 
 Test the function by clicking on the blue "Test" button. You can accept the `HelloWorld` test template, those arguments are going to be ignored for now. You should see the following output:
 
