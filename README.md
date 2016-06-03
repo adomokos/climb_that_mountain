@@ -132,3 +132,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Why Make?](blog/2016/03/why-make.md)<br/>
   05/<br/>
     * [Currying in Haskell, Clojure, Ruby and JavaScript](blog/2016/05/currying-in-haskell-clojure-ruby.md)<br/>
+  06/<br/>
+    * [Using Ruby in AWS Lambda](blog/2016/06/using-ruby-in-aws-lambda.md)<br/>
