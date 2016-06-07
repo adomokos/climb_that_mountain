@@ -134,3 +134,4 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Currying in Haskell, Clojure, Ruby and JavaScript](blog/2016/05/currying-in-haskell-clojure-ruby.md)<br/>
   06/<br/>
     * [Using Ruby in AWS Lambda](blog/2016/06/using-ruby-in-aws-lambda.md)<br/>
+    * [Using Ruby with ActiveRecord in AWS Lambda](blog/2016/06/using-ruby-with-active-record-on-aws.md)<br/>
