@@ -1,12 +1,12 @@
 ### Using Ruby with ActiveRecord in AWS Lambda
 
-I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this writing I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [active_record](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
+I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this article I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [active_record](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
 
 I recorded all my changes in [this project](https://github.com/adomokos/aws-lambda-ruby), feel free to jump in where you want, I recorded commit points after each section.
 
 (1) Add faker to the project
 
-You can pick up the changes from the previous blog post [here](https://github.com/adomokos/aws-lambda-ruby/commit/7bf6c4e5d6f745d636dbdc6737db7f23a4371085). Let's jump in by editing our Ruby app, let's add a Gemfile to it in the `hello_ruby` directory:
+You can pick up the changes from the previous blog post [here](https://github.com/adomokos/aws-lambda-ruby/commit/7bf6c4e5d6f745d636dbdc6737db7f23a4371085). Let's start by editing our Ruby app, add a Gemfile to it in the `hello_ruby` directory:
 
 ```ruby
 source 'https://rubygems.org'
@@ -48,7 +48,7 @@ BUNDLE_WITHOUT: development:test
 BUNDLE_DISABLE_SHARED_GEMS: '1'
 ```
 
-Changed the `resources/wrapper.sh` file to set the Gemfile's location:
+Change the `resources/wrapper.sh` file to set the Gemfile's location:
 
 ```shell
 #!/bin/bash
@@ -106,7 +106,7 @@ We've just run the app with Traveling Ruby's Ruby interpreter, and we used the `
 
 (3) Deploy the app with faker to AWS Lambda
 
-In order to run your app on AWS Lambda, you only need to change the `package` target in your Makefile, everything else, the delete, create, invoke targets should remain the same. Change the target like this:
+In order to run your app in AWS Lambda, you only need to change the `package` target in your Makefile, everything else, the delete, create, invoke targets should remain the same. Change the file like this:
 
 ```shell
 ...
@@ -136,7 +136,7 @@ package: ## Package the code for AWS Lambda
 
 ...
 ```
-The added rows are very similar to the ones we had to add to run the app locally with Travelling Ruby. Delete the lambda functions and recreate it by using the Makefile. When you invoke it, your should see something like this:
+The added rows are very similar to the ones we had to add to run the app locally with Travelling Ruby. Delete the lambda function and recreate it by using the Makefile. When you invoke it, your should see something like this:
 
 ```shell
 START RequestId: 3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b Version: $LATEST
@@ -177,7 +177,7 @@ This target will let you update the function code. It also calls the `package` t
 
 (5) Create a new RDS database with one table
 
-Add this script to your Makefile, it will create a minimal RDS instance for you, you can drop that instance, connect to the DB and drop and create the database with some seed data in it.
+Add this script to your Makefile, it will create a minimal RDS instance for you, you can drop that instance, connect to the DB and drop/create the database with some seed data in it.
 
 ```shell
 DBPASSWD=Kew2401Sd
@@ -315,7 +315,7 @@ package: ## Packages the code for AWS Lambda
 ```
 We need to replace the content of the `2.0.0/extensions` directory with the Traveling Ruby's Linux version, as the one copied there is OSX specific.
 
-AWS Lambda has an IP address other than your IP. In order to make it easy for you now, (and don't do this anywhere else), I'd suggest making your AWS Instance available without IP restriction. Do this only temporarily, to test things out, remove this Inbound rule once you've seen your Lamba working. You can specify VPC your Lambda has access to, but the topic of AWS Lambda security would need another blog post just in itself.
+AWS Lambda has an IP address other than your IP. In order to make it easy for you now, (and don't do this anywhere else), I'd suggest making your AWS Instance available without IP restriction. Do this only temporarily, to test things out, remove this Inbound rule once you've seen your Lamba working. You can specify the VPC your Lambda has access to, but the topic of AWS Lambda security would need another blog post just in itself.
 
 This is how I opened up my RDS instance for any IP out there:
 
@@ -352,4 +352,4 @@ Sweet! The Ruby code in this AWS Lambda function reports back 2 users and correc
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/2f307f68c3d06a23ff9024c303656ec6d6144a0f)
 
-Being able to use MRI Ruby with gems opens up a ton possibilities for us (and I hope for you as well.) AWS Lambdas are neat little workers that can scale up and down very well. It's much easier to launch a 1000 AWS Lambdas at the same time than running Ruby processes with resque or sidekiq on worker boxes.
+Being able to use MRI Ruby with gems opens up a ton possibilities for us (and I hope for you as well.) AWS Lambdas are neat little workers that can scale up and down very well. It's much easier to launch a 1000 AWS Lambdas at the same time than running Ruby processes with [resque](https://github.com/mperham/sidekiq) or [sidekiq](https://github.com/mperham/sidekiq) on worker boxes.
