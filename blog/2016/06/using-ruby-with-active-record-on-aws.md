@@ -1,6 +1,6 @@
 ### Using Ruby with ActiveRecord in AWS Lambda
 
-I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this article I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [active_record](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
+I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this article I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [activerecord](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
 
 I recorded all my changes in [this project](https://github.com/adomokos/aws-lambda-ruby), feel free to jump in where you want, I recorded commit points after each section.
 
