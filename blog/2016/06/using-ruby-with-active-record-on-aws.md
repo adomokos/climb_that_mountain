@@ -1,6 +1,6 @@
 ### Using Ruby with ActiveRecord in AWS Lambda
 
-I showed in the previous blog post how you can run MRI Ruby on AWS Lambda. In this article I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [activerecord](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
+My previous blog post described how you can run MRI Ruby on AWS Lambda. In this article I'll guide you through adding gems to the project: first [faker](https://github.com/stympy/faker), and then the [mysql2](https://github.com/brianmario/mysql2) gem with [activerecord](https://github.com/rails/rails/tree/master/activerecord), and finally we will have the Ruby code talk to an RDS instance, all this through an AWS Lambda.
 
 I recorded all my changes in [this project](https://github.com/adomokos/aws-lambda-ruby), feel free to jump in where you want, I recorded commit points after each section.
 
@@ -38,7 +38,7 @@ You will get a different name between the single quotes, but that's the point, f
 
 (2) Use faker with Traveling Ruby
 
-The `run` target in the Makefile will have to copy all vendorized gems, plus it needs to configure the app to run with the correct bundler settings. This step is heavily influenced by how Traveling Ruby packages gems for deployment, please review [their tutorial](https://github.com/phusion/traveling-ruby/blob/master/TUTORIAL-2.md) as reference.
+The `run` target in the Makefile will have to copy all vendorized gems, plus it needs to configure the app to run with the correct bundler settings. This step is heavily influenced by how [Traveling Ruby](http://phusion.github.io/traveling-ruby/) packages gems for deployment, please review [their tutorial](https://github.com/phusion/traveling-ruby/blob/master/TUTORIAL-2.md) as reference.
 
 Add a `bundler_config` template file to the `resources` directory with this content:
 
@@ -136,7 +136,7 @@ package: ## Package the code for AWS Lambda
 
 ...
 ```
-The added rows are very similar to the ones we had to add to run the app locally with Travelling Ruby. Delete the lambda function and recreate it by using the Makefile. When you invoke it, your should see something like this:
+The added rows are very similar to the ones we had to add to run the app locally with Traveling Ruby. Delete the lambda function and recreate it by using the Makefile. When you invoke it, your should see something like this:
 
 ```shell
 START RequestId: 3f6ae8f5-23c1-11e6-9acc-0f50ffa39e9b Version: $LATEST
@@ -234,7 +234,7 @@ mysql> SELECT * FROM users;
 
 (6) Connect to MySQL with Rails' ActiveRecord
 
-Add the `mysql2` and `active_record` to the Ruby app's Gemfile:
+Add the `mysql2` and `active_record` gems to the Ruby app's Gemfile:
 
 ```ruby
 gem 'activerecord'
@@ -352,4 +352,4 @@ Sweet! The Ruby code in this AWS Lambda function reports back 2 users and correc
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/2f307f68c3d06a23ff9024c303656ec6d6144a0f)
 
-Being able to use MRI Ruby with gems opens up a ton possibilities for us (and I hope for you as well.) AWS Lambdas are neat little workers that can scale up and down very well. It's much easier to launch a 1000 AWS Lambdas at the same time than running Ruby processes with [resque](https://github.com/mperham/sidekiq) or [sidekiq](https://github.com/mperham/sidekiq) on worker boxes.
+Being able to use MRI Ruby with gems opens up a ton possibilities for us (and I hope for you as well). AWS Lambdas are neat little workers that can scale up and down very well. It's much easier to launch a 1000 AWS Lambdas at the same time than running Ruby processes with [resque](https://github.com/mperham/sidekiq) or [sidekiq](https://github.com/mperham/sidekiq) on worker boxes.
