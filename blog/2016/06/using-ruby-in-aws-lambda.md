@@ -289,4 +289,4 @@ REPORT RequestId: e8c24c91-2165-11e6-a0b6-35430628271f
 
 [Commit point](https://github.com/adomokos/aws-lambda-ruby/commit/7bf6c4e5d6f745d636dbdc6737db7f23a4371085)
 
-This blog post guided you through the steps of running MRI Ruby on AWS lambda. In the upcoming post, I'll show you how you can add gems and talk with an RDS instance from your Ruby code on AWS Lambda.
+This blog post guided you through the steps of running MRI Ruby on AWS lambda. In the [upcoming post](using-ruby-with-active-record-on-aws.md), I'll show you how you can add gems and talk with an RDS instance from your Ruby code on AWS Lambda.
