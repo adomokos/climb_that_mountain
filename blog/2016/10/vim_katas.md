@@ -14,5 +14,4 @@ I might have covered 60% of the book by now, but when I bump into a repeatable t
 
 Using Vim reminds me of learning to play a musical instrument. It takes time and effort to be good at it, and the keystrokes have to be in your fingertips. Once you slow down and think about it, the effectiveness of the text-based editor fades away, you would be more efficient by using visual editor instead (like Sublime Text, IntelliJ or Visual Studio).
 
-Vim (and I am sure many other tools) has this huge wall that people have to climb first to appreciate it. Clone that [repo](https://github.com/adomokos/Vim-Katas), open the first markdown file in vim, and start practicing.
-
+Vim (and I am sure many other tools) has this huge wall that people have to climb first to appreciate it. Clone that [repo](https://github.com/adomokos/Vim-Katas), open the first markdown file in Vim, and start practicing.
