@@ -2,6 +2,8 @@
 
 It was about 5 years ago when I watched Jim Weirich solving the [Roman Numeral kata](https://vimeo.com/33841375) in Ruby at an SCNA conference in Chicago. I was amazed by how he mastered his editor of choice: Emacs. His fingers were flying on the keyboard and he wrangled the code I have rarely seen anybody ever before that.
 
+![vim-screen](/resources/2016/10/vim_screen.jpg)
+
 I started using Vim in 2008 or 2009, but I never really invested the time to be good at it. I read the man pages, I went through Vim tutor, but I never really picked up or started using most of the advanced features.
 
 I remember how great I felt when I reset my Caps Lock key to function as Ctrl key. The power of hitting `<Ctrl+c>` with my pinky and index finger just to trigger `<Esc>` without reaching up to the top left on the keyboard made me feel I've just found kryptonite.
