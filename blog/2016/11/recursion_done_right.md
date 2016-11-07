@@ -1,8 +1,8 @@
 ## Recursion Done Right
 
-Learning Haskell has influenced the way I think about code. I wrote about [currying befefore](http://www.adomokos.com) in various languages, but Haskell tought me a bit about how to do recursion properly.
+Learning Haskell has influenced the way I think about code. I wrote about [currying befefore](http://www.adomokos.com/2016/05/currying-in-haskell-clojure-ruby-and.html) in various languages, but Haskell tought me a bit about how to do recursion properly.
 
-Although fast paced, I really like the examples in the book [Learn you a Little Haskell for Great Good](http://www.example.com). As one chapter talks about recursion and higher order functions, I was amazed by the simplicity of the code that lets you do basic list operations.
+Although fast paced, I really like the examples in the book [Learn you a Little Haskell for Great Good](http://learnyouahaskell.com/). As [one chapter](http://learnyouahaskell.com/recursion#maximum-awesome) talks about recursion and higher order functions, I was amazed by the simplicity of the code that lets you do basic list operations.
 
 Here is how one could find the maximum of a list:
 
