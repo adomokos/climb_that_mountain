@@ -88,7 +88,4 @@ end
 ```
 Now this is pretty darn close to the solution in Haskell. I applied the head-tail (or [car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR)) concept.
 
-Now let's look at the max function.
-
-
-
+Now let's look at the map function.
