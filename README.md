@@ -136,4 +136,6 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Using Ruby in AWS Lambda](blog/2016/06/using-ruby-in-aws-lambda.md)<br/>
     * [Using Ruby with ActiveRecord in AWS Lambda](blog/2016/06/using-ruby-with-active-record-on-aws.md)<br/>
   10/<br/>
-    * [Vim Katas](blog/2016/10/vim_katas.md)
+    * [Vim Katas](blog/2016/10/vim_katas.md)  
+  11/<br/>
+    * [Recursion Done Right](blog/2016/11/recursion_done_right.md)
