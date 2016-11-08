@@ -86,6 +86,68 @@ module Collections
   ...
 end
 ```
-Now this is pretty darn close to the solution in Haskell. I applied the head-tail (or [car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR)) concept.
+This is pretty darn close to the solution in Haskell. I applied the head-tail (or [car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR)) concept.
 
 Now let's look at the map function.
+
+These specs describe the behavior:
+
+```ruby
+context 'map' do
+  it 'mapping [] with (*3) gives []' do
+    expect(Collections.map(->(x){ x*3 }, [])).to be_empty
+  end
+  it 'mapping [1,2,3] with (*3) gives [1,6,9]' do
+    expect(Collections.map(->(x){ x*3 }, [1,2,3])).to eq([3,6,9])
+  end
+end
+```
+My implementation of `map` takes a lambda with one argument, which multiplies that one argument by three, and the second argument is the collction of items the map function will operate on.
+
+This is my implementation for it:
+
+```ruby
+module Collections
+  def self.map(f, (head, *tail))
+    return [] unless head
+
+    [f.(head)] + map(f, tail)
+  end
+  ...
+end
+```
+The key to make it succint is the destructuring the collection argument into head and tail. The guard statement makes sure the recursion will quit once there is no item in the head. The bulk of the logic is the last line of the method: the lambda is applied to the head, it's converted into an array and that value is concatenated with the result of the recurred result of the lambda and the rest of the collection.
+
+In our case, the following calculation takes place:
+```
+map (*3) [1,2,3]
+[(3*1)] + map (*3) [2,3]
+[(3*1)] + [(3*2)] + map (*3) [3]
+[(3*1)] + [(3*2)] + [(3*3)]
+[3] + [6] + [9]
+[3,6,9]
+```
+
+Haskell takes pride in how easily it implements the [quick sort algorithm](https://en.wikipedia.org/quick_sort_algorithm). Let's see how it's done there:
+
+```haskell
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) =
+    let smallerSorted = quicksort [a | a <- xs, a <= x]
+        biggerSorted = quicksort [a | a <- xs, a > x]
+    in  smallerSorted ++ [x] ++ biggerSorted
+```
+I don't blame you if this seems to be a bit more criptic than you wanted to be. It take a little practice to read what is really going on here. I'll explain it, as it will help our own Ruby implementation. The first line is the type declaration, ignore that for now. The second line is the guard, sorting an empty array will give you back an empty array. The meat of the logic begins on the third line. The collection argument is destructured into head and tail, just like I've been doing in the examples above. Based on the head value, we are filtering the elements into smaller-equal, and bigger parts. We do all this recursively until the list is exhausted. Right before the result is returned, the three items, the smaller sorted, the head value and the bigger sorted elements are combined into one collection.
+
+Let's see how this is done in Ruby. Here are the specs I prepared to prove this logic:
+```ruby
+  context 'quick sort' do
+    it 'returns an empty list for empty list' do
+      expect(Collections.quicksort([])).to eq([])
+    end
+    it 'sorts a list of items' do
+      expect(Collections.quicksort([2,5,3])).to eq([2,3,5])
+    end
+  end
+```
