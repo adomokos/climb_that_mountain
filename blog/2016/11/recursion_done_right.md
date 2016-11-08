@@ -1,6 +1,6 @@
 ## Recursion Done Right
 
-Learning Haskell has influenced the way I think about code. I wrote about [currying before](http://www.adomokos.com/2016/05/currying-in-haskell-clojure-ruby-and.html) in various languages, but Haskell taught me a bit about how to do recursion properly.
+Learning Haskell has influenced the way I think about code. I wrote about [currying](http://www.adomokos.com/2016/05/currying-in-haskell-clojure-ruby-and.html) before in various languages, but Haskell taught me a bit about how to do recursion properly.
 
 Although fast paced, I really like the examples in the book [Learn you a Little Haskell for Great Good](http://learnyouahaskell.com/). As [one chapter](http://learnyouahaskell.com/recursion#maximum-awesome) talks about recursion and higher order functions, I was amazed by the simplicity of the code that lets you do basic list operations.
 
@@ -16,7 +16,7 @@ There is already a `maximum` function in Haskell's core library, this example ju
 I am not going into details about the type declaration, but there are a couple of points I'd like to talk about.
 The pattern matching in the second line checks for the case, where the collection is an empty array. When that happens, an exception is thrown.
 The last line does pattern matching as well, it grabs the head and the tail of the list and saves it into the x and xs variables. Then it uses the `max` functions to figure out which number is greater: x or the recurred result of maximum' with the tail of the list.
-This is a prime example of declarative code, it's simplicity is striking and the fact that I don't have to know how max works with the recursion makes it a joy to read.
+This is a prime example of declarative code, its simplicity is striking and the fact that I don't have to know how max works with the recursion makes it a joy to read.
 
 Let's look at another example. Here is how you could implement `map` in Haskell yourself:
 
@@ -26,7 +26,7 @@ map' f [] = []
 map' f (x:xs) = f x : map' f xs
 ```
 
-Similarly, the edge-case is handled first. And the last line has the logic, function f is applied to the head of the list, the result is concatenated with the recurred result of `map'` of f function and the tail of the list.
+Similarly, the edge-case is handled first. The last line has the logic, function f is applied to the head of the list, the result is concatenated with the recurred result of `map'` of f function and the tail of the list.
 
 All right, let's see how we could get this logic expressed in Ruby.
 
@@ -60,7 +60,7 @@ RSpec.describe 'Recursion done right' do
 end
 ```
 
-I did not find a `max` method in Ruby, I added that as a private class method. This is still pretty easy to read, but a bit more verbose than what I'd like it to be. I wanted to find the `(x:xs)` head-tail equivalent in Ruby, I knew that will be key to make it more succinct solution. This is it: `(head, *tail) = collection`. I also had to change the guard to quit from the recursion to look for empty array, as the splat operator will provide that.
+I did not find a `max` method in Ruby, I added that as a private class method. This is still pretty easy to read, but a bit more verbose than what I'd like it to be. I wanted to find the `(x:xs)` head-tail ([car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR) for you LiSP folks) equivalent in Ruby, I knew that will be key to make it a more succinct solution. This is it: `(head, *tail) = collection`. I also had to change the guard to quit from the recursion to look for empty array, as the splat operator will provide that.
 
 Here is my revised solution:
 
@@ -86,8 +86,7 @@ module Collections
   ...
 end
 ```
-This is pretty darn close to the solution in Haskell. I applied the head-tail (or [car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR)) concept.
-
+This is pretty darn close to the solution in Haskell.
 Now let's look at the map function.
 
 These specs describe the behavior:
