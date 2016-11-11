@@ -152,7 +152,7 @@ context 'quick sort' do
 end
 ```
 
-Here is how I'd like to code to be:
+Here is how I'd like the code to be:
 
 ```ruby
 def self.quick_sort((head, *tail))
@@ -164,15 +164,15 @@ def self.quick_sort((head, *tail))
 end
 ```
 
-This logic is very close to the Haskell example, but unfortunately I don't have the filter function just yet. (Ruby standard library offers the `select` method on enumerables, but let's keep these examples free from all that.) Filter takes a lambda as its predicate function, and a collection it needs to operate on.
+This logic is very close to the Haskell example, but unfortunately, I don't have the filter function just yet. (Ruby standard library offers the `select` method on enumerables, but let's keep these examples free from all that.) `filter` takes a lambda as its predicate function, and a collection it needs to operate on.
 This spec proves out our logic:
 
 ```ruby
 context 'filter' do
-  it 'filter (>2) []' do
+  specify 'filter (>2) [] will return an empty list' do
     expect(Collections.filter(->(x){ x > 2 }, [])).to be_empty
   end
-  it 'filter (>2) [1,3,5]' do
+  specify 'filter (>2) [1,3,5] will return [3,5]' do
     expect(Collections.filter(->(x){ x > 2 }, [1,3,5])).to eq([3,5])
   end
 end
