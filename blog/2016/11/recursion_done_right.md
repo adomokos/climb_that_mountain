@@ -169,10 +169,10 @@ This spec proves out our logic:
 
 ```ruby
 context 'filter' do
-  specify 'filter (>2) [] will return an empty list' do
+  specify 'filter (>2) [] returns an empty list' do
     expect(Collections.filter(->(x){ x > 2 }, [])).to be_empty
   end
-  specify 'filter (>2) [1,3,5] will return [3,5]' do
+  specify 'filter (>2) [1,3,5] returns [3,5]' do
     expect(Collections.filter(->(x){ x > 2 }, [1,3,5])).to eq([3,5])
   end
 end
@@ -194,7 +194,7 @@ end
 
 And now, when you run the entire spec, the quick sort implementation just magically works.
 
-[image with passing specs in the example]
+![specs_executed](/resources/2016/11/specs_executed.png)
 
 Studying Haskell taught me a few things about recursion. The head and tail concept is essential to make the code simple and neat. Without that it would have been a lot more noisier. Whenever I used recursion before, I always felt I needed an accumulator. I felt I needed something I could jump to and investigate when something went wrong. I would have written the filter function like this before:
 
@@ -207,6 +207,7 @@ def self.filter(f, (head, *tail), accumulator=[])
   filter(f, tail, accumulator)
 end
 ```
-Although this works, adding the accumulator with a default argument to the list just makes this code a lot noisier, but I do like not having conditional branches in it, it's just easier for the eyes.
+Although this works, adding the accumulator with a default argument to the list just makes this code a lot noisier, but I do like not having conditional branches in it, it's just easier for the eyes.  
+You can review the examples in [this gist](https://gist.github.com/adomokos/cc326bf27b0529d9386813c8af66e59c).
 
-Based on what you read here, try implementing `replicate`, `take`, `reverse`, `repeat` and `zip` functions yourself. In case you need directions, check out this [gist](https://gist.github.com/) to see how I did it.
+Based on what you read here, try implementing `replicate`, `take`, `reverse`, `repeat` and `zip` functions yourself. In case you need directions, check out this [gist](https://gist.github.com/adomokos/3182e9914ab29b5a36c444a16ae7ecd1) to see how I did it.
