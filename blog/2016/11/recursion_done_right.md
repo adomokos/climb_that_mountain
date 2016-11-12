@@ -159,8 +159,8 @@ def self.quicksort((head, *tail))
   return [] unless head
 
   smaller_sorted = quicksort(Collections.filter(->(x) { x <= head }, tail))
-  larger_sorted = quicksort(Collections.filter(->(x) { x > head }, tail))
-  smaller_sorted + [head] + larger_sorted
+  bigger_sorted = quicksort(Collections.filter(->(x) { x > head }, tail))
+  smaller_sorted + [head] + bigger_sorted
 end
 ```
 
