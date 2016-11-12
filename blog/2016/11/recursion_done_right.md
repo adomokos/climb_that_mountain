@@ -194,7 +194,7 @@ end
 
 And now, when you run the entire spec, the quick sort implementation just magically works.
 
-![specs_executed](/resources/2016/11/specs_executed.png)
+![specs_executed](/resources/2016/11/specs_executed.png =450x187)
 
 Studying Haskell taught me a few things about recursion. The head and tail concept is essential to make the code simple and neat. Without that it would have been a lot more noisier. Whenever I used recursion before, I always felt I needed an accumulator. I felt I needed something I could jump to and investigate when something went wrong. I would have written the filter function like this before:
 
