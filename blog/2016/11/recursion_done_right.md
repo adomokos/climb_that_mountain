@@ -127,7 +127,7 @@ map (*3) [1,2,3]
 [3,6,9]
 ```
 
-Haskell takes pride in how easily it implements the [quick sort algorithm](https://en.wikipedia.org/quick_sort_algorithm). Let's see how it's done there:
+Haskell takes pride in how easily it implements the [quicksort algorithm](https://en.wikipedia.org/quick_sort_algorithm). Let's see how it's done there:
 
 ```haskell
 quicksort :: (Ord a) => [a] -> [a]
@@ -142,12 +142,12 @@ I don't blame you if this seems to be a bit more cryptic than you wanted to be. 
 Let's see how this is done in Ruby. Here are the specs I prepared to prove the logic:
 
 ```ruby
-context 'quick sort' do
+context 'quicksort' do
   it 'returns an empty list for empty list' do
-    expect(Collections.quick_sort([])).to eq([])
+    expect(Collections.quicksort([])).to eq([])
   end
   it 'sorts a list of items' do
-    expect(Collections.quick_sort([2,5,3])).to eq([2,3,5])
+    expect(Collections.quicksort([2,5,3])).to eq([2,3,5])
   end
 end
 ```
@@ -155,11 +155,11 @@ end
 Here is how I'd like the code to be:
 
 ```ruby
-def self.quick_sort((head, *tail))
+def self.quicksort((head, *tail))
   return [] unless head
 
-  smaller_sorted = quick_sort(Collections.filter(->(x) { x <= head }, tail))
-  larger_sorted = quick_sort(Collections.filter(->(x) { x > head }, tail))
+  smaller_sorted = quicksort(Collections.filter(->(x) { x <= head }, tail))
+  larger_sorted = quicksort(Collections.filter(->(x) { x > head }, tail))
   smaller_sorted + [head] + larger_sorted
 end
 ```
@@ -192,7 +192,7 @@ def self.filter(f, (head, *tail))
 end
 ```
 
-And now, when you run the entire spec, the quick sort implementation just magically works.
+And now, when you run the entire spec, the quicksort implementation just magically works.
 
 <img src="/resources/2016/11/specs_executed.png" width="440" height="187">
 
