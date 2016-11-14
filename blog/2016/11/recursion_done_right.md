@@ -127,7 +127,7 @@ map (*3) [1,2,3]
 [3,6,9]
 ```
 
-Haskell takes pride in how easily it implements the [quicksort algorithm](https://en.wikipedia.org/quick_sort_algorithm). Let's see how it's done there:
+Haskell takes pride in how easily it implements the [quicksort algorithm](https://en.wikipedia.org/wiki/Quicksort). Let's see how it's done there:
 
 ```haskell
 quicksort :: (Ord a) => [a] -> [a]
