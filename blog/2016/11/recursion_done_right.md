@@ -28,7 +28,7 @@ map' f (x:xs) = f x : map' f xs
 
 Similarly, the edge-case is handled first. The last line has the logic, function f is applied to the head of the list, the result is concatenated with the recurred result of `map'` of f function and the tail of the list.
 
-All right, let's see how we could get this logic expressed in Ruby.
+All right, let's see how we could express this logic in Ruby.
 
 Here is my first attempt:
 ```ruby
@@ -60,7 +60,7 @@ RSpec.describe 'Recursion done right' do
 end
 ```
 
-I did not find a `max` method in Ruby, I added that as a private class method. This is still pretty easy to read, but a bit more verbose than what I'd like it to be. I wanted to find the `(x:xs)` head-tail ([car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR) for you LiSP folks) equivalent in Ruby, I knew that will be key to make it a more succinct solution. This is it: `(head, *tail) = collection`. I also had to change the guard to quit from the recursion to look for empty array, as the splat operator will provide that.
+I did not find a `max` method in Ruby, I added that as a private class method. This is still pretty easy to read, but a bit more verbose than what I'd like it to be. I wanted to find the `(x:xs)` head-tail ([car-cdr](https://en.wikipedia.org/wiki/CAR_and_CDR) for you LiSP folks) equivalent in Ruby, I knew that will be key to make it a more succinct solution. This is it: `(head, *tail) = collection`. I also had to change the guard to quit from the recursion to look for an empty array, as the splat operator will provide that.
 
 Here is my revised solution:
 
@@ -196,7 +196,7 @@ And now, when you run the entire spec, the quicksort implementation just magical
 
 <img src="/resources/2016/11/specs_executed.png" width="440" height="187">
 
-Studying Haskell taught me a few things about recursion. The head and tail concept is essential to make the code simple and neat. Without that it would have been a lot more noisier. Whenever I used recursion before, I always felt I needed an accumulator. I felt I needed something I could jump to and investigate when something went wrong. I would have written the filter function like this before:
+Studying Haskell taught me a few things about recursion. The head and tail concept is essential to make the code simple and neat. Without that it would have been a lot more noisier. Whenever I used recursion before, I always felt I needed an accumulator. I wanted something I could jump to and investigate when something went wrong. I would have written the filter function like this before:
 
 ```ruby
 def self.filter(f, (head, *tail), accumulator=[])
@@ -207,7 +207,7 @@ def self.filter(f, (head, *tail), accumulator=[])
   filter(f, tail, accumulator)
 end
 ```
-Although this works, adding the accumulator with a default argument to the list just makes this code a lot noisier, but I do like not having conditional branches in it, it's just easier for the eyes.  
+Although this works, adding the accumulator with a default argument to the list just makes this code a lot noisier, but I do like not having conditional branches in it, it's just easier to reason about this code.  
 You can review the examples in [this gist](https://gist.github.com/adomokos/cc326bf27b0529d9386813c8af66e59c).
 
 Based on what you read here, try implementing `replicate`, `take`, `reverse`, `repeat` and `zip` functions yourself. In case you need directions, check out this [gist](https://gist.github.com/adomokos/3182e9914ab29b5a36c444a16ae7ecd1) to see how I did it.
