@@ -5,7 +5,7 @@
 The first time I heard about Golang was a few years back, when the great guys at Brad's Deals, our nextdoor office neighbor organized and hosted the local Go meetup there. Then IO.js and Node.js war broke out and TJ Holowaychuck shifted from Node.js to Golang announcing the move in a [open letter](https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.fada6ndrw) to the community.
 I did not think much of the language, as its reputation was far from the beauty of a real functional language.
 
-Fast forward a couple of years and I am giving Ruby a serious try on AWS Lambda. [Ruby works there](http://www.adomokos.com/2016/06/using-ruby-with-activerecord-in-aws.html), however, it needs enough memory and 3000 ms (3 seconds) to do anything. We have to invoke some of them millions of times in a month and when we [calculated](https://s3.amazonaws.com/lambda-tools/pricing-calculator.html) the cost for it, the bill gets fairly large quickly. 
+Fast forward a couple of years and I am giving Ruby a serious try on AWS Lambda. [Ruby works there](http://www.adomokos.com/2016/06/using-ruby-with-activerecord-in-aws.html), however, it needs enough memory and 3000 ms (3 seconds) to do anything. We have to invoke some of them millions of times in a month and when we [calculated](https://s3.amazonaws.com/lambda-tools/pricing-calculator.html) the cost for it, the bill gets fairly large quickly.
 
 Then one night I wrote a tiny Go program:
 
@@ -52,7 +52,7 @@ func TestFMap(t *testing.T) {
 }
 ```
 
-Writing `map` with recursion would be more elegant, but it's not as performant as using another array with defined length that does not have to grow during the operation. Grow? Yes, take a look at the differences between slices and arrays.
+Writing `map` with recursion would be more elegant, but it's not as performant as using a slice with defined length that does not have to grow during the operation.
 
 #### History
 
@@ -72,15 +72,57 @@ Go comes with many built-in tool, like code formating and benchmarking to name t
 
 (Add an animated gif demonstrating code formatting and testing on save in vim)
 
-Let's see how performant the procedure I wrote it. I had to create a special benchmark test case:
+Let's see how performant the procedure I wrote above. But before I do that I'll introduce another function where the slice's length is not pre-determined at the beginning of the operation, this way it has to auto-scale internally.
 
 ```go
+func fmapAutoScale(f func(int) string, numbers []int) []string {
+  // Initialize a slice with default length, it will auto-scale
+  var items []string
 
+  for _, item := range numbers {
+    items = append(items, f(item))
+  }
+
+  return items
+}
+```
+The function is doing the same as `fmap`, similar test should verify the logic.
+
+I added two benchmark tests to cover these functions:
+
+```go
+// Run benchmark with this command
+// go test -v fmap_test.go -run="none" -benchtime="3s" -bench="BenchmarkFmap" -benchmem
+func BenchmarkFmap(b *testing.B) {
+  b.ResetTimer()
+
+  numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+  for i := 0; i < b.N; i++ {
+    fmap(func(item int) string { return strconv.Itoa(item)  }, numbers)
+  }
+}
+
+func BenchmarkFmapAutoScale(b *testing.B) {
+  b.ResetTimer()
+
+  numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+  for i := 0; i < b.N; i++ {
+    fmapAutoScale(func(item int) string { return strconv.Itoa(item)  }, numbers)
+  }
+}
 ```
 
-# Write about tooling
-# WRite about formatting
-# Benchmarking
+When I ran the benchmark tests, this is the result I received:
 
-# About the lack of Boundler
-# Tiobe index
+```shell
+ % go test -v fmap_test.go -run="none" -benchtime="3s" -bench="BenchmarkFmap" -benchmem
+ BenchmarkFmap-4          ‡ 10000000 | 485 ns/op | 172 B/op | 11 allocs/op
+ BenchmarkFmapAutoScale-4 ‡ 5000000  | 851 ns/op | 508 B/op | 15 allocs/op
+ PASS
+ ok   command-line-arguments  10.476s
+```
+
+The first function, where I set the slice size to the exact size is more performant than the second one, where I just initialize the slice and let it autoscale. The `ns/op` displays the execution length per operation in nanoseconds. The `B/op` output describes the bytes it uses per operation. The last column describes how many memomry allocations it uses per operation. The difference is insignificant, but you can see how this can become very useful as you try writing performant code.
+
+#### Popularity
+Go is getting popular. In fact, very popular. It was "The Language of the Year" last year as it jumped from 37th to 9th on the TIOBE index, the biggest jump by any language before. I am sure you've been seeing articles about Go more and more. Check it out if you have not done so yet, as the chance of finding a project or job that uses Go is increasing every day.
