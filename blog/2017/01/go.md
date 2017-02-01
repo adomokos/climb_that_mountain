@@ -19,12 +19,12 @@ func main() {
 }
 ```
 
-I cross compiled (since I am working on OSX) with the command `GOOS=linux GOARCH=amd64 go build github.com/adomokos/hello` to Linux, packaged it up with a Node.JS executor and ran it. I couldn't believe my eyes. It took only 34 ms to get the string `Hello, World!` back. 34 ms! And it was on a 128 MB memory instance. It was beautiful! Ruby would need four times the memory and it would still execute ~10 times slower than Go. That was the moment when I got hooked.
+I cross compiled (since I am working on OSX) with the command `GOOS=linux GOARCH=amd64 go build github.com/adomokos/hello` to Linux, packaged it up with a Node.JS executor and ran it. I couldn't believe my eyes, it took only 34 ms to get the string `Hello, World!` back. 34 ms! And it was on a 128 MB memory instance. It was beautiful! Ruby would need four times the memory and it would still execute ~10 times slower than Go. That was the moment when I got hooked.
 
 
 Go is a simple language. I am not saying it's easy to learn, it's subjective: it depends on your background, your experience. But it's far from the beauty of Haskell or Clojure. However, I know, that the team I am working with would have no trouble switching between Go and Ruby during the day.
 
-What kind of a language today does not have a `map` or `reduce` functions? Especially when functions are first class citizens. It turns out, I can write my own map function if I need to:
+What kind of a language today does not have `map` or `reduce` functions?! Especially when functions are first class citizens in the language. It turns out, I can write my own map function if I need to:
 
 ```go
 package collections
@@ -52,6 +52,8 @@ func TestFMap(t *testing.T) {
 }
 ```
 
+Writing `map` with recursion would be more elegant, but it's not as performant as using another array with defined length that does not have to grow during the operation. Grow? Yes, take a look at the differences between slices and arrays.
+
 #### History
 
 Go was created by some very smart people at Google, I wanted to understand their decision to keep a language this pure.
@@ -62,16 +64,19 @@ Google has a large amount of code in C and C++, however, those languages are far
 * to run fast
 * to make parallel processing easy
 
-Google hires massive number of fresh CS graduates each year with some C++ and Java programming experience. These engineers can feel right at home with Go, where the syntax and concept is similar to those languages.
+Google hires massive number of fresh CS graduates each year with some C++ and Java programming experience, these engineers can feel right at home with Go, where the syntax and concept is similar to those languages.
 
 #### Tooling
 
-Go comes with many built-in tool, like code formatter and benchmarking to name the fiew. In fact I set up [Vim Go](https://github.com/fatih/vim-go) that leverages many of those tools for me. I can run, test code with couple of keystrokes.
+Go comes with many built-in tool, like code formating and benchmarking to name the fiew. In fact I set up [Vim Go](https://github.com/fatih/vim-go) that leverages many of those tools for me. I can run, test code with only a couple of keystrokes.
 
 (Add an animated gif demonstrating code formatting and testing on save in vim)
 
+Let's see how performant the procedure I wrote it. I had to create a special benchmark test case:
 
+```go
 
+```
 
 # Write about tooling
 # WRite about formatting
