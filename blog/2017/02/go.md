@@ -23,6 +23,8 @@ func main() {
 
 I cross compiled (since I am working on OSX) with the command `GOOS=linux GOARCH=amd64 go build github.com/adomokos/hello` to Linux, packaged it up with a Node.JS executor and ran it. I couldn't believe my eyes, it took only 68 ms to get the string `Hello, World!` back. 68 ms! And it was on a 128 MB memory instance. It was beautiful! ***Ruby would need four times the memory and it would still execute ~10 times slower than Go. That was the moment when I got hooked.***
 
+![Go Hello World on AWS Lambda](/resources/2017/02/go_hello_world.png)
+
 Go is a simple language. I am not saying it's easy to learn, it's subjective: it depends on your background, your experience. But it's far from the beauty of Haskell or Clojure. However, I know, that the team I am working with would have no trouble switching between Go and Ruby during the day.
 
 What kind of a language today does not have `map` or `reduce` functions?! Especially when functions are first class citizens in the language. It turns out, I can write my own map function if I need to:
