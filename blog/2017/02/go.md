@@ -126,4 +126,5 @@ When I ran the benchmark tests, this is the result I received:
 The first function, where I set the slice size to the exact size is more performant than the second one, where I just initialize the slice and let it autoscale. The `ns/op` displays the execution length per operation in nanoseconds. The `B/op` output describes the bytes it uses per operation. The last column describes how many memomry allocations it uses per operation. The difference is insignificant, but you can see how this can become very useful as you try writing performant code.
 
 #### Popularity
-Go is getting popular. In fact, very popular. It was "The Language of the Year" last year as it jumped from 37th to 9th on the TIOBE index, the biggest jump by any language before. I am sure you've been seeing articles about Go more and more. Check it out if you have not done so yet, as the chance of finding a project or job that uses Go is increasing every day.
+
+Go is getting popular. In fact, very popular. It was TIOBE's "[The Language of the Year](http://www.tiobe.com/tiobe-index/)" gaining 2.16% in one year. I am sure you'll be seeing articles about Go more and more. Check it out if you have not done so yet, as the chance of finding a project or job that uses Go is increasing every day.
