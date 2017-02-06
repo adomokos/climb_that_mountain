@@ -7,7 +7,7 @@ I did not think much of the language, as its reputation was far from the beauty 
 
 Fast forward a couple of years and I am giving Ruby a serious try on AWS Lambda. [Ruby works there](http://www.adomokos.com/2016/06/using-ruby-with-activerecord-in-aws.html), however, it needs enough memory and 3000 ms (3 seconds) to do anything. We have to invoke some of them millions of times in a month and when we [calculated](https://s3.amazonaws.com/lambda-tools/pricing-calculator.html) the cost for it, the bill gets fairly large quickly.
 
-![Ruby Hello World on AWS Lambda](resources/2017/02/ruby_hello_world.png)
+![Ruby Hello World on AWS Lambda](/resources/2017/02/ruby_hello_world.png)
 
 Then one night I wrote a tiny Go program:
 
