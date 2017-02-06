@@ -127,4 +127,4 @@ The first function, where I set the slice size to the exact size is more perform
 
 #### Popularity
 
-Go is getting popular. In fact, very popular. It was TIOBE's "[The Language of the Year](http://www.tiobe.com/tiobe-index/)" gaining 2.16% in one year. I am sure you'll be seeing articles about Go more and more. Check it out if you have not done so yet, as the chance of finding a project or job that uses Go is increasing every day.
+Go is getting popular. In fact, very popular. It was TIOBE's "[The Language of the Year](http://www.tiobe.com/tiobe-index/)" gaining 2.16% in one year. I am sure you'll be seeing articles about Go more and more. Check it out if you haven't done it yet, as the chance of finding a project or job that uses Go is increasing every day.
