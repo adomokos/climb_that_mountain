@@ -25,7 +25,7 @@ I cross compiled (since I am working on OSX) with the command `GOOS=linux GOARCH
 
 ![Go Hello World on AWS Lambda](/resources/2017/02/go_hello_world.png)
 
-Go is a simple language. I am not saying it's easy to learn, it's subjective: it depends on your background, your experience. But it's far from the beauty of Haskell or Clojure. However, I know, that the team I am working with would have no trouble switching between Go and Ruby during the day.
+Go is a simple language. I am not saying it's easy to learn, it's subjective: it depends on your background, your experience. But it's far from the beauty of Haskell or Clojure. However, the team I am working with would have no trouble switching between Go and Ruby multiple times a day.
 
 What kind of a language today does not have `map` or `reduce` functions?! Especially when functions are first class citizens in the language. It turns out, I can write my own map function if I need to:
 
