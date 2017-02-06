@@ -73,8 +73,6 @@ Google hires massive number of fresh CS graduates each year with some C++ and Ja
 
 Go comes with many built-in tool, like code formating and benchmarking to name the fiew. In fact I set up [Vim Go](https://github.com/fatih/vim-go) that leverages many of those tools for me. I can run, test code with only a couple of keystrokes.
 
-(Add an animated gif demonstrating code formatting and testing on save in vim)
-
 Let's see how performant the procedure I wrote above. But before I do that I'll introduce another function where the slice's length is not pre-determined at the beginning of the operation, this way it has to auto-scale internally.
 
 ```go
