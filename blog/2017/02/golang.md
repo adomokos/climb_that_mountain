@@ -1,6 +1,6 @@
-## Monday, January 23, 2017
+## Wednesday, February 8, 2017
 
-### Go
+### Golang
 
 The first time I heard about Golang was a few years back, when the great guys at Brad's Deals, our nextdoor office neighbor organized and hosted the local Go meetup there. Then [IO.js](https://iojs.org/en/) and Node.js war broke out and TJ Holowaychuck shifted from Node.js to Golang announcing the move in a [open letter](https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.fada6ndrw) to the community.
 I did not think much of the language, as its reputation was far from the beauty of a real functional language.
