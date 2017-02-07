@@ -7,6 +7,8 @@ I did not think much of the language, as its reputation was far from the beauty 
 
 Fast forward a couple of years and I am giving Ruby a serious try on AWS Lambda. [Ruby works there](http://www.adomokos.com/2016/06/using-ruby-with-activerecord-in-aws.html), however, it needs enough memory and 3000 ms (3 seconds) to do anything. We have to invoke some of them millions of times in a month and when we [calculated](https://s3.amazonaws.com/lambda-tools/pricing-calculator.html) the cost for it, the bill gets fairly large quickly.
 
+I created a simple AWS Lambda with Ruby just to print the words "Hello, World!" with 128 MB memory. It took 5339 ms to execute it.
+
 ![Ruby Hello World on AWS Lambda](/resources/2017/02/ruby_hello_world.png)
 
 Then one night I wrote a tiny Go program:
@@ -21,13 +23,13 @@ func main() {
 }
 ```
 
-I cross compiled (since I am working on OSX) with the command `GOOS=linux GOARCH=amd64 go build github.com/adomokos/hello` to Linux, packaged it up with a Node.JS executor and ran it. I couldn't believe my eyes, it took only 68 ms to get the string `Hello, World!` back. 68 ms! And it was on a 128 MB memory instance. It was beautiful! ***Ruby would need four times the memory and it would still execute ~10 times slower than Go. That was the moment when I got hooked.***
+I cross compiled (since I am working on OSX) with the command `GOOS=linux GOARCH=amd64 go build github.com/adomokos/hello` to Linux, packaged it up with a Node.JS executor and ran it. I couldn't believe my eyes, it took only 68 ms to get the string "Hello, World!" back. 68 ms! And it was on a 128 MB memory instance. It was beautiful! ***Ruby would need four times the memory and it would still execute ~10 times slower than Go. That was the moment when I got hooked.***
 
 ![Go Hello World on AWS Lambda](/resources/2017/02/go_hello_world.png)
 
 Go is a simple language. I am not saying it's easy to learn, it's subjective: it depends on your background, your experience. But it's far from the beauty of Haskell or Clojure. However, the team I am working with would have no trouble switching between Go and Ruby multiple times a day.
 
-What kind of a language today does not have `map` or `reduce` functions?! Especially when functions are first class citizens in the language. It turns out, I can write my own map function if I need to:
+What kind of a language today does not have `map` or `reduce` functions?! Especially when functions are first-class citizens in the language. It turns out, I can write my own map function if I need to:
 
 ```go
 package collections
@@ -123,7 +125,7 @@ When I ran the benchmark tests, this is the result I received:
  ok   command-line-arguments  10.476s
 ```
 
-The first function, where I set the slice size to the exact size is more performant than the second one, where I just initialize the slice and let it autoscale. The `ns/op` displays the execution length per operation in nanoseconds. The `B/op` output describes the bytes it uses per operation. The last column describes how many memomry allocations it uses per operation. The difference is insignificant, but you can see how this can become very useful as you try writing performant code.
+The first function, where I set the slice size to the exact size is more performant than the second one, where I just initialize the slice and let it autoscale. The `ns/op` displays the execution length per operation in nanoseconds. The `B/op` output describes the bytes it uses per operation. The last column describes how many memory allocations it uses per operation. The difference is insignificant, but you can see how this can become very useful as you try writing performant code.
 
 #### Popularity
 
