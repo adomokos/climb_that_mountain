@@ -2,7 +2,7 @@
 
 ### Golang
 
-The first time I heard about Golang was a few years back, when the great guys at Brad's Deals, our nextdoor office neighbor organized and hosted the local Go meetup there. Then [IO.js](https://iojs.org/en/) and Node.js war broke out and TJ Holowaychuck shifted from Node.js to Golang announcing the move in a [open letter](https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.fada6ndrw) to the community.
+The first time I heard about Golang was a few years back, when the great guys at Brad's Deals, our next door office neighbor organized and hosted the local Go meetup there. Then [IO.js](https://iojs.org/en/) and Node.js war broke out and TJ Holowaychuck shifted from Node.js to Golang announcing the move in a [open letter](https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.fada6ndrw) to the community.
 I did not think much of the language, as its reputation was far from the beauty of a real functional language.
 
 Fast forward a couple of years and I am giving Ruby a serious try on AWS Lambda. [Ruby works there](http://www.adomokos.com/2016/06/using-ruby-with-activerecord-in-aws.html), however, it needs enough memory and 3000 ms (3 seconds) to do anything. We have to invoke some of them millions of times in a month and when we [calculated](https://s3.amazonaws.com/lambda-tools/pricing-calculator.html) the cost for it, the bill gets fairly large quickly.
@@ -73,7 +73,7 @@ Google hires massive number of fresh CS graduates each year with some C++ and Ja
 
 #### Tooling
 
-Go comes with many built-in tool, like code formating and benchmarking to name the fiew. In fact I set up [Vim Go](https://github.com/fatih/vim-go) that leverages many of those tools for me. I can run, test code with only a couple of keystrokes.
+Go comes with many built-in tools, like code formatting and benchmarking to name the few. In fact, I set up [Vim Go](https://github.com/fatih/vim-go) that leverages many of those tools for me. I can run, test code with only a couple of keystrokes.
 
 Let's see how performant the procedure I wrote above. But before I do that I'll introduce another function where the slice's length is not pre-determined at the beginning of the operation, this way it has to auto-scale internally.
 
@@ -89,7 +89,7 @@ func fmapAutoScale(f func(int) string, numbers []int) []string {
   return items
 }
 ```
-The function is doing the same as `fmap`, similar test should verify the logic.
+The function is doing the same as `fmap`, a similar test should verify the logic.
 
 I added two benchmark tests to cover these functions:
 
