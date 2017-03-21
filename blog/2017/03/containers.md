@@ -1,14 +1,10 @@
 ### Containers
 
-As I was exploring how to make Golang even faster on AWS Lambda, I found a project that promised sub-millisecond execution time compared to my (already pretty good) [~60 millisecond](/blog/2016/06/using-ruby-with-active-record-on-aws.md). It used Python execution that ran the Go code in process in contrast to my attempt, where I had to spawn a new process and execute the lambda code there. Very clever, no wonder that solution did not have the 60 millisecond penalty for running that code.
-
-```highlight
-However, in order to build the sample code for this AWS Lambda I had to use Docker.
-```
+As I was exploring how to make Golang even faster on AWS Lambda, I found a project that promised sub-millisecond execution time compared to my (already pretty good) [~60 millisecond](/blog/2016/06/using-ruby-with-active-record-on-aws.md). It used Python execution that ran the Go code in process in contrast to my attempt, where I had to spawn a new process and execute the lambda code there. Very clever, no wonder that solution did not have the 60 millisecond penalty for running that code. However, in order to build the sample code for this AWS Lambda I had to use Docker.
 
 I've heard about Docker years ago, understood what it's used for at a very high level, however, I have never really given it a serious try. I figured it was time. Boy, I was in for some pleasant surprise!
 
-The project <a href="">eawsy</a> used docker to containerize their build environment on my laptop. What does that mean? Imagine having a build server running on your computer in seconds, where the version of the Go compiler, the Python environment is set by the author of the project. I'd use a little build engine that takes in my code, runs its magic and a zip file comes out that I can run on Lambda. What?!
+The project <a href="https://github.com/eawsy/aws-lambda-go">AWS Lambda Go from Eawsy</a> used Docker to containerize their build environment on my laptop. What does that mean? Imagine having a build server running on your computer in seconds, where the version of the Go compiler, the Python environment is set by the author of the project. I'd use a little build engine that takes in my code, runs its magic and a zip file comes out that I can run on Lambda. What?!
 
 I remember writing all these different tutorials about <a href="">running MRI Ruby on AWS Lambda</a> or <a href="">interacting with a Postgres DB with Clojure</a> and I had to set up all the prereqs in plain text: "you have to have Postgres running, and Clojure, and MRI Ruby". I provided all the different Makefile scripts to follow the examples. However, with Docker, that's all the things of the past, I'd just provide a Dockerfile that sets up the right environment in the future.
 
