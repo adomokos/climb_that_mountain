@@ -25,4 +25,4 @@ I created a <a href="https://github.com/adomokos/docker_templates">Docker templa
 
 There are many things I like about Docker as compared to Vagrant or other virtual machine solutions. The biggest thing for me is the low power Docker containers would need. Vagrant images would reserve 2 of your 4 cores and 8GB memory, when Docker will only take from the host as it needs. If it's 32MB, that's it, if it's 1GB, it will take that much.
 
-Docker is the future, and you will see more and more code repos with a `Dockerfile` in it.
+Docker is the future, you will see more and more code repos with a `Dockerfile` in it.
