@@ -2,7 +2,7 @@
 
 As I was exploring how to make Golang even faster on AWS Lambda, I found a project that promised sub-millisecond execution time compared to my (already pretty good) [~60 millisecond](/blog/2016/06/using-ruby-with-active-record-on-aws.md). It used Python execution that ran the Go code in-process in contrast to my attempt, where I had to spawn a new process and execute the lambda code there. Very clever, no wonder that solution did not have the 60 millisecond penalty for running that code. However, in order to build the sample code for this AWS Lambda I had to use Docker.
 
-![Docker Logo](resources/2017/03/docker_logo.png)
+![Docker Logo](/resources/2017/03/docker_logo.png)
 
 I've heard about Docker years ago, understood what it's used for at a very high level, however, I have never really given it a serious try. I figured it was time. Boy, I was in for some pleasant surprise!
 
