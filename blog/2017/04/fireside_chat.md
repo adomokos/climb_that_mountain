@@ -6,7 +6,7 @@ When I saw a retweet from Jason Fried about available tickets to a fireside chat
 
 Basecamp HQ is as cool as you think it is. Very few desks, a couple of meeting rooms. It reminded me more of a train terminal with its large windows and limited furnishing than a real office. The office is centered around an auditorium, which is an effective PR and educational platform for the company.
 
-I enjoyed looking at the walls covered with postcards from employees all over the world, but I especially liked David's Green Card approval notice from the USCIS from 2015. I laughed out loud when I noticed it, as I had to go through similar hassle myself, but mine is safely guarded with my documents at home.
+I enjoyed looking at the walls covered with postcards from employees all over the world, but I especially liked David's H-1B approval notice from the USCIS from 2015. I laughed out loud when I noticed it, as I had to go through similar hassle myself, but mine is safely guarded with my documents at home.
 
 Basecamp works in six weeks work schedule. Whatever the team can get down in six weeks, they will deliver it. The scope can change, but the six weeks schedule is hard set. This schedule helps them delivering functionality, and since the company is working remotely, it worked out well for them.
 
