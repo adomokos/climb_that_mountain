@@ -13,7 +13,7 @@ I remember writing all these different tutorials about [running MRI Ruby on AWS 
 I believe containers are big, and will be even bigger very soon.
 
 ```highlight
-I see more and more applications where the code describes the software behavior and the container descriptor describes the environmen.
+I see more and more applications where the code describes the software behavior and the container descriptor describes the environment.
 ```
 
 They live side by side, clearly stating what virtual components the software needs to execute. Engineers can run the software with those containers locally, and the software can be deployed to the cloud with those images pre-built, with tight control around its execution context.
