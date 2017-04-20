@@ -2,7 +2,7 @@
 
 When I saw a retweet from Jason Fried about available tickets to a fireside chat with him at Basecamp, I jumped on it. I figured if I can kill two birds with one stone, - meeting him in person and seeing their offices - I'll jump on it. The subject was "Company Culture" by Aimee Lee, who was there publicizing her new book about Zappos' culture.
 
-![Basecamp HQ](/resources/2014/04/basecamp.jpg)
+![Basecamp HQ](/resources/2017/04/basecamp.jpg)
 
 Basecamp HQ is as cool as you think it is. Very few desks, a couple of meeting rooms. It reminded me more of a train terminal with its large windows and limited furnishing than a real office. The office is centered around an auditorium, which is an effective PR and educational platform for the company.
 
@@ -21,4 +21,4 @@ Jason went into details why other products were divested (like HighRise, Backpac
 
 I enjoyed the Q&A at the very end. Some interesting questions came up about the startup community in Chicago, about VCs in general. Jason kindly offered to stay as long as everybody's questions were answered. Really a courteous offer, considering it was after 8 pm on a Friday night.
 
-Oh, yes, and one more thing: Basecamp has 130 thousand paying customers. It's a remarkable achievement by a company that has never taken VC money, was profitable from the get-go, and created an exciting app in the "not-so-exciting" domain of project management.
+Oh, yes, and one more thing: Basecamp has 130,000 paying customers. It's a remarkable achievement by a company that has never taken VC money, was profitable from the get-go, and created an exciting app in the "not-so-exciting" domain of project management.
