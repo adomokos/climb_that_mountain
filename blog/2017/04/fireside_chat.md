@@ -4,7 +4,7 @@ When I saw a retweet from [Jason Fried](https://twitter.com/jasonfried) about av
 
 ![Basecamp HQ](/resources/2017/04/basecamp.jpg)
 
-Basecamp HQ is as cool as you think it is. Very few desks, a couple of meeting rooms. It reminded me more of a train terminal with its large windows and limited furnishing than a real office. The office is centered around an auditorium, which is an effective PR and educational platform for the company.
+[Basecamp HQ](https://basecamp.com/about/office) is as cool as you think it is. Very few desks, a couple of meeting rooms. It reminded me more of a train terminal with its large windows and limited furnishing than a real office. The office is centered around an auditorium, which is an effective PR and educational platform for the company.
 
 I enjoyed looking at the walls covered with postcards from employees all over the world, but I especially liked David's H-1B approval notice from the USCIS from 2015. I laughed out loud when I noticed it, as I had to go through similar hassle myself, but mine is safely guarded with my documents at home.
 
