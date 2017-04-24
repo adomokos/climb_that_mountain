@@ -1,6 +1,6 @@
 ### Fireside Chat
 
-When I saw a retweet from Jason Fried about available tickets to a fireside chat with him at Basecamp, I jumped on it. I figured if I can kill two birds with one stone, - meeting him in person and seeing their offices - I'll jump on it. The subject was "Company Culture" by Aimee Lee, who was there publicizing her new book about Zappos' culture.
+When I saw a retweet from [Jason Fried](https://twitter.com/jasonfried) about available tickets to a fireside chat with him at Basecamp, I jumped on it. I figured if I can kill two birds with one stone, - meeting him in person and seeing their offices - it's a no-brainer. Company Culture was the topic of the conversation led by [Aimee Groth](https://twitter.com/AimeeGroth), who visited Chicago to publicize her new book, [Kingdom of Happiness](https://www.amazon.com/Kingdom-Happiness-Inside-Hsiehs-Zapponian/dp/1501129902) about Zappos' culture.
 
 ![Basecamp HQ](/resources/2017/04/basecamp.jpg)
 
