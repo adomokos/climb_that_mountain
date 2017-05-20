@@ -145,3 +145,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Golang](blog/2017/02/golang.md)<br/>
   03/<br/>
     * [Containers](blog/2017/03/containers.md)<br/>
+  04/<br/>
+    * [Fireside Chat](blog/2017/04/fireside_chat.md)<br/>
