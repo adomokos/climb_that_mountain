@@ -93,8 +93,8 @@ pry(main)> (3939 >> 0).to_s(2).last(5).to_i(2)
 => 3
 ```
 
-Using the binary "&" with the max number the bits can represent will do this in one step: `(3939 >> 0) & 0b11111 => 3`. Just a side note, the binary number can be represented as a hexadecimal value for brevity's sake: `(3939 >> 0) & 0x1F => 3`.
+Using the binary "&" with the max number the bits can stroe will do this conversion in one step: `(3939 >> 0) & 0b11111 => 3`. As a side note, the binary number can be represented as a hexadecimal value: `(3939 >> 0) & 0x1F => 3`. This is a lot shorter than a series of ones and zeros.
 
-There is a limit of how large the numbers can be as you have x number of bits to store those.
+There is a limit of how large the numbers can be as you have a limit of bits to store those. The max number can be determined by flipping the available bits on. For an 7 bit number it's `64 + 32 + 16 + 8 + 4 + 2 + 1 = 127` or `2**x-1`, where x is the number of bits. In our case it is `2**7-1 = 127`.
 
-
+We ended up using a 62 bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value.
