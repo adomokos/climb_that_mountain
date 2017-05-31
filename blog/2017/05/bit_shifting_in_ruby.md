@@ -21,14 +21,14 @@ pry(main)> 123.to_s(2)
 
 This is the exact same string representation as the one in the image above, where the third bit is turned off and represented with a zero.
 
-I'd like to keep the `client_id` on the left hand side, but I'd like to reserve bits on the right hand side. For the sake of simplicity, I will keep this as a small number. Let's add 5 bits to the right hand side of these bits by using the bitwise left shift operator.
+I'd like to keep the `client_id` on the left side, but I'd like to reserve bits on the right side. For the sake of simplicity, I will keep this as a small number. Let's add 5 bits to the right-hand side of these bits by using the bitwise left shift operator.
 
 ```shell
 pry(main)> (123 << 5).to_s(2)
 => "111101100000"
 ```
 
-The original number, 123, is still represented on the left side, but 5 "0"s were added to the right hand side. You get the numeric representation of this by leaving out the `to_s(2)` call at the end:
+The original number, 123, is still represented on the left side, but 5 "0"s were added to the right side. You get the numeric representation of this by leaving out the `to_s(2)` call at the end:
 
 ```shell
 pry(main)> 123 << 5
@@ -42,7 +42,7 @@ pry(main)> 3936.to_s(2)
 => "111101100000"
 ```
 
-On the left hand side I have the binary representation of 123, but how about those bits on the right side? What are those representing? Right now, those bits are all turned off, they will give you 0 (`"00000".to_i(2) => 0`). How can I store the number 3 on the right hand side? The bits should look like this:
+On the left-hand side I have the binary representation of 123, but how about those bits on the right side? What are those representing? Right now, those bits are all turned off, they will give you 0 (`"00000".to_i(2) => 0`). How can I store the number 3 on the right-hand side? The bits should look like this:
 
 ![3-on-right-side](/resources/2017/05/3_on_right_side.jpg)
 
@@ -60,7 +60,7 @@ pry(main)> (123 << 5 | 3)
 => 3939
 ```
 
-The storing part will work, but how can we get our two numbers back from this one combined number? Well, we have to split the bits and convert the binary representation to integer.
+The storing part will work, but how can we get our two numbers back from this one combined number? Well, we have to split the bits and convert the binary representation to an integer.
 
 Five bits were used on the right side to store our second number. We need to chop those off to get the number stored on the left side. The bitwise right shift (>>) will do just that:
 
@@ -75,11 +75,11 @@ The string "1111011" is our original 123 in a binary string format. We can conve
 pry(main)> (3939 >> 5).to_s(2).to_i(2)
 => 123
 ```
-I right shifted the original number, 3939, converted it to binary string and converted that to an Integer.
+I right shifted the original number, 3939, converted it to a binary string and converted that to an Integer.
 
 There are more efficient ways to do this by using a binary "&" `(3939 >> 5) & 0b1111111 => 123` with the max value the bits can represent. That's what the Pinterest article had, but I found using the Ruby conversion methods a bit more friendly to those of us who are not dealing with binary data on a daily basis.
 
-We have the number on the left hand side, but what about the number on the right side? When we convert the number representation (3939) to binary string, we know that the five characters on the right side will represent the bits of our other number. Ruby String's `last(x)` will do just that:
+We have the number on the left side, but what about the number on the right side? When we convert the number representation (3939) to a binary string, we know that the five characters on the right side will represent the bits of our other number. Ruby String's `last(x)` will do just that:
 
 ```shell
 pry(main)> (3939 >> 0).to_s(2).last(5)
@@ -97,4 +97,4 @@ Using the binary "&" with the max number the bits can store will do this convers
 
 There is a limit of how large the numbers can be as you have a limit of bits to store those. The max number can be determined by flipping the available bits on. For an 7 bit number it's `64 + 32 + 16 + 8 + 4 + 2 + 1 = 127` or `2**x-1`, where x is the number of bits. In our case it is `2**7-1 = 127`.
 
-We ended up using a 64 bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value. The remaining two bits are "worth in gold", we can expand the numbers or store a third (albeit small) number in it.
+We ended up using a 64-bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value. The remaining two bits are "worth in gold", we can expand the numbers or store a third (albeit small) number in it.
