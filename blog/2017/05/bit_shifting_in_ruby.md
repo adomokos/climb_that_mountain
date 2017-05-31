@@ -1,12 +1,12 @@
 ### Bit Shifting for a Shard ID in Ruby
 
-As our database grew, we had to take a serious look at how can we could split it up by our clients, as most of them wanted to have their own data separate from the others anyway. A few months ago I found a [great article](https://medium.com/@Pinterest_Engineering/sharding-pinterest-how-we-scaled-our-mysql-fleet-3f341e96ca6f) from Pinterest, in which they describe how they [sharded](https://en.wikipedia.org/wiki/Shard_(database_architecture)) their MySQL database.
+As our database grew, we had to take a serious look at how can we could split it up by our clients, as most of them wanted to have their own data separate from the others anyway. A few months ago I found a [great article](https://medium.com/@Pinterest_Engineering/sharding-pinterest-how-we-scaled-our-mysql-fleet-3f341e96ca6f) from Pinterest, that describes how they [sharded](https://en.wikipedia.org/wiki/Shard_(database_architecture)) their MySQL database.
 
 A sharded entity needs a UUID to uniquely identify the record across all shards. Most of the programming languages can generate a UUID easily, however, what was amazing to me, was that Pinterest generated its own unique ids by encapsulating three distinct numbers in one. Wait, what??! Read that article, it's definitely worth your time.
 
 While Pinterest encapsulated three numbers into one, we only needed two, a `client_id` and an `entity_id`. Our `client_id` would be a much smaller number than our `entity_id`, we wanted to reserve more bits for the latter.
 
-It turns out, Ruby has many "friendlier" tools to deal with binary operations. Let's look at them!
+It turns out, Ruby has many friendlier tools to deal with binary operations. Let's look at them!
 
 What is the binary representation of the integer number 123?
 
@@ -19,7 +19,7 @@ pry(main)> 123.to_s(2)
 => "1111011"
 ```
 
-This is the exact same string representation as the one in the image above, where you can see the third bit is turned off by represented with a zero.
+This is the exact same string representation as the one in the image above, where the third bit is turned off and represented with a zero.
 
 I'd like to keep the `client_id` on the left hand side, but I'd like to reserve bits on the right hand side. For the sake of simplicity, I'll keep this as a small number. Let's add 5 bits to the right hand side of these bits by using the bitwise left shift operator.
 
@@ -42,11 +42,11 @@ pry(main)> 3936.to_s(2)
 => "111101100000"
 ```
 
-On the left hand side I have the binary representation of 123, but how 'bout those bits on the right side? What are those representing. Right now, those bits are all turned off, they will give you 0 (`"00000".to_i(2) => 0`). How can I store the number 3 on the right hand side? The bits should look like this:
+On the left hand side I have the binary representation of 123, but how about those bits on the right side? What are those representing? Right now, those bits are all turned off, they will give you 0 (`"00000".to_i(2) => 0`). How can I store the number 3 on the right hand side? The bits should look like this:
 
 ![3-on-right-side](/resources/2017/05/3_on_right_side.jpg)
 
-The "binary or" "|" will turn the two rightmost bits on:
+The binary "|" will turn the two rightmost bits on:
 
 ```shell
 pry(main)> (123 << 5 | 3).to_s(2)
@@ -93,8 +93,8 @@ pry(main)> (3939 >> 0).to_s(2).last(5).to_i(2)
 => 3
 ```
 
-Using the binary "&" with the max number the bits can stroe will do this conversion in one step: `(3939 >> 0) & 0b11111 => 3`. As a side note, the binary number can be represented as a hexadecimal value: `(3939 >> 0) & 0x1F => 3`. This is a lot shorter than a series of ones and zeros.
+Using the binary "&" with the max number the bits can store will do this conversion in one step: `(3939 >> 0) & 0b11111 => 3`. As a side note, the binary number can be represented as a hexadecimal value: `(3939 >> 0) & 0x1F => 3`. This is a lot shorter than a series of ones and zeros.
 
 There is a limit of how large the numbers can be as you have a limit of bits to store those. The max number can be determined by flipping the available bits on. For an 7 bit number it's `64 + 32 + 16 + 8 + 4 + 2 + 1 = 127` or `2**x-1`, where x is the number of bits. In our case it is `2**7-1 = 127`.
 
-We ended up using a 62 bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value.
+We ended up using a 64 bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value. The remaining two bits are "worth in gold", we can expand the number or store a third (albeit small) number in it.
