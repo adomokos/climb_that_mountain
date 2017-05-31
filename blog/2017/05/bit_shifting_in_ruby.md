@@ -21,7 +21,7 @@ pry(main)> 123.to_s(2)
 
 This is the exact same string representation as the one in the image above, where the third bit is turned off and represented with a zero.
 
-I'd like to keep the `client_id` on the left hand side, but I'd like to reserve bits on the right hand side. For the sake of simplicity, I'll keep this as a small number. Let's add 5 bits to the right hand side of these bits by using the bitwise left shift operator.
+I'd like to keep the `client_id` on the left hand side, but I'd like to reserve bits on the right hand side. For the sake of simplicity, I will keep this as a small number. Let's add 5 bits to the right hand side of these bits by using the bitwise left shift operator.
 
 ```shell
 pry(main)> (123 << 5).to_s(2)
@@ -97,4 +97,4 @@ Using the binary "&" with the max number the bits can store will do this convers
 
 There is a limit of how large the numbers can be as you have a limit of bits to store those. The max number can be determined by flipping the available bits on. For an 7 bit number it's `64 + 32 + 16 + 8 + 4 + 2 + 1 = 127` or `2**x-1`, where x is the number of bits. In our case it is `2**7-1 = 127`.
 
-We ended up using a 64 bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value. The remaining two bits are "worth in gold", we can expand the number or store a third (albeit small) number in it.
+We ended up using a 64 bit Integer for our `shard_id`, which is a `BIGINT` in MySQL. We store `client_id` in 22 bits giving us the maximum of `2**22-1 = 4_194_304` and 40 bits for the `entity_id` with  `2**40-1 = 1_099_511_627_775` max value. The remaining two bits are "worth in gold", we can expand the numbers or store a third (albeit small) number in it.
