@@ -102,7 +102,7 @@ end
 
 The table is shifted to the right, but it's clearly visible, and the commented out header provides a different color in my IDE that separates it from the data.
 
-[!include_examples](resources/2017/06/include_examples.png)
+![include_examples](/resources/2017/06/include_examples.png)
 
 The `shared_example` is also a lot simpler, I don't need to deal with the header information, as it's not passed to it, examples are being ran line by line.
 
