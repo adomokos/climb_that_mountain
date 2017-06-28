@@ -42,7 +42,7 @@ The spec documentation, however, does not reveal the used table. This is what it
 eating apples
   can tell how many are remaining
 ```
-Let's say, one of the examples will trigger an error. When I change the second example and change the "left" columns 15 value to 16, this is what I see when I run the spec.
+Let's say, one of the examples will trigger an error. When I change the second example's "left" column's 15 value to 16, this is what I see when I run the spec.
 
 ```shell
 F
