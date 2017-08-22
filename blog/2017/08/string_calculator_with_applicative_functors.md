@@ -75,5 +75,18 @@ Just 12
 Nothing
 λ>
 ```
+We need to parse the list of strings, which is achieved by `readMaybe`.
 
+```shell
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/adomokos/.ghci
+λ> import Text.Read (readMaybe)
+λ> import Data.List.Split (splitOn)
+λ> let xs = "1,2,3"
+λ> splitOn (",") xs
+["1","2","3"]
+λ> map (\x -> readMaybe x :: Maybe Int) $ splitOn (",") xs
+[Just 1,Just 2,Just 3]
+```
+We now have a list of Maybe values that can be reduced into a single Maybe value.
 
