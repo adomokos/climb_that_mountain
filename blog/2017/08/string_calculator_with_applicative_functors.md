@@ -58,6 +58,22 @@ Finished in 0.0023 seconds
 4 examples, 1 failure
 ```
 
-In some other languages I could just wrap the entire logic and return zero when an exception occurs, however, Haskell can do better. Much better.
+I could easily wrap the entire logic and return zero when an exception occurs, however, Haskell can do better. Much better.
 
-I can return a `Maybe Int` from the operation that parses the string to an integer: if the result is `Nothing` here, the overall result will be `Nothing`.
+I can return a `Maybe Int` from the operation that parses the string to an integer: if the result is `Nothing` here, the overall result will be `Nothing`. There is a string parser in the `Text.Read` module that does just that, it's called `readMaybe`.
+
+Here is how it works:
+
+```shell
+ % ghci
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /Users/adomokos/.ghci
+λ> import Text.Read
+λ> (readMaybe "12") :: Maybe Int
+Just 12
+λ> (readMaybe "!") :: Maybe Int
+Nothing
+λ>
+```
+
+
