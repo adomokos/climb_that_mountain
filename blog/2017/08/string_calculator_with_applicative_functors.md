@@ -75,7 +75,7 @@ Just 12
 Nothing
 λ>
 ```
-We need to parse the list of strings, which is achieved by `readMaybe`.
+I need to parse the list of strings, which is achieved by `readMaybe`.
 
 ```shell
 GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
@@ -88,5 +88,88 @@ Loaded GHCi configuration from /Users/adomokos/.ghci
 λ> map (\x -> readMaybe x :: Maybe Int) $ splitOn (",") xs
 [Just 1,Just 2,Just 3]
 ```
-We now have a list of Maybe values that can be reduced into a single Maybe value.
+I now have a list of Maybe values that can be reduced into a single Maybe value. Reducing an array of numbers would be super easy (`foldl (+) 0 [1,2,3]` or `foldl1 (+) [1,2,3]` or just simply `sum [1,2,3]`). It's obvious I'll need something similar.
 
+Adding a number to a `Maybe Int` can be achieved with a Functor:
+```shell
+λ> fmap (+10) (Just 4)
+Just 14
+λ> (+10) `fmap` (Just 4)
+Just 14
+λ> (+10) <$> Just 4
+Just 14
+```
+Note that all three expressions mean the same thing. The first was is using the fmap in a conventional function name and arguments style, the second one uses the infix verion of `fmap` and the third one is using a symbol.
+
+This works for adding a number to a Maybe Int, however, I need to use an Applicative Functor to add two Maybe Ints together.
+
+```shell
+λ> (+) <$> Just 10 <*> Just 4
+Just 14
+```
+Using Applicative Functors, folding the list of Maybe Ints happens like this:
+
+```shell
+λ> let xs = [Just 1, Just 2, Just 3]
+λ> foldl (\acc x -> (+) <$> x <*> acc) (Just 0) xs
+Just 6
+λ> foldl1 (\acc x -> (+) <$> x <*> acc) xs
+Just 6
+```
+
+The solution now works, although a bit hard to read:
+
+```haskell
+import Test.Hspec
+import Text.Read (readMaybe)
+import Data.List.Split (splitOn)
+
+calculator :: String -> Maybe Int
+calculator input =
+    foldr (\x acc -> (+) <$> x <*> acc) (Just 0) $
+        map (\x -> readMaybe x) $ splitOn "," input
+
+main :: IO ()
+main = hspec $ do
+    describe "String Calculator" $ do
+        it "returns Nothing for empty string" $ do
+            calculator "" `shouldBe` Nothing
+        it "returns Just 1 for '1'" $ do
+            calculator "1" `shouldBe` Just 1
+        it "returns Just 3 for '1,2,3'" $ do
+            calculator "1,2,3" `shouldBe` Just 6
+        it "returns Nothing for '1,2,3,!'" $ do
+            calculator "1,2,3,!" `shouldBe` Nothing
+```
+
+It's more meaningful after I've refactored into chunks:
+
+```haskell
+calculator :: String -> Maybe Int
+calculator input =
+    let foldingFn acc x =  (+) <$> acc <*> x
+        parsedInts = map (\x -> readMaybe x) . splitOn (",")
+    in foldr1 (foldingFn) (parsedInts input)
+```
+
+The splittedString function can be further simplified:
+
+```haskell
+calculator :: String -> Maybe Int
+calculator input =
+    let foldingFn acc x =  (+) <$> acc <*> x
+        parsedInts = map (readMaybe) . splitOn (",")
+    in foldr1 (foldingFn) (parsedInts input)
+```
+
+And finally, the sum of list of Maybe values can be calculated by using the `sequence` function like this:
+
+```haskell
+
+calculator :: String -> Maybe Int
+calculator input =
+    let parsedInts = map (readMaybe) . splitOn (",")
+    in fmap sum . sequence $ parsedInts input
+```
+
+I find this the most readable, but I liked the journey of getting here with Applicative Functors.
