@@ -1,6 +1,6 @@
 ### String Calculator with Applicative Functors
 
-I like the simplicity of the [String Calculator kata](http://link...). It's a typical example of map-reduce algorithm, where the string has to be split by a delimiter, mapped into a list of integeres and then reduced to their sum. I've often used it as an example to quickly evaluate engineering candidates, try new languages and tools. This was the first challange I've tried to solve in Haskell about a year ago. The other day I found the code and I tried to see how I could improve upon it with everything I've learned so far.
+I like the simplicity of the [String Calculator kata](http://osherove.com/tdd-kata-1/). It's a typical example of the map-reduce algorithm, where the string has to be split by a delimiter, mapped into a list of integeres and then reduced to their sum. I've often [used it](https://github.com/adomokos/stringcalulator_js_starter_kit) as an example to quickly evaluate engineering candidates, try new languages and tools. This was the first challange I've tried to solve in Haskell about a year ago. The other day I found the code and I tried to see how I could improve upon it with everything I've learned so far.
 
 This is what I found from a year before:
 
@@ -26,11 +26,9 @@ main = hspec $ do
             calculator "1" `shouldBe` 1
         it "returns 3 for '1,2,3'" $ do
             calculator "1,2,3" `shouldBe` 6
-        it "returns 0 for '1,2,!'" $ do
-            calculator "1,2,!" `shouldBe` 0
 ```
 
-This works really well for simple cases, but what should I do when there is a non-numeric string in the input arguments? Returning zero would be a reasonable solution, but Haskell can do better.
+This works really well for simple cases, but what should I do when there is a non-numeric string in the input arguments? The program crashes:
 
 ```haskell
         it "returns 0 for '1,2,!'" $ do
@@ -60,7 +58,8 @@ Finished in 0.0023 seconds
 
 I could easily wrap the entire logic and return zero when an exception occurs, however, Haskell can do better. Much better.
 
-I can return a `Maybe Int` from the operation that parses the string to an integer: if the result is `Nothing` here, the overall result will be `Nothing`. There is a string parser in the `Text.Read` module that does just that, it's called `readMaybe`.
+I can return a `Maybe Int` from the operation that parses the string to an integer: if the result is `Nothing` here, the overall result will be `Nothing`.
+There is a string parser in the `Text.Read` module that does just that, it's called `readMaybe`.
 
 Here is how it works:
 
@@ -75,7 +74,7 @@ Just 12
 Nothing
 λ>
 ```
-I need to parse the list of strings, which is achieved by `readMaybe`.
+I need to parse the list of strings, which is achieved by mapping over the values with `readMaybe`:
 
 ```shell
 GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
@@ -88,9 +87,10 @@ Loaded GHCi configuration from /Users/adomokos/.ghci
 λ> map (\x -> readMaybe x :: Maybe Int) $ splitOn (",") xs
 [Just 1,Just 2,Just 3]
 ```
-I now have a list of Maybe values that can be reduced into a single Maybe value. Reducing an array of numbers would be super easy (`foldl (+) 0 [1,2,3]` or `foldl1 (+) [1,2,3]` or just simply `sum [1,2,3]`). It's obvious I'll need something similar.
+I now have a list of Maybe Int values that can be reduced into a single Maybe Int value. Reducing an array of numbers would be super easy (`foldl (+) 0 [1,2,3]` or `foldl1 (+) [1,2,3]` or just simply `sum [1,2,3]`). It's obvious that I will need something similar.
 
 Adding a number to a `Maybe Int` can be achieved with a Functor:
+
 ```shell
 λ> fmap (+10) (Just 4)
 Just 14
@@ -99,14 +99,15 @@ Just 14
 λ> (+10) <$> Just 4
 Just 14
 ```
-Note that all three expressions mean the same thing. The first was is using the fmap in a conventional function name and arguments style, the second one uses the infix verion of `fmap` and the third one is using a symbol.
+All three expressions mean the same thing. The first is using the fmap as a conventional function name and arguments style, the second one uses the infix verion of `fmap` and the third one is using a symbol.
 
-This works for adding a number to a Maybe Int, however, I need to use an Applicative Functor to add two Maybe Ints together.
+This works for adding a number to a Maybe Int, however, I need to use an Applicative Functor to calculate the sum of two Maybe Ints.
 
 ```shell
 λ> (+) <$> Just 10 <*> Just 4
 Just 14
 ```
+
 Using Applicative Functors, folding the list of Maybe Ints happens like this:
 
 ```shell
@@ -142,7 +143,7 @@ main = hspec $ do
             calculator "1,2,3,!" `shouldBe` Nothing
 ```
 
-It's more meaningful after I've refactored into chunks:
+It's more meaningful after I've refactored it into chunks:
 
 ```haskell
 calculator :: String -> Maybe Int
@@ -152,7 +153,7 @@ calculator input =
     in foldr1 (foldingFn) (parsedInts input)
 ```
 
-The splittedString function can be further simplified:
+The `parsedInts` function can be further simplified:
 
 ```haskell
 calculator :: String -> Maybe Int
@@ -172,4 +173,4 @@ calculator input =
     in fmap sum . sequence $ parsedInts input
 ```
 
-I find this the most readable, but I liked the journey of getting here with Applicative Functors.
+I find this form to be the most readable, but I liked the journey of getting there through the Applicative Functors.
