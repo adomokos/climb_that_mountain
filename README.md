@@ -147,3 +147,9 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Containers](blog/2017/03/containers.md)<br/>
   04/<br/>
     * [Fireside Chat](blog/2017/04/fireside_chat.md)<br/>
+  05/<br/>
+    * [Bit Shifting for a Shard ID in Ruby](blog/2017/05/bit_shifting_in_ruby.md)<br/>
+  06/<br/>
+    * [Scenario Outlines in RSpec](blog/2017/06/scenario_outlines_in_rspec.md)<br/>
+  08/<br/>
+    * [Sting Calculator with Applicative Functors in Haskell](blog/2017/08/string_calculator_with_applicative_functors.md)<br/>
