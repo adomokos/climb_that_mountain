@@ -1,6 +1,6 @@
 ### String Calculator with Applicative Functors in Haskell
 
-I like the simplicity of the [String Calculator kata](http://osherove.com/tdd-kata-1/). It's a typical example of the map-reduce algorithm, where the string has to be split by a delimiter, mapped into a list of integers and then reduced to their sum. I've often [used it](https://github.com/adomokos/stringcalulator_js_starter_kit) as an example to quickly evaluate engineering candidates, try new languages and tools. This was the first challenge I tried to solve in Haskell about a year ago. The other day I found the code and I wanted to see how I could improve upon it with everything I've learned so far.
+I like the simplicity of the [String Calculator kata](http://osherove.com/tdd-kata-1/). It's a typical example of the map-reduce algorithm, where the string has to be split by a delimiter, mapped into a list of integers and then reduced to their sum. I've often [used it](https://github.com/adomokos/stringcalulator_js_starter_kit) as an example to quickly evaluate engineering candidates, try new languages and tools. This was the first challenge I tried to solve in Haskell about a year ago. I found the code the other day, I wanted to see how I could improve upon it with everything I've learned so far.
 
 This is what I found from a year before:
 
