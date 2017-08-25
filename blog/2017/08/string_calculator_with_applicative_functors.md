@@ -28,7 +28,7 @@ main = hspec $ do
             calculator "1,2,3" `shouldBe` 6
 ```
 
-This works really well for simple cases, but what should I do when there is a non-numeric string in the input arguments? The program crashes:
+This works for simple cases, but what should I do when there is a non-numeric string in the input arguments?
 
 ```haskell
         it "returns 0 for '1,2,!'" $ do
