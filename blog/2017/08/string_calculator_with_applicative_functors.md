@@ -1,6 +1,6 @@
 ### String Calculator with Applicative Functors
 
-I like the simplicity of the [String Calculator kata](http://osherove.com/tdd-kata-1/). It's a typical example of the map-reduce algorithm, where the string has to be split by a delimiter, mapped into a list of integers and then reduced to their sum. I've often [used it](https://github.com/adomokos/stringcalulator_js_starter_kit) as an example to quickly evaluate engineering candidates, try new languages and tools. This was the first challenge I've tried to solve in Haskell about a year ago. The other day I found the code and I tried to see how I could improve upon it with everything I've learned so far.
+I like the simplicity of the [String Calculator kata](http://osherove.com/tdd-kata-1/). It's a typical example of the map-reduce algorithm, where the string has to be split by a delimiter, mapped into a list of integers and then reduced to their sum. I've often [used it](https://github.com/adomokos/stringcalulator_js_starter_kit) as an example to quickly evaluate engineering candidates, try new languages and tools. This was the first challenge I tried to solve in Haskell about a year ago. The other day I found the code and I wanted to see how I could improve upon it with everything I've learned so far.
 
 This is what I found from a year before:
 
@@ -99,7 +99,7 @@ Just 14
 λ> (+10) <$> Just 4
 Just 14
 ```
-All three expressions mean the same thing. The first is using the fmap as a conventional function name and arguments style, the second one uses the infix verion of `fmap` and the third one is using a symbol.
+All three expressions mean the same thing. The first is using the fmap as a conventional function name and arguments style, the second one uses the infix version of `fmap` and the third one is using a symbol.
 
 This works for adding a number to a Maybe Int, however, I need to use an Applicative Functor to calculate the sum of two Maybe Ints.
 
