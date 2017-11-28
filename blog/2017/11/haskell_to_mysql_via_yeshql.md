@@ -54,8 +54,7 @@ executables:
 ```
 
 Feel free to use your name and Github repo in this file.
-Delete and regenarate the project's cabal file with this command: `rm -f hashmir.cabal && stack build`. `stack build` and `stack install` should produce the same executable file.
+Delete and regenarate the project's cabal file with this command: `rm -f hashmir.cabal && stack build`. `stack install` should produce the same executable file.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/873bacf0c76787e9e199f994ca43d6de2f67cf3a)
-
 
