@@ -1,6 +1,6 @@
 ### Haskell to MySQL via Yeshql (part 1)
 
-As I was looking for an easy and light way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find something similar in Haskell, and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exatly what I needed to keep SQL and Haskell code separate.
+As I was looking for an easy and light way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find something similar in Haskell, and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exactly what I needed to keep SQL and Haskell code separate.
 
 This blog post will show you how you can easily get yeshql up and running and run queries against MySQL. I'll build a simple CRUD console app that you can follow along, I'll list commit points at the end of each section.
 
@@ -54,7 +54,7 @@ executables:
 ```
 
 Feel free to use your name and Github repo in this file.
-Delete and regenarate the project's cabal file with this command: `rm -f hashmir.cabal && stack build`. `stack install` should produce the same executable file.
+Delete and regenerate the project's cabal file with this command: `rm -f hashmir.cabal && stack build`. `stack install` should produce the same executable file.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/873bacf0c76787e9e199f994ca43d6de2f67cf3a)
 
@@ -136,7 +136,7 @@ main :: IO ()
 main = countClient
 ```
 
-When you try to build the project (I conventiently use `make build`) one of these errors are displayed:
+When you try to build the project (I conveniently use `make build`) one of these errors are displayed:
 
 ```shell
 Failed to load interface for ‘Database.YeshQL’
@@ -196,4 +196,4 @@ Yeshql generated a function on-the-fly, named `countClientSQL`. That's the funct
 
 [Commit point](https://github.com/adomokos/hashmir/commit/78a597e2c348abe751178812367f260fde69edb6)
 
-We set up the project, ran the first query against MySQL from Haskell via yeshql templates. This brings us to the end of part 1 of this series. In the next article we'll start adding more SQL queries to insert and queryvarious records.
+We set up the project, ran the first query against MySQL from Haskell via yeshql templates. This brings us to the end of part 1 of this series. In the next article, we'll start adding more SQL queries to insert and query various records.
