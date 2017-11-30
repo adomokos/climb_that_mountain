@@ -23,7 +23,7 @@ someFunc
 Since I [learned](https://academy.mondaymorninghaskell.com/p/your-first-haskell-project) about [hpack](https://github.com/sol/hpack), I never touch a Haskell project's cabal file any more. This blog post assumes you are familiar with this tool, feel free to learn about hpack more before you proceed.
 This is the hpack file I add to the project to generate the various sections in the cabal file.
 
-Add this `package.yml` to the project's root directory:
+Add this `package.yaml` to the project's root directory:
 
 ```shell
 name: hashmir
