@@ -10,7 +10,7 @@ You will need [stack](https://docs.haskellstack.org/en/stable/README/) and ghc i
 
 #### Generate the project with stack
 
-Generate the project with stack: `stack new hashmir`. Go inside the directory, build and deploy the app with `stack build && stack install`. Run the skeleton app:
+Generate the project with this command: `stack new hashmir`. Go inside the directory, build and deploy the app with `stack build && stack install`. Run the skeleton app:
 
 ```shell
  % ~/.local/bin/hashmir-exe
