@@ -60,7 +60,7 @@ Delete and regenerate the project's cabal file with this command: `rm -f hashmir
 
 #### Setting up the Database
 
-We will need a MySQL user and a database we can use in this project. Let's add a Makefile to script that out for us. You might need the master user in MySQL to create a role and grant access.
+We will need a MySQL user and a database we can use in this project. Let's add a Makefile to script that out for us. You might need the master or root user in MySQL to create a role and grant access. If the Makefile target does not work, just log on to the MySQL console with your root account and add the role and grant access just like you see it in the Makefile.
 
 [This is](https://github.com/adomokos/hashmir/blob/master/resources/schema.sql) the schema file we will work with. I won't include it in this post, but this script should drop and recreate the tables. Put it into the `./resources` directory.
 
