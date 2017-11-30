@@ -2,9 +2,9 @@
 
 As I was looking for an easy and light way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find something similar in Haskell, and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exatly what I needed to keep SQL and Haskell code separate.
 
-This blog post will show you how you can easily get yeshql up and running and run queries against MySQL. I'll build a simple CRUD console app, you should be able to take that and use code snippets in your apps.
+This blog post will show you how you can easily get yeshql up and running and run queries against MySQL. I'll build a simple CRUD console app that you can follow along, I'll list commit points at the end of each section.
 
-The Clojure tutorial I created for my blog posts is named [Kashmir](https://github.com/adomokos/kashmir), I'll name this project Hashmir. You can follow along the evolution of the code via commit points, I'll post a link after each section.
+The Clojure tutorial I created for my blog posts is named [Kashmir](https://github.com/adomokos/kashmir), I'll name this project [Hashmir](https://github.com/adomokos/hashmir).
 
 You will need [stack](https://docs.haskellstack.org/en/stable/README/) and ghc installed, I have stack `Version 1.5.1 x86_64 hpack-0.17.1` and ghc version 8.0.2. MySQL is also needed, I have version 5.7.20, but I won't use anything fancy as far as the database goes, if you have MySQL installed, I am sure that will do it.
 
