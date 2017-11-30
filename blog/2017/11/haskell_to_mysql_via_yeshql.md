@@ -96,7 +96,7 @@ sys	0m0.007s
 
 #### Writing the First Query
 
-There are two parts of yeshql's code:
+There are two parts of using yeshql's code:
 1. The SQL templates
 2. Code that uses the generated functions from the template
 
