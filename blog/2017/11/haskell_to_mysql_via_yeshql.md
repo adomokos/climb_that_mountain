@@ -1,4 +1,4 @@
-### Haskell to MySQL via Yeshql
+### Haskell to MySQL via Yeshql (part 1)
 
 As I was looking for an easy and light way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find a way to talk to a MySQL database and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exatly what I needed to keep SQL and Haskell code separate.
 
@@ -92,4 +92,108 @@ user	0m0.002s
 sys	0m0.007s
 ```
 
-[Commit point](https://github.com/adomokos/hashmir/commit/c8fb2b66f07b0cb6cb79e7a22d4f7715218dd960)
+[Commit point](https://github.com/adomokos/hashmir/commit/ff40249ac7bc767e9f57b52daccf690cbf3bae1a)
+
+#### Writing the First Query
+
+There are two parts of yeshql's code:
+1. The SQL templates
+2. Code that uses the generated functions from the template
+
+Modify the `app/Main.hs` file like this:
+
+```haskell
+{-#LANGUAGE TemplateHaskell #-}
+{-#LANGUAGE QuasiQuotes #-}
+
+module Main where
+
+import Database.YeshQL
+import Database.HDBC.MySQL
+
+[yesh|
+    -- name:countClientSQL :: (Int)
+    SELECT count(id) FROM clients;
+|]
+
+getConn :: IO Connection
+getConn = do
+    connectMySQL defaultMySQLConnectInfo {
+        mysqlHost     = "localhost",
+        mysqlDatabase = "hashmir_test",
+        mysqlUser     = "hashmir_user",
+        mysqlPassword = "shei7AnganeihaeF",
+        mysqlUnixSocket = "/tmp/mysql.sock"
+    }
+
+countClient :: IO ()
+countClient = do
+    conn <- getConn
+    Just (clientCount) <- countClientSQL conn
+    putStrLn $ "There are " ++ show clientCount ++ " records."
+
+main :: IO ()
+main = countClient
+```
+
+When you try to build the project (I conventiently use `make build`) one of these errors are displayed:
+
+```shell
+Failed to load interface for ‘Database.YeshQL’
+```
+
+I started referencing `Database.YeshQL`, however, I did not add that library to the project. This is where hpack is helpful, we only have to add it to the `package.yaml` file, that will generate a cabal file with the correct references.
+
+Let's modify the `dependencies` section of package.yaml file like this:
+
+```yaml
+...
+
+dependencies:
+  - base >= 4.7 && < 5
+  - yeshql
+  - HDBC
+  - HDBC-mysql
+
+...
+```
+
+When I try to build the project, I get the following error:
+
+```shell
+Error: While constructing the build plan, the following exceptions were encountered:
+
+In the dependencies for hashmir-0.1.0.0:
+    yeshql must match -any, but the stack configuration has no specified version (latest applicable is 3.0.1.3)
+needed since hashmir-0.1.0.0 is a build target.
+
+Recommended action: try adding the following to your extra-deps in ~/hashmir/stack.yaml:
+- yeshql-3.0.1.3
+```
+
+By modifying the `extra-deps: []` array like this in `stack.yaml`
+```yaml
+extra-deps: [
+    yeshql-3.0.1.3
+]
+```
+will download yeshql for the project and build it successfully.
+
+When I run the app (use `make run` to do it), this is what I see:
+
+```shell
+% make run
+Dropping and rebuilding database hashmir_test
+time ~/.local/bin/hashmir-exe
+There are 0 records.
+
+real	0m0.019s
+user	0m0.009s
+sys	0m0.006s
+```
+
+Yeshql generated a function on-the-fly, named `countClientSQL`. That's the function I invoked in the `countClient` function. Since there are no records in the table, 0 was returned from the function.
+
+[Commit point](https://github.com/adomokos/hashmir/commit/78a597e2c348abe751178812367f260fde69edb6)
+
+We set up the project, ran the first query against MySQL from Haskell via yeshql templates. This brings us to the end of part 1 of this series. In the next article we'll start adding more SQL queries to insert and queryvarious records.
