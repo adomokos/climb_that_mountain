@@ -59,7 +59,7 @@ Delete and regenerate the project's cabal file with this command: `rm -f hashmir
 
 #### Setting up the Database
 
-We will need a MySQL user and a database we can use in this project. Let's add a Makefile to script that out for us. You might need the master or root user in MySQL to create a role and grant access. If the Makefile target does not work, just log on to the MySQL console with your root account and add the role and grant access just like you see it in the Makefile.
+We will need a MySQL user and a database we can use in this project. Let's add a Makefile to script that out for us. You might need the master or root user in MySQL to create a role and grant access. If the Makefile target does not work, just log on to the MySQL console with your root account and add the role and grant access with the scripts you see it in the Makefile.
 
 [This is](https://github.com/adomokos/hashmir/blob/master/resources/schema.sql) the schema file we will work with. I won't include it in this post, but this script should drop and recreate the tables. Put it into the `./resources` directory.
 
@@ -76,8 +76,6 @@ build-db: ## Builds the DB
 	@mysql -u $(DBUSER) --password='$(DBPASSWD)' --host $(HOST) -e "CREATE DATABASE $(DBNAME);" > /dev/null 2>&1
 	@mysql -u $(DBUSER) --password='$(DBPASSWD)' --host $(HOST) $(DBNAME) < resources/schema.sql > /dev/null 2>&1
 ```
-In case your MySQL root user uses a password, you can put it into the `~/.my.cnf` file or just modify the Makefile and provide it there.
-
 You should be able to execute `make build` to rebuild the app, and `make run` to rebuild the DB and run the app:
 
 ```shell
