@@ -1,6 +1,6 @@
 ### Haskell to MySQL via Yeshql (part 1)
 
-As I was looking for an easy and light way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find a way to talk to a MySQL database and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exatly what I needed to keep SQL and Haskell code separate.
+As I was looking for an easy and light way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find something similar in Haskell, and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exatly what I needed to keep SQL and Haskell code separate.
 
 This blog post will show you how you can easily get yeshql up and running and run queries against MySQL. I'll build a simple CRUD console app, you should be able to take that and use code snippets in your apps.
 
