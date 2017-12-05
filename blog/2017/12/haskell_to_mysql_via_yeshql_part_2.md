@@ -186,7 +186,7 @@ countClient :: IO (Maybe Int)
 countClient = do withConn countClientSQL
 ```
 
-I really like how Haskell makes the functions that uses IO impure or dirty: once they have been tainted, they are tainted and you should always try to isolate functions that are tainted from the pure ones.
+I really like how Haskell makes the functions that uses IO impure or dirty: once they have been tainted, they are tainted. You should always try to isolate functions that are tainted from the pure ones as the pure ones are easier test - they have no side effects.
 
 The `main` function is now responsible for reporting the result:
 
