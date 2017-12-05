@@ -172,3 +172,31 @@ countClient = do
 ```
 
 [Commit point](https://github.com/adomokos/hashmir/commit/3bb07613665dad7e07bd4bbb24b2c22fac981911)
+
+#### Extract Data Access Logic
+
+Having code that prints information on the screen from the functions makes them dirty. They should only return primitives, and the caller main function should print the reports. Let's make those functions a bit more clean:
+
+```haskell
+insertClient :: String -> String -> IO Integer
+insertClient name subdomain = do
+    withConn $ do insertClientSQL name subdomain
+
+countClient :: IO (Maybe Int)
+countClient = do withConn countClientSQL
+```
+
+I really like how Haskell makes the functions that uses IO impure or dirty: once they have been tainted, they are tainted and you should always try to isolate functions that are tainted from the pure ones.
+
+The `main` function is now responsible for reporting the result:
+
+```haskell
+main :: IO ()
+main = do
+    clientId <- insertClient "TestClient" "testclient"
+    putStrLn $ "New client's id is " ++ show clientId
+    Just clientCount <- countClient
+    putStrLn $ "There are " ++ show clientCount ++ " records."
+```
+
+[Commit point](https://github.com/adomokos/hashmir/commit/f2b2393b437c32b669984d52f8195b1b9d643f95)
