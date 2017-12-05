@@ -292,3 +292,7 @@ sys	0m0.007s
 ```
 
 [Commit point](https://github.com/adomokos/hashmir/commit/275d45ad1f6abe1f6f5eccb0e67c552543c96c90)
+
+This last change wraps up our Part 2 in this series. We can now create `clients` records, count them with a simple `withConn` function that properly opens, commits and closes the connection.
+
+In the third post in this series I will show you how we can insert two records in one transation, how we can deal with errors and how this logic can be tested.
