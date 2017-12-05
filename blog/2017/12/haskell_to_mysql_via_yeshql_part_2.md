@@ -139,4 +139,26 @@ When you build the project and run it, it should work without errors.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/841959b7da65baf8b5a351d2e06d5ae0525b511d)
 
+Thanks to Haskells currying, this function can be further simplified. No need to provide the input argument in the lambda:
+
+```haskell
+insertClient :: String -> String -> IO ()
+insertClient name subdomain = do
+    clientId <-
+        withConn (do insertClientSQL name subdomain)
+    putStrLn $ "New client's id is " ++ show clientId
+```
+
+This looks much better, but we can further simplify this code:
+
+```haskell
+insertClient :: String -> String -> IO ()
+insertClient name subdomain = do
+    clientId <- withConn $ do insertClientSQL name subdomain
+    putStrLn $ "New client's id is " ++ show clientId
+```
+
+Now that function is easy to read!
+
+[Commit point](https://github.com/adomokos/hashmir/commit/841959b7da65baf8b5a351d2e06d5ae0525b511d)
 
