@@ -160,5 +160,15 @@ insertClient name subdomain = do
 
 Now that function is easy to read!
 
-[Commit point](https://github.com/adomokos/hashmir/commit/841959b7da65baf8b5a351d2e06d5ae0525b511d)
+[Commit point](https://github.com/adomokos/hashmir/commit/2dac1bc5f175d6e14bd040ffe5a0858042a688ea)
 
+Let's refactor the `countClient` function similarly.
+
+```haskell
+countClient :: IO ()
+countClient = do
+    Just (clientCount) <- withConn countClientSQL
+    putStrLn $ "There are " ++ show clientCount ++ " records."
+```
+
+[Commit point](https://github.com/adomokos/hashmir/commit/3bb07613665dad7e07bd4bbb24b2c22fac981911)
