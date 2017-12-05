@@ -200,3 +200,95 @@ main = do
 ```
 
 [Commit point](https://github.com/adomokos/hashmir/commit/f2b2393b437c32b669984d52f8195b1b9d643f95)
+
+#### Move Data Logic Into a Library
+
+Our `Main.hs` has all the application logic. It looks pretty solid, let's move it into a library module. Copy all database access related code from `app/Main.hs` into `src/Hashmir/Data.hs` file like this:
+
+```haskell
+{-#LANGUAGE TemplateHaskell #-}
+{-#LANGUAGE QuasiQuotes #-}
+
+module Hashmir.Data where
+
+import Database.YeshQL
+import qualified Database.HDBC as H
+import Database.HDBC.MySQL
+
+[yesh|
+    -- name:countClientSQL :: (Int)
+    SELECT count(id) FROM clients;
+    ;;;
+    -- name:insertClientSQL
+    -- :client_name :: String
+    -- :subdomain :: String
+    INSERT INTO clients (name, subdomain) VALUES (:client_name, :subdomain);
+|]
+
+getConn :: IO Connection
+getConn = do
+    connectMySQL defaultMySQLConnectInfo {
+        mysqlHost     = "localhost",
+        mysqlDatabase = "hashmir_test",
+        mysqlUser     = "hashmir_user",
+        mysqlPassword = "shei7AnganeihaeF",
+        mysqlUnixSocket = "/tmp/mysql.sock"
+    }
+
+withConn :: (Connection -> IO b) -> IO b
+withConn f = do
+    conn <- getConn
+    result <- f conn
+    H.commit conn
+    H.disconnect conn
+    return result
+
+insertClient :: String -> String -> IO Integer
+insertClient name subdomain =
+    withConn $ insertClientSQL name subdomain
+
+countClient :: IO (Maybe Int)
+countClient = withConn countClientSQL
+```
+
+This is the same logic we had in the `app/Main.hs` file, but now it is in the `Hashmir.Data` module.
+
+The `Main` module becomes small once remove all the code we just moved out of it:
+
+```haskell
+module Main where
+
+import qualified Hashmir.Data as D
+
+main :: IO ()
+main = do
+    clientId <- D.insertClient "TestClient" "testclient"
+    putStrLn $ "New client's id is " ++ show clientId
+    Just clientCount <- D.countClient
+    putStrLn $ "There are " ++ show clientCount ++ " records."
+```
+
+We also have to tell Cabal where it can find this code. Change the `Lib` directive to `Hashmir.Data` in the package.yaml:
+
+```yaml
+library:
+  source-dirs: src/
+  exposed-modules:
+    - Hashmir.Data
+```
+
+The project shuld build and when you run the app it should insert a Client record and return the number of `clients` records:
+
+```shell
+% make run
+Dropping and rebuilding database hashmir_test
+time ~/.local/bin/hashmir-exe
+New client's id is 1
+There are 1 records.
+
+real	0m0.022s
+user	0m0.010s
+sys	0m0.007s
+```
+
+[Commit point](https://github.com/adomokos/hashmir/commit/275d45ad1f6abe1f6f5eccb0e67c552543c96c90)
