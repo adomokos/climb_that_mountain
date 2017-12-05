@@ -112,7 +112,7 @@ Now both the `countClient` and the `insertClient` has duplicated logic:
     H.disconnect conn -- added line
 ```
 
-This kind of reminds me of the use of [withFile](http://www.example.com) from the IO module. `withFile` accepts a lambda where the `handle` is passed to it and the code in the lambda can use the provided `handle`. We need the same thing here, `withConn` would accept an active connection. Consider this function:
+This kind of reminds me of the use of [withFile](http://hackage.haskell.org/package/base-4.10.1.0/docs/System-IO.html#v:withFile) from the IO module. `withFile` accepts a lambda where the `handle` is passed to it and the code in the lambda can use the provided `handle`. We need the same thing here, `withConn` would accept an active connection. Consider this function:
 
 ```haskell
 withConn :: (Connection -> IO b) -> IO b
