@@ -88,3 +88,55 @@ sys	0m0.006s
 The database got rebuilt, one client record was inserted and the count function counted that record.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/dbdbcc3d41bf84f7230ef0ff98f78f6752c115ab)
+
+#### Introducing: withConn
+
+Committing and disconnecting a connection is generally a good practice. Let's match the `countClient` function with the `insertClient` function and call `commit` and `disconnect` the connection there as well.
+
+```haskell
+countClient :: IO ()
+countClient = do
+    conn <- getConn
+    Just (clientCount) <- countClientSQL conn
+    H.commit conn -- added line
+    H.disconnect conn -- added line
+    putStrLn $ "There are " ++ show clientCount ++ " records."
+```
+
+Now both the `countClient` and the `insertClient` has duplicated logic:
+
+```haskell
+    conn <- getConn
+    ...
+    H.commit conn -- added line
+    H.disconnect conn -- added line
+```
+
+This kind of reminds me of the use of [withFile](http://www.example.com) from the IO module. `withFile` accepts a lambda where the `handle` is passed to it and the code in the lambda can use the provided `handle`. We need the same thing here, `withConn` would accept an active connection. Consider this function:
+
+```haskell
+withConn :: (Connection -> IO b) -> IO b
+withConn f = do
+    conn <- getConn
+    result <- f conn
+    H.commit conn
+    H.disconnect conn
+    return result
+```
+Our refactored `insertClient` function would look like this:
+
+```haskell
+insertClient :: String -> String -> IO ()
+insertClient name subdomain = do
+    clientId <-
+        withConn (\conn -> do
+            insertClientSQL name subdomain conn
+        )
+    putStrLn $ "New client's id is " ++ show clientId
+```
+
+When you build the project and run it, it should work without errors.
+
+[Commit point](https://github.com/adomokos/hashmir/commit/841959b7da65baf8b5a351d2e06d5ae0525b511d)
+
+
