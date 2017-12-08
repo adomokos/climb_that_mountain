@@ -1,12 +1,12 @@
 ### Haskell to MySQL via Yeshql (Part 2.)
 
-In the [previous](/blog/2017/11/haskell_to_mysql_via_yeshql.md) blog post we built the skeleton of a console app in Haskell that talks to MySQL via [Yeshql](https://github.com/tdammers/yeshql). We used a Makefile to rebuild the database, compile the code and run the app. [This is](https://github.com/adomokos/hashmir/commit/78a597e2c348abe751178812367f260fde69edb6) the commit point where we left it at the end of Part 1.
+In the [previous](/blog/2017/11/haskell_to_mysql_via_yeshql.md) blog post, we built the skeleton of a console app in Haskell that talks to MySQL via [Yeshql](https://github.com/tdammers/yeshql). We used a Makefile to rebuild the database, compile the code and run the app. [This is](https://github.com/adomokos/hashmir/commit/78a597e2c348abe751178812367f260fde69edb6) the commit point where we left it at the end of Part 1.
 
-In this article we will add functionality to create `clients` records, we will extract the logic that acquires, commits and closes the connection, and finally we will move the database related code into its own module.
+In this article we will add functionality to create `clients` records, we will extract the logic that acquires, commits and closes the connection, and finally, we will move the database related code into its own module.
 
 #### Insert a Client record
 
-We can query the `clients` table, however, there are no records in that table. Let's add one with a SQL template.
+We can query the `clients` table, however, there are no records in that table. Let's add one to the SQL template.
 
 Modify the yeshql templates by adding the following code:
 
@@ -36,7 +36,7 @@ insertClient name subdomain = do
     putStrLn $ "New client's id is " ++ show clientId
 ```
 
-The generated `insertClientSQL` (note the name in the SQL template) is invoked with the two specified argument plus the connection. Uncommitted connection will not write the record to the table, without that statement the `countClientSQL` function would return 0 records.
+The generated `insertClientSQL` (note the name in the SQL template) is invoked with the two specified arguments plus the connection. The uncommitted connection will not write the record to the table, without that statement the `countClientSQL` function would return 0 records.
 Disconnecting a connection is a good practice (if you can't pool those connections), free up resources when you don't need them.
 
 Invoke the created `insertClient` function from `main` like this:
@@ -141,7 +141,7 @@ When you build the project and run it, it should work without errors.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/841959b7da65baf8b5a351d2e06d5ae0525b511d)
 
-Thanks to Haskells currying, this function can be further simplified. No need to provide the input argument in the lambda:
+Thanks to Haskell's currying, this function can be further simplified. No need to provide the input argument in the lambda:
 
 ```haskell
 insertClient :: String -> String -> IO ()
@@ -279,7 +279,7 @@ library:
     - Hashmir.Data
 ```
 
-The project shuld build and when you run the app it should insert a Client record and return the number of `clients` records:
+The project should build and when you run the app it should insert a Client record and return the number of `clients` records:
 
 ```shell
 % make run
@@ -297,4 +297,4 @@ sys	0m0.007s
 
 This last change wraps up our Part 2 in this series. We can now create `clients` records, count them with a simple `withConn` function that properly opens, commits and closes the connection.
 
-In the third post in this series I will show you how we can insert two records in one transation, how we can deal with errors and how this logic can be tested.
+In the third post in this series, I will show you how we can insert two records in one transaction, how we can deal with errors and how this logic can be tested.
