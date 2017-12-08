@@ -1,8 +1,8 @@
-### Haskell to MySQL via Yeshql (Part 1.)
+### Haskell to MySQL via YeshQL (Part 1.)
 
-As I was looking for an easy way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find something similar in Haskell, and I found [yeshql](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exactly what I needed to keep SQL and Haskell code separate.
+As I was looking for an easy way to talk to Postgres from Clojure, I discovered [yesql](https://github.com/krisajenkins/yesql). I wanted to find something similar in Haskell, and I found [YeshQL](https://github.com/tdammers/yeshql). It's a template parsing library on top of [HDBC](https://github.com/ryantm/hdbc-mysql), exactly what I needed to keep SQL and Haskell code separate.
 
-This blog post will show you how you can easily get yeshql up and running and run queries against MySQL. I'll build a simple CRUD console app that you can follow along, I'll list commit points at the end of each section.
+This blog post will show you how you can easily get YeshQL up and running and run queries against MySQL. I'll build a simple CRUD console app that you can follow along, I'll list commit points at the end of each section.
 
 The Clojure tutorial I created for my blog posts is named [Kashmir](https://github.com/adomokos/kashmir), I'll name this project [Hashmir](https://github.com/adomokos/hashmir).
 
@@ -93,7 +93,7 @@ sys	0m0.007s
 
 #### Writing the First Query
 
-There are two parts of using yeshql's code:
+There are two parts of using YeshQL's code:
 1. The SQL templates
 2. Code that uses the generated functions from the template
 
