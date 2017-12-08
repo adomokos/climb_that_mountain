@@ -39,7 +39,7 @@ insertClient name subdomain = do
 The generated `insertClientSQL` (note the name in the SQL template) is invoked with the two specified arguments plus the connection. The uncommitted connection will not write the record to the table, without that statement the `countClientSQL` function would return 0 records.
 Disconnecting a connection is a good practice (if you can't pool those connections), free up resources when you don't need them.
 
-Invoke the created `insertClient` function from `main` like this:
+Invoke the created `insertClient` function from `main` function like this:
 
 ```haskell
 main = do
@@ -114,7 +114,7 @@ Now both the `countClient` and the `insertClient` has duplicated logic:
     H.disconnect conn -- added line
 ```
 
-This kind of reminds me of the use of [withFile](http://hackage.haskell.org/package/base-4.10.1.0/docs/System-IO.html#v:withFile) from the IO module. `withFile` accepts a lambda where the `handle` is passed to it and the code in the lambda can use the provided `handle`. We need the same thing here, `withConn` would accept an active connection. Consider this function:
+This reminds me of the use of [withFile](http://hackage.haskell.org/package/base-4.10.1.0/docs/System-IO.html#v:withFile) from the IO module. `withFile` accepts a lambda where the `handle` is passed to it and the code in the lambda can use the provided `handle`. We need the same thing here, `withConn` would accept an active connection. Consider this function:
 
 ```haskell
 withConn :: (Connection -> IO b) -> IO b
@@ -177,7 +177,7 @@ countClient = do
 
 #### Extract Data Access Logic
 
-Having code that prints information on the screen from the functions makes them dirty. They should only return primitives, and the caller main function should print the reports. Let's make those functions a bit more clean:
+Having code that prints information on the screen from the functions that talks with the database makes them mixed with responsibilities. They should only return primitives, and the caller main function should print the reports. Let's make those functions a bit more clean:
 
 ```haskell
 insertClient :: String -> String -> IO Integer
@@ -255,7 +255,7 @@ countClient = withConn countClientSQL
 
 This is the same logic we had in the `app/Main.hs` file, but now it is in the `Hashmir.Data` module.
 
-The `Main` module becomes small once remove all the code we just moved out of it:
+The `Main` module becomes small once we remove all the code we just moved out of it:
 
 ```haskell
 module Main where
@@ -270,7 +270,7 @@ main = do
     putStrLn $ "There are " ++ show clientCount ++ " records."
 ```
 
-We also have to tell Cabal where it can find this code. Change the `Lib` directive to `Hashmir.Data` in the package.yaml:
+We also have to tell Cabal where it can find this code. Change the `Lib` directive to `Hashmir.Data` in the `package.yaml`:
 
 ```yaml
 library:
@@ -279,7 +279,7 @@ library:
     - Hashmir.Data
 ```
 
-The project should build and when you run the app it should insert a Client record and return the number of `clients` records:
+The project should build and when you run the app it should insert and return the number of `clients` records:
 
 ```shell
 % make run
