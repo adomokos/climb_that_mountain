@@ -6,7 +6,7 @@ In this article we will add functionality to create `clients` records, we will e
 
 #### Insert a Client record
 
-We can query the `clients` table, however, there are no records in that table. Let's add one to the SQL template.
+We can query the `clients` table, however, there are no records in that table. Let's add one script to the SQL template.
 
 Modify the YeshQL templates by adding the following code:
 
@@ -105,7 +105,7 @@ countClient = do
     putStrLn $ "There are " ++ show clientCount ++ " records."
 ```
 
-Now both the `countClient` and the `insertClient` has duplicated logic:
+Now both the `countClient` and the `insertClient` has the same duplicated logic:
 
 ```haskell
     conn <- getConn
@@ -205,7 +205,7 @@ main = do
 
 #### Move Data Logic Into a Library
 
-Our `Main.hs` has all the application logic. It looks pretty solid, let's move it into a library module. Copy all database access related code from `app/Main.hs` into `src/Hashmir/Data.hs` file like this:
+Our `Main.hs` file has all the application logic. It looks pretty solid, let's move it into a library module. Copy all database access related code from `app/Main.hs` into `src/Hashmir/Data.hs` file like this:
 
 ```haskell
 {-#LANGUAGE TemplateHaskell #-}
