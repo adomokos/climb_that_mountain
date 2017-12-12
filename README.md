@@ -154,6 +154,6 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
   08/<br/>
     * [Sting Calculator with Applicative Functors in Haskell](blog/2017/08/string_calculator_with_applicative_functors.md)<br/>
   11/<br/>
-    * [Haskell to MySQL via Yeshql (Part 1.)](blog/2017/11/haskell_to_mysql_via_yeshql.md)<br/>
+    * [Haskell to MySQL via YeshQL (Part 1.)](blog/2017/11/haskell_to_mysql_via_yeshql.md)<br/>
   12/<br/>
-    * [Haskell to MySQL via Yeshql (Part 2.)](blog/2017/12/haskell_to_mysql_via_yeshql_part_2.md)<br/>
+    * [Haskell to MySQL via YeshQL (Part 2.)](blog/2017/12/haskell_to_mysql_via_yeshql_part_2.md)<br/>
