@@ -218,3 +218,77 @@ Finished in 0.2354 seconds
 This looks much more cleaner.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/63c976e618fe9e9b9ca1c833ad052f62a7d3486b) for this section.
+
+#### Roll Back Transactions When Error Occurs
+
+The happy path of our application is working well: the User and Client records are inserted properly. First the Client is saved, its `id` is used for the User record to establish the proper references. But we should treat these two inserts as one unit of work: if the second fails, it should roll back the first insert.
+
+Let's write a test for it. I'll make the created Client's `id` intentionally wrong by incrementing it by one.
+
+```haskell
+    it "rolls back the transaction when failure occurs" $ do
+        clientId <- D.insertClient "TestClient" "testclient"
+        _ <- D.insertUser (clientId + 1) "joe" "joe@example.com" "password1"
+        clientCount <- D.withConn $ D.countClientSQL
+        clientCount `shouldBe` Just 0
+```
+
+When I run the tests, this is the error I am getting:
+
+```shell
+Hashmir.Data
+  Hashmir Data
+    creates a Client record
+    creates a Client and a User record
+    rolls back the transaction when failure occurs FAILED [1]
+
+Failures:
+
+  test/Hashmir/DataSpec.hs:23:
+  1) Hashmir.Data, Hashmir Data, rolls back the transaction when failure occurs
+       uncaught exception:
+           SqlError (SqlError {seState = "",
+               seNativeError = 1452,
+               seErrorMsg = "Cannot add or update a child row: a foreign key constraint
+                             fails (`hashmir_test`.`users`, CONSTRAINT `client_id`
+                             FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`))"})
+
+Randomized with seed 668337839
+
+Finished in 0.3924 seconds
+3 examples, 1 failure
+```
+
+The database is protecting itself from incorrect state, a User record won't be saved with an `id` that does not match a record in the `clients` table. This exception is justified, although, it could be handled better with a Maybe type, but that's not the point right now. Let's just expect this exception for now to see a proper test failure.
+
+Change the test like this:
+
+```haskell
+    it "rolls back the transaction when failure occurs" $ do
+        clientId <- D.insertClient "TestClient" "testclient"
+        (D.insertUser (clientId + 1)
+                      "joe"
+                      "joe@example.com"
+                      "password1")
+            `shouldThrow` anyException
+        clientCount <- D.withConn $ D.countClientSQL
+        clientCount `shouldBe` Just 0
+```
+
+The spec now produces the error I would expect:
+
+```shell
+Failures:
+
+  test/Hashmir/DataSpec.hs:31:
+  1) Hashmir.Data, Hashmir Data, rolls back the transaction when failure occurs
+       expected: Just 0
+        but got: Just 1
+
+Randomized with seed 1723584293
+
+Finished in 0.3728 seconds
+3 examples, 1 failure
+```
+
+Finally, we have a spec that we fails correctly, as we are not rolling back the created Client record.
