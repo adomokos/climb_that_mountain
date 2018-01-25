@@ -78,7 +78,9 @@ test: ## Run the specs
 
 [This is](https://github.com/adomokos/hashmir/commit/9f7c14e6aa518da44338b7426822173053ecf6c0) the commit point for this section.
 
-In this next section let's verify the client create logic. Creating a record in a database is easy, we already verified it when we ran the app. However, making this automated and repeatable shows some challanges. We need to make sure that every test cleans after itself in the DB. We could wrap each and every spec in a transaction and just roll it back, but that would be quite complex. Dropping and rebuilding the database is fast as it is. Sure, it's a couple of hundred milliseconds, but that is negligable for now.
+#### Verify Client Create Logic
+
+Creating a record in a database is easy, we already verified it when we ran the app. However, making this automated and repeatable shows some challanges. We need to make sure that every test cleans after itself in the DB. We could wrap each and every spec in a transaction and just roll it back, but that would be quite complex. Dropping and rebuilding the database is fast as it is. Sure, it's a couple of hundred milliseconds, but that is negligable for now.
 
 HSpec provides before hooks, we will hook into that.
 
@@ -146,3 +148,7 @@ Finished in 0.1378 seconds
 The beauty of this solution is that we can run it over and over again, the test will pass as the checked `clientId` will always be 1, since the database is recreated every time.
 
 [This is](https://github.com/adomokos/hashmir/commit/af99147ab05146dcf37954886d0f23e3cef79bfd) the commit up to this point.
+
+#### Add a User Record Along With Client
+
+
