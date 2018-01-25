@@ -102,7 +102,7 @@ resetDB = callCommand "make build-db"
 spec :: Spec
 spec = before resetDB $ do
     describe "Hashmir Data" $ do
-        it "runs a test" $ do
+        it "creates a Client record" $ do
             clientId <- D.insertClient "TestClient" "testclient"
             clientId `shouldBe` 1
 ```
@@ -147,8 +147,74 @@ Finished in 0.1378 seconds
 
 The beauty of this solution is that we can run it over and over again, the test will pass as the checked `clientId` will always be 1, since the database is recreated every time.
 
-[This is](https://github.com/adomokos/hashmir/commit/af99147ab05146dcf37954886d0f23e3cef79bfd) the commit up to this point.
+[This is](https://github.com/adomokos/hashmir/commit/be20905a5ad5199c7b7b5e1eb4de8705a3656770) the commit up to this point.
 
 #### Add a User Record Along With Client
 
+Let's add a failing spec for this first. Add the following content to the `test/Hashmir/DataSpec.hs` file:
 
+```haskell
+    it "creates a Client and a User record" $ do
+        clientId <- D.insertClient "TestClient" "testclient"
+        userId <- D.insertUser clientId "joe" "joe@example.com" "password1"
+        userId `shouldBe` 1
+```
+
+There is no `insertUser` function, let's add it. We also need to add the SQL template to the YeshQL code. It's very similar to the Client insert script, here are all the changes for that:
+
+```haskell
+[yesh|
+    -- name:countClientSQL :: (Int)
+    SELECT count(id) FROM clients;
+    ;;;
+    -- name:insertClientSQL
+    -- :client_name :: String
+    -- :subdomain :: String
+    INSERT INTO clients (name, subdomain) VALUES (:client_name, :subdomain);
+    ;;;
+    -- name:insertUserSQL
+    -- :client_id :: Integer
+    -- :login :: String
+    -- :email :: String
+    -- :password :: String
+    INSERT INTO users (client_id, login, email, password)
+    VALUES (:client_id, :login, :email, :password);
+|]
+```
+
+And the `insertUser` function is like this:
+
+```haskell
+insertUser :: Integer -> String -> String -> String -> IO Integer
+insertUser clientId login email password =
+    withConn $ insertUserSQL clientId login email password
+```
+
+When I run `make test`, this is the output printed on the screen:
+
+```shell
+Hashmir.Data
+  Hashmir Data
+Dropping and rebuilding database hashmir_test
+    creates a Client record
+Dropping and rebuilding database hashmir_test
+    creates a Client and a User record
+
+Finished in 0.2642 seconds
+2 examples, 0 failures
+```
+The lines `Dropping and rebuilding database hashmir_test` is too much noise, let's remove it from the Makefile.
+
+```shell
+Hashmir.Data
+  Hashmir Data
+    creates a Client record
+    creates a Client and a User record
+
+Finished in 0.2354 seconds
+2 examples, 0 failures
+```
+
+This looks much more cleaner.
+
+[Commit point](https://github.com/adomokos/hashmir/commit/63c976e618fe9e9b9ca1c833ad052f62a7d3486b) for this section.
