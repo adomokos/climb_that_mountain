@@ -291,4 +291,64 @@ Finished in 0.3728 seconds
 3 examples, 1 failure
 ```
 
-Finally, we have a spec that we fails correctly, as we are not rolling back the created Client record.
+Finally, we have a spec that fails correctly, as we are not rolling back the created Client record.
+
+The reason the Client record is not rolled back is that we use two different transactions to persist the records: first the Client record saved and the connection is committed, and then the User record is attempted to be saved. It fails, the record is not created, but the Client record has already been committed to the database. This is our problem, we should reuse the same connection for both save operations, and only commit it after the second one.
+
+Let's refactor the code to do that. Both the `insertClient` and `insertUser` now accept a connection:
+
+```haskell
+insertClient :: H.IConnection conn =>
+                      String -> String -> conn -> IO Integer
+insertClient name subdomain =
+    insertClientSQL name subdomain
+
+insertUser :: H.IConnection conn =>
+                    Integer -> String -> String -> String -> conn -> IO Integer
+insertUser clientId login email password =
+    insertUserSQL clientId login email password
+```
+
+The specs now has to be modified to pass in the connection:
+
+```haskell
+spec :: Spec
+spec = before resetDB $ do
+    describe "Hashmir Data" $ do
+        it "creates a Client record" $ do
+            clientId <- D.withConn $ D.insertClient "TestClient" "testclient"
+            clientId `shouldBe` 1
+        it "creates a Client and a User record" $ do
+            userId <- D.withConn (\conn -> do
+                clientId <- D.insertClient "TestClient" "testclient" conn
+                D.insertUser clientId "joe" "joe@example.com" "password1" conn)
+            userId `shouldBe` 1
+        it "rolls back the transaction when failure occurs" $ do
+            (D.withConn (\conn -> do
+                clientId <- D.insertClient "TestClient" "testclient" conn
+                D.insertUser (clientId+1) "joe" "joe@example.com" "password1" conn))
+                `shouldThrow` anyException
+            clientCount <- D.withConn $ D.countClientSQL
+            clientCount `shouldBe` Just 0
+```
+
+And finally, the Main function has to be updated as well:
+
+```haskell
+main :: IO ()
+main = do
+    clientId <- D.withConn $ D.insertClient "TestClient" "testclient"
+    putStrLn $ "New client's id is " ++ show clientId
+    Just clientCount <- D.withConn D.countClientSQL
+    putStrLn $ "There are " ++ show clientCount ++ " records."
+```
+
+When you run the tests, they should all pass now.
+
+[Commit point](https://github.com/adomokos/hashmir/commit/b488dad7c610a84ba84e90e0340d0449ac094d3a) for this section.
+
+#### Summary
+
+In this blog series we set up YeshQL and inserted Client and its dependent User records. We added tests and made sure all the writes are in one transaction.
+
+Our final solution works, but it requires the connection to be passed in. A Reader Monad would be a more elegant solution, but that should be a new blog post.
