@@ -2,7 +2,7 @@
 
 
 In the [previous](/blog/2017/12/haskell_to_mysql_via_yeshql_part_2.md) blog post we built a console app in Haskell that talks to MySQL via [YeshQL](https://github.com/tdammers/yeshql). It creates a client record and counts them with a SQL query.
-In the final post in this series we will add automated tests to our application, we will save a user record along with its parent client and make sure all the saving happens in one unit of work.
+In the final part in this series, we will add automated tests to our application, we will save a user record along with its parent client and make sure all the saving happens in one unit of work.
 
 [This is](https://github.com/adomokos/hashmir/commit/275d45ad1f6abe1f6f5eccb0e67c552543c96c90) the commit point where we left it at the end of Part 2.
 
@@ -53,7 +53,7 @@ tests:
       Hashmir.DataSpec
 ```
 
-`make build` should recomplie the app, and `stack test` will run the entire test suite.
+`make build` should recompile the app, and `stack test` will run the entire test suite.
 
 When all is good, you should see this:
 
@@ -80,7 +80,7 @@ test: ## Run the specs
 
 #### Verify Client Create Logic
 
-Creating a record in a database is easy, we already verified it when we ran the app. However, making this automated and repeatable shows some challanges. We need to make sure that every test cleans after itself in the DB. We could wrap each and every spec in a transaction and just roll it back, but that would be quite complex. Dropping and rebuilding the database is fast as it is. Sure, it's a couple of hundred milliseconds, but that is negligable for now.
+Creating a record in a database is easy, we already verified it when we ran the app. However, making this automated and repeatable shows some challenges. We need to make sure that every test cleans after itself in the DB. We could wrap each and every spec in a transaction and just roll it back, but that would be quite complex. Dropping and rebuilding the database is fast as it is. Sure, it's a couple of hundred milliseconds, but that is negligible for now.
 
 HSpec provides before hooks, we will hook into that.
 
@@ -215,13 +215,13 @@ Finished in 0.2354 seconds
 2 examples, 0 failures
 ```
 
-This looks much more cleaner.
+This looks much cleaner.
 
 [Commit point](https://github.com/adomokos/hashmir/commit/63c976e618fe9e9b9ca1c833ad052f62a7d3486b) for this section.
 
 #### Roll Back Transactions When Error Occurs
 
-The happy path of our application is working well: the User and Client records are inserted properly. First the Client is saved, its `id` is used for the User record to establish the proper references. But we should treat these two inserts as one unit of work: if the second fails, it should roll back the first insert.
+The happy path of our application is working well: the User and Client records are inserted properly. First, the Client is saved, its `id` is used for the User record to establish the proper references. But we should treat these two inserts as one unit of work: if the second fails, it should roll back the first insert.
 
 Let's write a test for it. I'll make the created Client's `id` intentionally wrong by incrementing it by one.
 
@@ -259,7 +259,7 @@ Finished in 0.3924 seconds
 3 examples, 1 failure
 ```
 
-The database is protecting itself from incorrect state, a User record won't be saved with an `id` that does not match a record in the `clients` table. This exception is justified, although, it could be handled better with a Maybe type, but that's not the point right now. Let's just expect this exception for now to see a proper test failure.
+The database is protecting itself from an incorrect state, a User record won't be saved with an `id` that does not match a record in the `clients` table. This exception is justified, although, it could be handled better with a Maybe type, that's not the point right now. Let's just expect this exception for now to see a proper test failure.
 
 Change the test like this:
 
@@ -293,7 +293,7 @@ Finished in 0.3728 seconds
 
 Finally, we have a spec that fails correctly, as we are not rolling back the created Client record.
 
-The reason the Client record is not rolled back is that we use two different transactions to persist the records: first the Client record saved and the connection is committed, and then the User record is attempted to be saved. It fails, the record is not created, but the Client record has already been committed to the database. This is our problem, we should reuse the same connection for both save operations, and only commit it after the second one.
+The reason the Client record is not rolled back is that we use two different transactions to persist the records: first, the Client record saved and the connection is committed, and then the User record is attempted to be saved. It fails, the record is not created, but the Client record has already been committed to the database. This is our problem, we should reuse the same connection for both save operations, and only commit it after the second one.
 
 Let's refactor the code to do that. Both the `insertClient` and `insertUser` now accept a connection:
 
@@ -349,6 +349,6 @@ When you run the tests, they should all pass now.
 
 #### Summary
 
-In this blog series we set up YeshQL and inserted Client and its dependent User records. We added tests and made sure all the writes are in one transaction.
+In this blog series we set up YeshQL, and added logic to insert Client and its dependent User records. We added tests and made sure all the writes are in one transaction.
 
 Our final solution works, but it requires the connection to be passed in. A Reader Monad would be a more elegant solution, but that should be a new blog post.
