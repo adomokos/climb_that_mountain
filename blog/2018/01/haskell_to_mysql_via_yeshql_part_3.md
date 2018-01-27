@@ -80,7 +80,7 @@ test: ## Run the specs
 
 #### Verify Client Create Logic
 
-Creating a record in a database is easy, we already verified it when we ran the app. However, making this automated and repeatable shows some challenges. We need to make sure that every test cleans after itself in the DB. We could wrap each and every spec in a transaction and just roll it back, but that would be quite complex. Dropping and rebuilding the database is fast as it is. Sure, it's a couple of hundred milliseconds, but that is negligible for now.
+Creating a record in the database is easy, we already verified it when we ran the app. However, making this automated and repeatable shows some challenges. We need to make sure that every test cleans after itself in the DB. We could wrap each and every spec in a transaction and just roll it back, but that would be quite complex. Dropping and rebuilding the database is fast as it is. Sure, it's a couple of hundred milliseconds, but that is negligible for now.
 
 HSpec provides before hooks, we will hook into that.
 
@@ -182,7 +182,7 @@ There is no `insertUser` function, let's add it. We also need to add the SQL tem
 |]
 ```
 
-And the `insertUser` function is like this:
+And the `insertUser` function like this:
 
 ```haskell
 insertUser :: Integer -> String -> String -> String -> IO Integer
@@ -293,7 +293,7 @@ Finished in 0.3728 seconds
 
 Finally, we have a spec that fails correctly, as we are not rolling back the created Client record.
 
-The reason the Client record is not rolled back is that we use two different transactions to persist the records: first, the Client record saved and the connection is committed, and then the User record is attempted to be saved. It fails, the record is not created, but the Client record has already been committed to the database. This is our problem, we should reuse the same connection for both save operations, and only commit it after the second one.
+The reason the Client record is not rolled back is that we use two different transactions to persist the records: first, the Client record is saved and the connection is committed, and then the User record is attempted to be saved. It fails, the record is not created, but the Client record has already been committed to the database. This is our problem, we should reuse the same connection for both save operations, and only commit it after the second one.
 
 Let's refactor the code to do that. Both the `insertClient` and `insertUser` now accept a connection:
 
@@ -349,6 +349,6 @@ When you run the tests, they should all pass now.
 
 #### Summary
 
-In this blog series we set up YeshQL, and added logic to insert Client and its dependent User records. We added tests and made sure all the writes are in one transaction.
+In this blog series we set up YeshQL, added logic to insert Client and its dependent User records, we added tests and made sure all the writes are in one transaction.
 
-Our final solution works, but it requires the connection to be passed in. A Reader Monad would be a more elegant solution, but that should be a new blog post.
+Our final solution works, but it requires the connection to be passed in. Reader Monad would be a more elegant solution, but that should be a different blog post.
