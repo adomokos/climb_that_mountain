@@ -35,7 +35,7 @@ spec = do
             True `shouldBe` True
 ```
 
-We are not testing anything real here, I just want to make sure all the building blocks are in place.
+We are not testing anything real here, we just want to make sure all the building blocks are in place.
 
 Add the `test-suite` directive to `package.yml` file:
 
@@ -76,7 +76,7 @@ test: ## Run the specs
 .PHONY: help test
 ```
 
-[This is](https://github.com/adomokos/hashmir/commit/9f7c14e6aa518da44338b7426822173053ecf6c0) the commit point for this section.
+[Commit point](https://github.com/adomokos/hashmir/commit/9f7c14e6aa518da44338b7426822173053ecf6c0)
 
 #### Verify Client Create Logic
 
@@ -147,7 +147,7 @@ Finished in 0.1378 seconds
 
 The beauty of this solution is that we can run it over and over again, the test will pass as the checked `clientId` will always be 1, since the database is recreated every time.
 
-[This is](https://github.com/adomokos/hashmir/commit/be20905a5ad5199c7b7b5e1eb4de8705a3656770) the commit up to this point.
+[Commit point](https://github.com/adomokos/hashmir/commit/be20905a5ad5199c7b7b5e1eb4de8705a3656770)
 
 #### Add a User Record Along With Client
 
@@ -217,7 +217,7 @@ Finished in 0.2354 seconds
 
 This looks much cleaner.
 
-[Commit point](https://github.com/adomokos/hashmir/commit/63c976e618fe9e9b9ca1c833ad052f62a7d3486b) for this section.
+[Commit point](https://github.com/adomokos/hashmir/commit/63c976e618fe9e9b9ca1c833ad052f62a7d3486b)
 
 #### Roll Back Transactions When Error Occurs
 
@@ -345,7 +345,7 @@ main = do
 
 When you run the tests, they should all pass now.
 
-[Commit point](https://github.com/adomokos/hashmir/commit/b488dad7c610a84ba84e90e0340d0449ac094d3a) for this section.
+[Commit point](https://github.com/adomokos/hashmir/commit/b488dad7c610a84ba84e90e0340d0449ac094d3a)
 
 #### Summary
 
