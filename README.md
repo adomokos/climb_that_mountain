@@ -157,3 +157,7 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Haskell to MySQL via YeshQL (Part 1.)](blog/2017/11/haskell_to_mysql_via_yeshql.md)<br/>
   12/<br/>
     * [Haskell to MySQL via YeshQL (Part 2.)](blog/2017/12/haskell_to_mysql_via_yeshql_part_2.md)<br/>
+
+2018/<br/>
+  01/<br/>
+    * [Haskell to MySQL via YeshQL (Part 3.)](blog/2018/01/haskell_to_mysql_via_yeshql_part_3.md)<br/>
