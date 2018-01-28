@@ -351,4 +351,4 @@ When you run the tests, they should all pass now.
 
 In this blog series we set up YeshQL, added logic to insert Client and its dependent User records, we added tests and made sure all the writes are in one transaction.
 
-Our final solution works, but it requires the connection to be passed in. Using a (Reader Monad)[https://hackage.haskell.org/package/mtl-2.2.1/docs/Control-Monad-Reader.html] would be a more elegant solution, but that should be a different blog post.
+Our final solution works, but it requires the connection to be passed in. Using a [Reader Monad](https://hackage.haskell.org/package/mtl-2.2.1/docs/Control-Monad-Reader.html) would be a more elegant solution, but that should be a different blog post.
