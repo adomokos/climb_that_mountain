@@ -161,3 +161,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
 2018/<br/>
   01/<br/>
     * [Haskell to MySQL via YeshQL (Part 3.)](blog/2018/01/haskell_to_mysql_via_yeshql_part_3.md)<br/>
+  04/<br/>
+    * [Path Count](blog/2018/04/path_count.md)<br/>
