@@ -4,7 +4,7 @@ I am sitting in the Denver Airport terminal, waiting for my flight to take home 
 
 I set down next to a guy (Dan xyz) with my lunch a couple of days ago and I started a conversation with him. When we chatted about open source, he mentioned he works on Stackage. Now, I heard about it, I knew what it was vaguely, but I asked him to tell me more. I learned quite a bit, this is what this writing is about.
 
-[Stack](http://stack.com) came along a couple of years ago to save us all from "Cabal Hell". Now, I never had to experience that coming to Haskell after Stack and Stackage was born, but understanding what they provide helps me appreciate it even more.
+[Stack](https://docs.haskellstack.org/en/stable/README/) came along a couple of years ago to save us all from "Cabal Hell". Now, I never had to experience that coming to Haskell after Stack and Stackage was born, but understanding what they provide helps me appreciate it even more.
 
 When you start a new project with Stack, there is one line in `stack.yaml` that has significant importance:
 
