@@ -14,11 +14,11 @@ resolver: lts-11.11
 
 This value makes the connection between Stack and Stackage.
 
-"What is `lts-11.11`?" It's the long term support version of Stackage.<br>
-"What is Stackage then?" It's a set of Haskell tools and libraries tested together making sure that the specified versions work together.<br>
-"Wait what? Isn't that a lot of work?" Oh yes it is, but the good thing is that this is in a huge part automated.<br>
-"How many people are working on this?" Maybe 7 or 8.<br>
-"How ofter are the libraries tested?" Every night there is a release, and every couple of months, there is an LTS (long term support) release.<br>
+"What is `lts-11.11`?" - It's the long term support version of Stackage.<br>
+"What is Stackage then?" - It's a set of Haskell tools and libraries tested together making sure that the specified versions work together.<br>
+"Wait what? Isn't that a lot of work?" - Oh yes it is, but the good thing is that this is in a huge part automated.<br>
+"How many people are working on this?" - Maybe 7 or 8.<br>
+"How ofter are the libraries tested?" - Every night there is a release, and every couple of months, there is an LTS (long term support) release.<br>
 "Which one should I use?" - the LTS version of course. Unless you are curious and want to see how a library is changing daily.<br>
 "But I have GHC installed globally on my computer. Is that used?" - It depends. If the LTS version you use in your project uses a different GHC version than what you have outside of Stack, that GHC version will be installed.<br>
 "Give me an example!" - Sure.<br>
