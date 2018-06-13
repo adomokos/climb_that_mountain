@@ -18,9 +18,9 @@ This value makes the connection between Stack and Stackage.
 "_What is Stackage then?_" - It's a set of Haskell tools and libraries tested together making sure that the specified versions work together.<br>
 "_Wait what? Isn't that a lot of work?_" - Oh yes it is, but the good thing is that this is in a huge part automated.<br>
 "_How many people are working on this?_" - Maybe 7 or 8.<br>
-"_How ofter are the libraries tested?_" - Every night there is a release, and every couple of months, there is an LTS (long term support) release.<br>
+"_How ofter are the libraries tested?_" - Every night there is a release, and every couple of months, there is an LTS (long term support) major release.<br>
 "_Which one should I use?_" - the LTS version of course. Unless you are curious and want to see how a library is changing daily.<br>
-"_But I have GHC installed globally on my computer. Is that used?_" - It depends. If the LTS version you specify in your project uses a different GHC version than what you have outside of Stack, that GHC version will be installed.<br>
+"_But I have GHC installed globally on my computer. Is that used?_" - It depends. If the LTS version you specify in your project uses a different GHC version than what you have outside of Stack, that LTS specified GHC version will be installed.<br>
 "_Give me an example!_" - Sure.<br>
 
 First, let's see what is installed globally. When I run `which ghc` this is what I get: `/usr/local/bin/ghc`. And when I peek into this file, I see it points to my homebrew installed ghc, with version 8.4.3:
@@ -88,9 +88,9 @@ The Glorious Glasgow Haskell Compilation System, version 8.2.2
 
 Ha, Stack rolls its own GHC version and ignores the system-level version if it's different than what it needs. How cool is that!
 
-When I went to Stackage's website, I noticed that a newer version of LTS was released recently. I had [LTS-11.11](https://www.stackage.org/lts-11.11) (released on 05/28/2018), but the latest version is (as of this writing of course) is [LTS-11.13](https://www.stackage.org/lts-11.13) (released on 06/09/2018). I switched `stack.yaml` to use that and rebuilt the project. Run the app and everything worked properly.
+When I went to Stackage's website, I noticed that a newer version of LTS was released recently. I had [LTS-11.11](https://www.stackage.org/lts-11.11) (released on 05/28/2018), but the latest version is (as of this writing of course) is [LTS-11.13](https://www.stackage.org/lts-11.13) (released on 06/09/2018). I updated `stack.yaml` to use the newer version and rebuilt the project. Run the app and everything worked properly.
 
-What change between the two LTS versions? Stackage.org has a very good comparison page, [this is](https://www.stackage.org/diff/lts-11.11/lts-11.13) where you can follow the diffs. It seems not many of the packages changed that I used, however, `postgresql-simple` went from 0.5.3.0 to 0.5.4.0. This project I am testing all these changes is using `persistent` with Postgres and postgresql-simple behind the scenes. Since LTS-11.13 is specified in `stack.yaml` and that LTS needs `postgresql-simple` version 0.5.4.0, what happens when I specify version 0.5.3.0 in package.yaml?
+What changed between the two LTS versions? Stackage.org has a very good comparison page, [this is](https://www.stackage.org/diff/lts-11.11/lts-11.13) where you can follow the diffs. It seems not many of the packages changed that I used, however, `postgresql-simple` went from 0.5.3.0 to 0.5.4.0. This project I am testing all these changes is using `persistent` with Postgres and postgresql-simple behind the scenes. Since LTS-11.13 is specified in `stack.yaml` and that LTS needs `postgresql-simple` version 0.5.4.0, what happens when I specify version 0.5.3.0 in package.yaml?
 
 I changed `package.yaml` this way:
 
@@ -101,7 +101,7 @@ dependencies:
   ...
 ```
 
-When I run stack build, this friendly error message lets me know that I'd like to use a version of a package that is not in the provided LTS version:
+When I run stack build, this friendly error message let me know that I'd like to use a version of a package that is not in the provided LTS version:
 
 ```shell
 Error: While constructing the build plan, the following exceptions were encountered:
