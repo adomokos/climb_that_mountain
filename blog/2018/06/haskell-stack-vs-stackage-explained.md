@@ -139,3 +139,5 @@ Once I remove the version specification for the `postgresql-simple` package, it 
 ```
 
 Yep, the correct, Stackage LTS-11.13 version was in fact installed.
+
+I grabbed all the package names from LTS-11.13, I counted 2474 packages that tested against each other for this particular LTS release. Kudos to the Stackage team for making sure we will only use packages that are playing nicely with eachother!
