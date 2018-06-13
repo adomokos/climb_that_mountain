@@ -1,6 +1,6 @@
 # Haskell Stack vs. Stackage - Explained
 
-I am sitting in the Denver Airport terminal, waiting for my flight to take home from [Lambda Conf 2018](https://lambdaconf2018.dryfta.com/en/) to Chicago. This conference has been the best I have attended in recent years. The quality of the talks, the friendliness of presenters and the attendees is just something I have not seen in a long time.
+I am sitting in the Denver Airport terminal, waiting for my flight to take home from [Lambda Conf 2018](https://lambdaconf2018.dryfta.com/en/) to Chicago. This conference was the best I have attended in recent years. The quality of the talks, the friendliness of presenters and the attendees is just something I have not seen in a long time.
 
 I set down next to a guy ([Dan Burton](https://github.com/DanBurton) to be exact) with my lunch a couple of days ago and I started a conversation with him. When we chatted about open source, he mentioned he works on Stackage. Now, I heard about it, and I asked him to tell me more. I learned quite a bit, I figured others would benefit from having this information. Hence the idea of this blog post was born.
 
