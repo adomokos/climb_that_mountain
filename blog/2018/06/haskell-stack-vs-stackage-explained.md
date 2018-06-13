@@ -20,7 +20,7 @@ This value makes the connection between Stack and Stackage.
 "_How many people are working on this?_" - Maybe 7 or 8.<br>
 "_How ofter are the libraries tested?_" - Every night there is a release, and every couple of months, there is an LTS (long term support) release.<br>
 "_Which one should I use?_" - the LTS version of course. Unless you are curious and want to see how a library is changing daily.<br>
-"_But I have GHC installed globally on my computer. Is that used?_" - It depends. If the LTS version you use in your project uses a different GHC version than what you have outside of Stack, that GHC version will be installed.<br>
+"_But I have GHC installed globally on my computer. Is that used?_" - It depends. If the LTS version you specify in your project uses a different GHC version than what you have outside of Stack, that GHC version will be installed.<br>
 "_Give me an example!_" - Sure.<br>
 
 First, let's see what is installed globally. When I run `which ghc` this is what I get: `/usr/local/bin/ghc`. And when I peek into this file, I see it points to my homebrew installed ghc, with version 8.4.3:
