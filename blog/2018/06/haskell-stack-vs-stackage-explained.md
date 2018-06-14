@@ -1,8 +1,8 @@
 # Haskell Stack vs. Stackage - Explained
 
-I am sitting in the Denver Airport terminal, waiting for my flight to take home from [Lambda Conf 2018](https://lambdaconf2018.dryfta.com/en/) to Chicago. This conference was the best I have attended in recent years. The quality of the talks, the friendliness of presenters and the attendees is just something I have not seen in a long time.
+I am sitting in the Denver Airport terminal, waiting for my flight to take home from [Lambda Conf 2018](https://lambdaconf2018.dryfta.com/en/) to Chicago. This conference was the best I have attended in recent years: the quality of the talks, the friendliness of presenters and the attendees is just something I have not seen in a long time.
 
-I set down next to a guy ([Dan Burton](https://github.com/DanBurton) to be exact) with my lunch a couple of days ago and I started a conversation with him. When we chatted about open source, he mentioned he works on Stackage. Now, I heard about it, and I asked him to tell me more. I learned quite a bit, I figured others would benefit from having this information, hence the idea of this blog post was born.
+I set down next to a guy ([Dan Burton](https://github.com/DanBurton) to be exact) with my lunch a couple of days ago and I started a conversation with him. When we chatted about open source, he mentioned he works on [Stackage](https://www.stackage.org). I heard about it, but I asked him to tell me more. I learned quite a bit, I figured others would benefit from having this information, hence the idea of this blog post was born.
 
 [Stack](https://docs.haskellstack.org/en/stable/README/) came along a couple of years ago to save us all from "Cabal Hell". I never had to experience it as I started learning Haskell only two years ago, long after Stack and Stackage was born. But understanding what they provide helps me appreciate it even more.
 
@@ -15,10 +15,11 @@ resolver: lts-11.11
 This value makes the connection between Stack and Stackage.
 
 "_What is `lts-11.11`?_" - It's the long term support version of Stackage.<br>
-"_What is Stackage then?_" - It's a set of Haskell tools and libraries tested together making sure that the specified versions work together.<br>
-"_Wait what? Isn't that a lot of work?_" - Oh yes it is, but the good thing is that this is in a huge part automated.<br>
+"_What is Stackage then?_" - It's a set of Haskell tools and libraries tested together in a snapshot making sure that the specified versions work together.<br>
+"_A snapshot? What's that?" - An LTS or Nightly release of packages.<br>
+"_Isn't this a lot of work? Testing all these libraries together..._" - Oh yes it is, but the good thing is that it's automated for the most part.<br>
 "_How many people are working on this?_" - Maybe 7 or 8.<br>
-"_How ofter are the libraries tested?_" - Every night there is a release, and every couple of months, there is an LTS (long term support) major release.<br>
+"_How ofter are the libraries tested?_" - Every night there is a release, and every couple of weeks, there is an LTS (long term support) major release.<br>
 "_Which one should I use?_" - the LTS version of course. Unless you are curious and want to see how a library is changing daily.<br>
 "_But I have GHC installed globally on my computer. Is that used?_" - It depends. If the LTS version you specify in your project uses a different GHC version than what you have outside of Stack, that LTS specified GHC version will be installed.<br>
 "_Give me an example!_" - Sure.<br>
@@ -49,6 +50,8 @@ Now when I run `ghc-pkg list`, I see 33 packages installed with this system-leve
     ...
 ```
 
+I have not installed any packages myself into this GHC version, all those 33 packages come with GHC.
+
 I have a project where the resolver is `lts-11.11`. When I run `stack exec -- ghc-pkg list` in this project (after it was successfully built of course), the following libraries are listed. I left out the bulk of the libraries, as the key point here is the different layers and not what is in those:
 
 ```shell
@@ -69,13 +72,13 @@ I have a project where the resolver is `lts-11.11`. When I run `stack exec -- gh
     persistent-test-0.1.0.0
 ```
 
-Haskell packages are pulled from 3 differents databases:
+The 3 paths listed above in this shell snippet is where Haskell packages are pulled from:
 
-1. The system-level Stack GHC packages list
-2. The system-level LTS-11.11 database
-3. Project specific database
+1. Global - the system-level GHC packages list, Stack will never install anything into this
+2. Snapshot - a database shared by all projects using the same snaphot
+3. Local - Project specific database
 
-But wait! What is GHC 8.2.2 doing there? I have version 8.4.3 installed at the system level. Oh, it turns out, Stack, based on the LTS information uses a different version of GHC. I have GHC version 8.4.3 at the system level, but LTS-11.11 uses GHC version 8.2.2.
+But wait! What is GHC 8.2.2 doing there? I have version 8.4.3 installed at the system level. As it turns out, Stack, based on the LTS information uses a different version of GHC. I have GHC version 8.4.3 at the system level, but LTS-11.11 uses GHC version 8.2.2.
 
 Let's prove that out further:
 
@@ -88,9 +91,9 @@ The Glorious Glasgow Haskell Compilation System, version 8.2.2
 
 Ha, Stack rolls its own GHC version and ignores the system-level version if it's different than what it needs. How cool is that!
 
-When I went to Stackage's website, I noticed that a newer version of LTS was released recently. I had [LTS-11.11](https://www.stackage.org/lts-11.11) (released on 05/28/2018), but the latest version is (as of this writing of course) is [LTS-11.13](https://www.stackage.org/lts-11.13) (released on 06/09/2018). I updated `stack.yaml` to use the newer version and rebuilt the project. Run the app and everything worked properly.
+When I went to Stackage's website, I noticed that a newer version of LTS was released recently. I had [LTS-11.11](https://www.stackage.org/lts-11.11) (released on 05/28/2018), but the latest version is (as of this writing of course) [LTS-11.13](https://www.stackage.org/lts-11.13) (released on 06/09/2018). I updated `stack.yaml` to use the newer version and rebuilt the project. Ran the app and everything worked properly.
 
-What changed between the two LTS versions? Stackage.org has a very good comparison page, [this is](https://www.stackage.org/diff/lts-11.11/lts-11.13) where you can follow the diffs. It seems not many of the packages changed that I used, however, `postgresql-simple` went from 0.5.3.0 to 0.5.4.0. This project I am testing all these changes is using `persistent` with Postgres and postgresql-simple behind the scenes. Since LTS-11.13 is specified in `stack.yaml` and that LTS needs `postgresql-simple` version 0.5.4.0, what happens when I specify version 0.5.3.0 in package.yaml?
+What changed between the two LTS versions? Stackage.org has a very good comparison page, [this is](https://www.stackage.org/diff/lts-11.11/lts-11.13) where you can follow the diffs. It seems not many of the packages changed that I used, however, `postgresql-simple` went from 0.5.3.0 to 0.5.4.0. Since LTS-11.13 is specified in `stack.yaml` and that LTS needs `postgresql-simple` version 0.5.4.0, what happens when I specify version 0.5.3.0 in package.yaml?
 
 I changed `package.yaml` this way:
 
@@ -101,7 +104,7 @@ dependencies:
   ...
 ```
 
-When I run stack build, this friendly error message let me know that I'd like to use a version of a package that is not in the provided LTS version:
+When I ran stack build, this friendly error message let me know that I'd like to use a version of a package that is not in the provided LTS version:
 
 ```shell
 Error: While constructing the build plan, the following exceptions were encountered:
@@ -131,7 +134,7 @@ Some different approaches to resolving this:
 Plan construction failed.
 ```
 
-Once I remove the version specification for the `postgresql-simple` package, it builds successfully. But did it pick the correct version since I did not specify it?
+Once I removed the version specification for the `postgresql-simple` package, it built successfully. But did it pick the correct version since I did not specify it?
 
 ```shell
 % stack exec -- ghc-pkg list | grep postgresql-simple
@@ -140,4 +143,4 @@ Once I remove the version specification for the `postgresql-simple` package, it 
 
 Yep, the correct, Stackage LTS-11.13 version was in fact installed.
 
-I grabbed all the package names from LTS-11.13, I counted 2474 packages that tested against each other for this particular LTS release. Kudos to the Stackage team for making sure we will only use packages that are playing nicely with eachother!
+I grabbed all the package names from LTS-11.13, I counted 2474 packages that got tested against each other for this particular LTS release. Kudos to the Stackage team for making sure we will only use packages that are playing nice with eachother!
