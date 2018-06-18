@@ -1,6 +1,6 @@
 # Haskell Stack vs. Stackage - Explained
 
-I am sitting in the Denver Airport terminal, waiting for my flight to take home from [Lambda Conf 2018](https://lambdaconf2018.dryfta.com/en/) to Chicago. This conference was the best I have attended in recent years: the quality of the talks, the friendliness of presenters and the attendees is just something I have not seen in a long time.
+I am sitting in the Denver Airport terminal, waiting for my flight to take me home from [Lambda Conf 2018](https://lambdaconf2018.dryfta.com/en/) to Chicago. This conference was the best I have attended in recent years: the quality of the talks, the friendliness of the presenters and the attendees is just something I have not seen in a long time.
 
 I set down next to a guy ([Dan Burton](https://github.com/DanBurton) to be exact) with my lunch a couple of days ago and I started a conversation with him. When we chatted about open source, he mentioned he works on [Stackage](https://www.stackage.org). I heard about it, but I asked him to tell me more. I learned quite a bit, I figured others would benefit from having this information, hence the idea of this blog post was born.
 
@@ -91,7 +91,7 @@ The Glorious Glasgow Haskell Compilation System, version 8.2.2
 
 Ha, Stack rolls its own GHC version and ignores the system-level version if it's different than what it needs. How cool is that!
 
-When I went to Stackage's website, I noticed that a newer version of LTS was released recently. I had [LTS-11.11](https://www.stackage.org/lts-11.11) (released on 05/28/2018), but the latest version is (as of this writing of course) [LTS-11.13](https://www.stackage.org/lts-11.13) (released on 06/09/2018). I updated `stack.yaml` to use the newer version and rebuilt the project. Ran the app and everything worked properly.
+When I went to Stackage's website, I noticed that a newer version of LTS was released recently. I had [LTS-11.11](https://www.stackage.org/lts-11.11) (released on 05/28/2018), but the latest version is (as of this writing) [LTS-11.13](https://www.stackage.org/lts-11.13) (released on 06/09/2018). I updated `stack.yaml` to use the newer version and rebuilt the project. Ran the app and everything worked properly.
 
 What changed between the two LTS snapshots? Stackage.org has a very good comparison page, [this is](https://www.stackage.org/diff/lts-11.11/lts-11.13) where you can follow the diffs. It seems not many of the packages changed that I used, however, `postgresql-simple` went from 0.5.3.0 to 0.5.4.0. Since LTS-11.13 is specified in `stack.yaml` and that LTS needs `postgresql-simple` version 0.5.4.0, what happens when I specify version 0.5.3.0 in package.yaml?
 
@@ -145,4 +145,4 @@ Yep, the correct, Stackage LTS-11.13 version was in fact installed.
 
 I grabbed all the package names from LTS-11.13, I counted 2474 packages that got tested against each other for this particular LTS release. Kudos to the Stackage Curator [Team](https://github.com/commercialhaskell/stackage/blob/master/CURATORS.md) for making sure we will only use packages that are playing nice with each other!
 
-(Thanks to Dan for proofreading my post. He pointed out a couple of inaccuracies, this writing is more accurate with his feedback.)
+(Thanks to Dan for proofreading my post, this writing is more accurate with his feedback.)
