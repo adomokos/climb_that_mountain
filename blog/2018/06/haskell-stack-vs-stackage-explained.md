@@ -18,8 +18,8 @@ This value makes the connection between Stack and Stackage.
 "_What is Stackage then?_" - It's a set of Haskell tools and libraries tested together in a snapshot making sure that the specified versions work together.<br>
 "_A snapshot? What's that?" - An LTS or Nightly release of packages.<br>
 "_Isn't this a lot of work? Testing all these libraries together..._" - Oh yes it is, but the good thing is that it's automated for the most part.<br>
-"_How many people are working on this?_" - Maybe 7 or 8.<br>
-"_How ofter are the libraries tested?_" - Every night there is a release, and every couple of weeks, there is an LTS (long term support) major release.<br>
+"_How many people are working on this?_" - [Eight](https://github.com/commercialhaskell/stackage/blob/master/CURATORS.md), but there are also some devops people at [FP Complete](https://www.fpcomplete.com/) that occasionally help with the server.<br>
+"_How often are the libraries tested?_" - There is a nightly snapshot released (almost) every night. There is an LTS snapshot minor bump (e.g. lts-11.11 -> lts-11.12) released (almost) every week. LTS major releases (e.g. lts-11 -> lts-12) are approximately every 3 to 5 months.<br>
 "_Which one should I use?_" - the LTS snapshot of course. Unless you are curious and want to see how a library is changing daily.<br>
 "_But I have GHC installed globally on my computer. Is that used?_" - It depends. If the LTS snapshot you specify in your project uses a different GHC version than what you have outside of Stack, that LTS specified GHC version will be installed.<br>
 "_Give me an example!_" - Sure.<br>
@@ -143,4 +143,4 @@ Once I removed the version specification for the `postgresql-simple` package, it
 
 Yep, the correct, Stackage LTS-11.13 version was in fact installed.
 
-I grabbed all the package names from LTS-11.13, I counted 2474 packages that got tested against each other for this particular LTS release. Kudos to the Stackage team for making sure we will only use packages that are playing nice with eachother!
+I grabbed all the package names from LTS-11.13, I counted 2474 packages that got tested against each other for this particular LTS release. Kudos to the Stackage Curator [Team](https://github.com/commercialhaskell/stackage/blob/master/CURATORS.md) for making sure we will only use packages that are playing nice with eachother!
