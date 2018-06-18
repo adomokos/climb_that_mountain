@@ -75,7 +75,7 @@ I have a project where the resolver is `lts-11.11`. When I run `stack exec -- gh
 The 3 paths listed above in this shell snippet is where Haskell packages are pulled from:
 
 1. Global - the system-level GHC packages list, Stack will never install anything into this
-2. Snapshot - a database shared by all projects using the same snaphot
+2. Snapshot - a database shared by all projects using the same snapshot
 3. Local - Project specific database
 
 But wait! What is GHC 8.2.2 doing there? I have version 8.4.3 installed at the system level. As it turns out, Stack, based on the LTS information uses a different version of GHC. I have GHC version 8.4.3 at the system level, but LTS-11.11 uses GHC version 8.2.2.
@@ -143,4 +143,6 @@ Once I removed the version specification for the `postgresql-simple` package, it
 
 Yep, the correct, Stackage LTS-11.13 version was in fact installed.
 
-I grabbed all the package names from LTS-11.13, I counted 2474 packages that got tested against each other for this particular LTS release. Kudos to the Stackage Curator [Team](https://github.com/commercialhaskell/stackage/blob/master/CURATORS.md) for making sure we will only use packages that are playing nice with eachother!
+I grabbed all the package names from LTS-11.13, I counted 2474 packages that got tested against each other for this particular LTS release. Kudos to the Stackage Curator [Team](https://github.com/commercialhaskell/stackage/blob/master/CURATORS.md) for making sure we will only use packages that are playing nice with each other!
+
+(Thanks to Dan for proofreading my post. He pointed out a couple of inaccuracies, this writing is more accurate with his feedback.)
