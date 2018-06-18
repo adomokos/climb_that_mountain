@@ -163,3 +163,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Haskell to MySQL via YeshQL (Part 3.)](blog/2018/01/haskell_to_mysql_via_yeshql_part_3.md)<br/>
   04/<br/>
     * [Path Count](blog/2018/04/path_count.md)<br/>
+  06/<br/>
+    * [Haskell Stack vs. Stackage - Explained](blog/2018/06/haskell-stack-vs-stackage-explained.md)<br/>
