@@ -165,3 +165,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Path Count](blog/2018/04/path_count.md)<br/>
   06/<br/>
     * [Haskell Stack vs. Stackage - Explained](blog/2018/06/haskell-stack-vs-stackage-explained.md)<br/>
+  10/<br/>
+    * [Haskell by Day](blog/2018/10/haskell_by_day.md)<br/>
