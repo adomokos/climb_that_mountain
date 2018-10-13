@@ -5,7 +5,7 @@ I hired a developer for our team who had more serious functional programming bac
 
 I asked him, how he knows so much about FP. His answer was plain and simple: "I've been learning Haskell." Oh. I have always thought Haskell is this far-out, esoteric, academic language that no one uses. I realized he knew more Clojure just by learning Haskell. Then he showed me Elm and I was blown away. (Elm has its roots in Haskell, it's a similar ML language.)
 
-A couple of months later I watched Chad Fowler's [talk](https://www.youtube.com/watch?v=sAsRtZEGMMQ&t=6s) about his adventures at WunderList in which he talked about a routing application that they wrote in &lt;50 lines of Haskell. It never went done and was blazing fast. His message (the one that I picked up anyway) was "Haskell, Haskell, learn Haskell".
+A couple of months later I watched Chad Fowler's [talk](https://www.youtube.com/watch?v=sAsRtZEGMMQ&t=6s) about his adventures at WunderList in which he talked about a routing application that they wrote in less than fifty (50) lines of Haskell. It never went done and was blazing fast. His message (the one that I picked up anyway) was "Haskell, Haskell, learn Haskell".
 
 I started digging into the language by following the examples from the book [Learn You a Haskell for Great Good](http://learnyouahaskell.com/). It was an easy read, I was cruising through the examples in GHCi (REPL). Then I stopped looking at the language for about 2-3 months as something came up. I went back to it and was shocked to realize that I did not remember anything. Zero. What the heck is this weird syntax `(x:xs)`?
 
