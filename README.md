@@ -167,3 +167,5 @@ My [blog](http://www.adomokos.com)'s articles currently hosted on blogger, makin
     * [Haskell Stack vs. Stackage - Explained](blog/2018/06/haskell-stack-vs-stackage-explained.md)<br/>
   10/<br/>
     * [Haskell by Day](blog/2018/10/haskell_by_day.md)<br/>
+  11/<br/>
+    * [Haskell's Hspec with QuickCheck](blog/2018/11/hspec_with_quickcheck.md)<br/>
